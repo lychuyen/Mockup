@@ -1,3 +1,0 @@
-# Manifest: Báo cáo Khảo sát TOSS — Buổi 19/06/2026
-# Tích hợp TOSS ↔ NetLine/OPS++
-ba/workspace/drafts/phan-tich/02-khao-sat/BAO-CAO-KHAO-SAT-19062026-v0.1.md

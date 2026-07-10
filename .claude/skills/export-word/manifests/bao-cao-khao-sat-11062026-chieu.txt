@@ -1,3 +1,0 @@
-# Manifest: Báo cáo Khảo sát TOSS — Buổi chiều 11/06/2026
-# Phỏng vấn Dispatcher: tiếp nối các chủ đề kỹ thuật chuyên sâu
-ba/workspace/drafts/phan-tich/02-khao-sat/BAO-CAO-KHAO-SAT-11062026-buoi-chieu-v0.1.md

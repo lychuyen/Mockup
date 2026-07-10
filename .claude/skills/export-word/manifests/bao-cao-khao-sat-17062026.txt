@@ -1,3 +1,0 @@
-# Manifest: Báo cáo Khảo sát TOSS — Buổi 17/06/2026
-# Quản lý MEL/CDL & Tích hợp AMOS
-ba/workspace/drafts/phan-tich/02-khao-sat/BAO-CAO-KHAO-SAT-17062026-v0.3.md

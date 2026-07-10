@@ -1,3 +1,0 @@
-# Manifest: Báo cáo Khảo sát TOSS — Buổi sáng 11/06/2026
-# Phỏng vấn Dispatcher: OFP/Release, NOTAM, thời tiết, MEL/CDL, Cost Index
-ba/workspace/drafts/phan-tich/02-khao-sat/BAO-CAO-KHAO-SAT-11062026-buoi-sang-v0.1.md

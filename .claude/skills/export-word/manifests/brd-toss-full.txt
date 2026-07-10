@@ -1,8 +1,0 @@
-# Manifest: BRD TOSS đầy đủ — Khung + 5 phân hệ + Phụ lục quy trình To-Be (thứ tự lắp ráp)
-ba/workspace/drafts/brd/BRD-TOSS-001-khung-v0.12.md
-ba/workspace/drafts/brd/BRD-TOSS-PH1-thong-tin-dieu-hanh-v0.8.md
-ba/workspace/drafts/brd/BRD-TOSS-PH2-tai-lieu-chuyen-bay-v0.7.md
-ba/workspace/drafts/brd/BRD-TOSS-PH3-bao-cao-toi-uu-v0.5.md
-ba/workspace/drafts/brd/BRD-TOSS-PH4-quan-ly-danh-muc-v0.6.md
-ba/workspace/drafts/brd/BRD-TOSS-PH5-quan-tri-he-thong-v0.6.md
-ba/workspace/drafts/brd/PHU-LUC-QUY-TRINH-TOBE.md

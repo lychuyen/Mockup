@@ -1,3 +1,0 @@
-# Manifest: Báo cáo Khảo sát TOSS — Buổi 15/06/2026
-# Màn hình Flight Dispatch & Quy trình OFP Release
-ba/workspace/drafts/phan-tich/02-khao-sat/BAO-CAO-KHAO-SAT-15062026-v0.1.md
