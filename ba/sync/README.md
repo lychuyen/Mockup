@@ -31,9 +31,10 @@ Ví dụ: `TOSS.FD.ALL.BRD.v0.8.md` = dự án **TOSS**, phân hệ **FD** (Flig
 | 3 | [`FLC-flight-load-control/`](FLC-flight-load-control/) | `FLC` | `TOSS.FLC.ALL.BRD.v0.8.md` (sở hữu chính PH2) | `TOSS.FLC.ALL.FD.v0.1.md` — 10 chức năng (Document + Fuel order), 1 phần dở (sec-10), 1 trống (sec-11) |
 | 4 | Station Manager | `SM` | *(chưa có)* | *(chưa có)* — chưa tạo thư mục |
 | 5 | [`RPT-report/`](RPT-report/) | `RPT` | `TOSS.RPT.ALL.BRD.v0.5.md` (sở hữu chính PH3) | *(chưa có SRS)* |
-| 6 | [`DM-data-maintenance/`](DM-data-maintenance/) | `DM` | `TOSS.DM.ALL.BRD.v0.6.md` (sở hữu chính PH4) | `VNA.TOSS_SRS_Data Maintenance_v0.1.docx` (gốc khách hàng, giữ tên) — 69 chức năng, từ điển 109 trường |
+| 6 | [`DM-data-maintenance/`](DM-data-maintenance/) | `DM` | `TOSS.DM.ALL.BRD.v0.6.md` (sở hữu chính PH4) | 69 file đặc tả chức năng phân rã và Catalog thiết kế (`srs/_parts/`) |
 | 7 | Data Source Monitoring | `DSM` | *(chưa có)* | *(chưa có)* — chưa tạo thư mục |
-| 8 | [`SA-system-admin/`](SA-system-admin/) | `SA` | `TOSS.SA.ALL.BRD.v0.6.md` (sở hữu chính PH5) | `VNA.TOSS_SRS_System Admin_V0.1.docx` (gốc khách hàng, giữ tên) — 30 chức năng, từ điển 49 trường |
+| 8 | [`SA-system-admin/`](SA-system-admin/) | `SA` | `TOSS.SA.ALL.BRD.v0.6.md` (sở hữu chính PH5) | 28 file đặc tả chức năng phân rã và Catalog thiết kế (`srs/_parts/`) |
+
 | 9 | [`MCB-mail-canh-bao/`](MCB-mail-canh-bao/) | `MCB` | pointer sang SA (BRD-TOSS-PH5) | *(chưa có SRS)* |
 | 10 | [`JDB-job-dong-bo/`](JDB-job-dong-bo/) | `JDB` | pointer sang SA (BRD-TOSS-PH5) | *(chưa có SRS)* |
 | 11 | [`AUTH-authentication/`](AUTH-authentication/) | `AUTH` | pointer sang SA (BRD-TOSS-PH5) | *(chưa có SRS)* |

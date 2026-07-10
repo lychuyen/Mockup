@@ -28,7 +28,9 @@
 | [bpmn-2.0-cheatsheet.md](bpmn-2.0-cheatsheet.md) | Cheat-sheet ký hiệu BPMN 2.0 (event/gateway/task/lane) | BPMN, sơ đồ quy trình, gateway, swimlane, As-Is/To-Be | Grep ký hiệu |
 | [agile-scrum-vn.md](agile-scrum-vn.md) | Thuật ngữ & nhịp Agile/Scrum (VI) | scrum, sprint, backlog, user story, INVEST | Cả file |
 | [company-process-standards.md](company-process-standards.md) | Chuẩn quy trình nội bộ (Viettel QT…) | QT02, biểu mẫu, chuẩn tài liệu công ty | Grep |
+| [shared-doc-structure-production-vs-madetomeasure.md](shared-doc-structure-production-vs-madetomeasure.md) | Quyết định cấu trúc tổ chức tài liệu Option C (gói bàn giao theo module kỹ thuật) | Option C, cấu trúc thư mục sync, bàn giao module | Cả file |
 | [erd-la-gi-thinhnotes.md](erd-la-gi-thinhnotes.md) | ERD (Entity Relationship Diagram) — Entity/Attribute/Relationship, quan hệ 1-1/1-nhiều/nhiều-nhiều *(tham khảo ngoài: Thinh Notes, crawl 24/06)* | ERD, thực thể, entity, attribute, relationship, mô hình dữ liệu, data model, 1-nhiều, nhiều-nhiều, data-modeler | Cả file |
+
 
 ## 3. UX / Thiết kế giao diện
 
