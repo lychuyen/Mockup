@@ -1,4 +1,4 @@
-# format-markdown.ps1 — PostToolUse hook for Write.
+﻿# format-markdown.ps1 — PostToolUse hook for Write.
 # Auto-formats .md files written under .claude/templates/ or deliverables/
 # using markdownlint-cli if it's installed. Silently skips if not available.
 #

@@ -1,6 +1,8 @@
 ---
 name: meeting-synthesize
 description: Tổng hợp biên bản họp TOSS từ TRANSCRIPT bản ghi âm (ASR — file .txt/.srt, thường chất lượng thấp). Đọc trung thực, map lỗi ASR bằng domain-knowledge, gắn cờ [cần xác nhận], xuất biên bản chuẩn TOSS. Dùng khi người dùng đưa file transcript họp dài và muốn "tổng hợp meeting", "viết lại meeting note từ ghi âm", "biên bản từ transcript".
+metadata:
+  version: "1.0.0"
 ---
 
 # Skill: Tổng hợp biên bản họp từ transcript (ASR)

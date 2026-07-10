@@ -1,4 +1,4 @@
-# save-transcript.ps1 — Stop hook.
+﻿# save-transcript.ps1 — Stop hook.
 # When a Claude Code session ends, archive the conversation transcript
 # to logs/ba-sessions/YYYY-MM-DD-HHmm.md for later traceability.
 #

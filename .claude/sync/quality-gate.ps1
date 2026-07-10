@@ -1,4 +1,4 @@
-# quality-gate.ps1 -- PostToolUse hook (NON-BLOCKING, verbose-on-fail) -- G1.
+﻿# quality-gate.ps1 -- PostToolUse hook (NON-BLOCKING, verbose-on-fail) -- G1.
 # Nguon: knowledge/agent-harness-engineering.md (N1 success-silent/fail-verbose, N4 verify-truoc-khi-xong).
 #
 # Khi ghi mot file deliverable .md (BRD/SRS/phan-tich/quy-trinh trong ba/),

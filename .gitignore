@@ -1,13 +1,23 @@
 # ===== TOSS monorepo — .gitignore =====
 
 # --- Local / runtime (không commit) ---
+# .claude/ MỞ TRACK LẠI toàn bộ từ 2026-07-02 (BA Lead) — team nhận framework + role qua git.
+# Chỉ giữ local: cấu hình runtime máy cá nhân
 .claude/settings.local.json
+# CLAUDE.md + HUMAN.md giữ LOCAL — không commit từ v2.15 (BA Lead 2026-07-02);
+# bàn giao qua zip/copy thư mục như .claude/
+CLAUDE.md
+HUMAN.md
 logs/
 identity.local.md
 *.local.md
 
 # --- SECRETS: credential, service-account key (TUYỆT ĐỐI không commit) ---
 .secrets/
+.agents/
+# Dump Figma API (~68MB/file, chứa dữ liệu thiết kế thô) — giữ local
+figma_output.json
+figma_response.json
 *service-account*.json
 *-service-account*.json
 *.sa.json
@@ -22,6 +32,7 @@ desktop.ini
 .vscode/
 .idea/
 *~
+~$*
 
 # --- Build artifacts: bản sinh lại được (Word/PPTX) từ nguồn ---
 # Mặc định KHÔNG commit. Muốn lưu vết bàn giao khách → comment dòng tương ứng.

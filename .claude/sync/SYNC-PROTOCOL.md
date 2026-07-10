@@ -1,19 +1,23 @@
 # SYNC-PROTOCOL.md — Dual-Scope Documentation Sync
 
 > **Auto-loaded into agent context.** This protocol governs how files in the AGENTS scope and HUMAN scope stay synchronized.
+>
+> **SCOPE CHANGE (2026-07-02, BA Lead decision):** the VI-mirror requirement for `.claude/{agents,commands,templates,glossary}/` is **retired**. The only remaining mirrored pair is **`CLAUDE.md` ↔ `HUMAN.md`**. `.claude/human/` is **no longer a mirror tree** — it now holds **human role portraits** (chân dung vai trò con người trong dự án; see `.claude/human/README.md`). The old mirrors are parked at `.claude/human/_legacy/` (frozen, pending BA Lead deletion).
 
 ---
 
 ## 1. Architecture
 
-Every documentation/configuration file in this project has **two parallel versions**:
+The mirrored pair in this project is:
 
-| Scope | Path Pattern | Audience | Language |
+| Scope | Path | Audience | Language |
 |---|---|---|---|
-| **AGENTS** (canonical) | `.claude/agents/`, `.claude/commands/`, `.claude/templates/`, `.claude/glossary/`, `CLAUDE.md` | AI agents — read by Claude Code at runtime | English-optimized (terse, structured) |
-| **HUMAN** (mirror) | `.claude/human/...`, `HUMAN.md` | Human readers — stakeholders, BAs, new team members | Vietnamese (narrative, explanatory) |
+| **AGENTS** (canonical) | `CLAUDE.md` | AI agents — read by Claude Code at runtime | English-optimized (terse, structured) |
+| **HUMAN** (mirror) | `HUMAN.md` | Human readers — stakeholders, BAs, new team members | Vietnamese (narrative, explanatory) |
 
-The AGENTS scope is **canonical** (Claude Code loads from these paths). The HUMAN scope is a **semantic mirror** for human reference.
+The AGENTS file is **canonical** (Claude Code loads it). The HUMAN file is a **semantic mirror** for human reference.
+
+Other `.claude/{agents,commands,templates,glossary,knowledge,examples}/` files are **single-language (EN or VI-primary) with no mirror obligation** — same regime as the DEV toolkit exception in CLAUDE.md §9.
 
 ---
 
@@ -22,28 +26,14 @@ The AGENTS scope is **canonical** (Claude Code loads from these paths). The HUMA
 | AGENTS scope (canonical, EN) | HUMAN scope (mirror, VI) |
 |---|---|
 | `CLAUDE.md` | `HUMAN.md` |
-| `.claude/agents/business-analyst.md` | `.claude/human/agents/business-analyst.md` |
-| `.claude/commands/brd.md` | `.claude/human/commands/brd.md` |
-| `.claude/commands/userstory.md` | `.claude/human/commands/userstory.md` |
-| `.claude/commands/asis-tobe.md` | `.claude/human/commands/asis-tobe.md` |
-| `.claude/commands/stakeholder.md` | `.claude/human/commands/stakeholder.md` |
-| `.claude/commands/interview.md` | `.claude/human/commands/interview.md` |
-| `.claude/templates/ba/BRD-template.md` | `.claude/human/templates/ba/BRD-template.md` |
-| `.claude/templates/ba/SRS-template.md` | `.claude/human/templates/ba/SRS-template.md` |
-| `.claude/templates/ba/FRD-template.md` | `.claude/human/templates/ba/FRD-template.md` |
-| `.claude/templates/ba/user-story-template.md` | `.claude/human/templates/ba/user-story-template.md` |
-| `.claude/templates/ba/use-case-template.md` | `.claude/human/templates/ba/use-case-template.md` |
-| `.claude/templates/ba/meeting-minutes-template.md` | `.claude/human/templates/ba/meeting-minutes-template.md` |
-| `.claude/templates/ba/change-request-template.md` | `.claude/human/templates/ba/change-request-template.md` |
-| `.claude/templates/ba/gap-analysis-template.md` | `.claude/human/templates/ba/gap-analysis-template.md` |
-| `.claude/templates/ba/test-scenario-template.md` | `.claude/human/templates/ba/test-scenario-template.md` |
-| `.claude/glossary/ba-terms-vi-en.md` | `.claude/human/glossary/ba-terms-vi-en.md` |
+
+> **Retired mappings (2026-07-02):** the former per-file mirrors for `.claude/agents/*`, `.claude/commands/*`, `.claude/templates/ba/*`, `.claude/glossary/*` are discontinued. Their last synced VI versions are preserved read-only at `.claude/human/_legacy/` for reference until BA Lead approves deletion. Do NOT update `_legacy/` content.
 
 ---
 
 ## 3. Sync Rules
 
-1. **When you edit an AGENTS file, you MUST update its HUMAN mirror in the same task** (and vice versa).
+1. **When you edit `CLAUDE.md`, you MUST update `HUMAN.md` in the same task** (and vice versa). This is the only pair still under the mirror obligation.
 2. The two versions must remain **semantically equivalent** — same rules, same checklists, same examples (with examples localized where natural).
 3. **Single source of truth:** AGENTS scope is canonical. On conflict, AGENTS wins; HUMAN is regenerated from AGENTS.
 4. **Frontmatter consistency:** `version` and `date` fields must be identical across the pair.
@@ -69,9 +59,9 @@ When you edit one file in a pair:
 
 ## 5. Automated Reminder (Hook)
 
-A `PostToolUse` hook on `Edit`/`Write` operations (configured in `.claude/settings.local.json`) automatically reminds the agent when a tracked file is modified. The hook:
+A `PostToolUse` hook on `Edit`/`Write` operations (`.claude/sync/sync-check.ps1`) automatically reminds the agent when a tracked file is modified. The hook:
 
-- Detects whether the edited path is in AGENTS or HUMAN scope.
+- Fires only for the `CLAUDE.md` ↔ `HUMAN.md` pair (since 2026-07-02; it no longer requests mirrors for `.claude/{agents,commands,templates,glossary}/` or `.claude/human/`).
 - Outputs the corresponding mirror path that needs updating.
 - Does NOT block the edit — it nudges the agent to follow up.
 
@@ -100,11 +90,13 @@ The first-time mirror creation was performed on **2026-05-26**. All HUMAN files 
 ## 8. Exclusions (NOT synced)
 
 These files do NOT have mirrors and are not subject to this protocol:
-- `ba/input/*` — external business documents, read-only.
-- `ba/process/*` — generated outputs, single-language by design (Vietnamese, per CLAUDE.md §7).
+- `ba/workspace/*`, `ba/sync/*` — BA working area and team-shared deliverables, single-language by design (Vietnamese, per CLAUDE.md §7/§9).
+- `.claude/{agents,commands,templates,glossary,knowledge,examples}/` — single-language, mirror obligation retired 2026-07-02.
+- `.claude/human/` — human role portraits (VI-only content, not a mirror); `_legacy/` is frozen.
 - `.claude/settings.local.json` — runtime configuration, no human mirror needed.
 - `.claude/sync/*` — meta-files for the sync system itself.
 
 ---
 
-*SYNC-PROTOCOL.md version 1.0 — 2026-05-26.*
+*SYNC-PROTOCOL.md version 1.1 — 2026-07-02. v1.1: retired VI-mirror requirement for `.claude/{agents,commands,templates,glossary}` (BA Lead decision 2026-07-02); `.claude/human/` repurposed as human role portraits; old mirrors parked at `_legacy/`; `CLAUDE.md ↔ HUMAN.md` pair unchanged.*
+*v1.0 — 2026-05-26.*

@@ -1,6 +1,8 @@
 ---
 name: term-check
 description: Tra cứu / kiểm tra thuật ngữ chuyên ngành hàng không trong domain-knowledge + glossary của TOSS. Báo có/không định nghĩa, trỏ nguồn (file:line); hoặc audit độ phủ thuật ngữ của một tài liệu. Dùng khi người dùng hỏi "X là gì", "kiểm tra từ vựng/thuật ngữ", "thuật ngữ này có trong glossary chưa", hoặc cần soát thuật ngữ một tài liệu.
+metadata:
+  version: "1.0.0"
 ---
 
 # Skill: Kiểm tra / tra cứu thuật ngữ chuyên ngành

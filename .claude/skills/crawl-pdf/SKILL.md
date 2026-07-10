@@ -1,6 +1,8 @@
 ---
 name: crawl-pdf
-description: Crawl một website để thu thập liên kết PDF, tải các file PDF về máy, và (tuỳ chọn) phân rã sang Markdown — PDF bằng pdftotext -layout, tài liệu Office (DOCX/PPTX/XLSX/HTML) bằng markitdown. Dùng khi người dùng muốn "crawl PDF", "lấy/tải các link PDF", "tải tài liệu PDF của trang X về", "liệt kê link PDF", hoặc "phân rã/chuyển PDF/DOCX/XLSX sang md" từ một nguồn web hay tài liệu nội bộ (vd ffac.ch, iata.org, govinfo.gov, ccaa.hr, Customer_docs...).
+description: Crawl một website để thu thập liên kết PDF, tải các file PDF về máy, và (tuỳ chọn) phân rã sang Markdown — PDF giữ cấu trúc bằng pymupdf4llm (heading/bảng/bold; fallback pdftotext -layout cho text thô), tài liệu Office (DOCX/PPTX/XLSX/HTML) bằng markitdown. Dùng khi người dùng muốn "crawl PDF", "lấy/tải các link PDF", "tải tài liệu PDF của trang X về", "liệt kê link PDF", hoặc "phân rã/chuyển PDF/DOCX/XLSX sang md" từ một nguồn web hay tài liệu nội bộ (vd ffac.ch, iata.org, govinfo.gov, ccaa.hr, Customer_docs...).
+metadata:
+  version: "1.1.0"
 ---
 
 # Skill: Crawl + Tải + Phân rã PDF từ website
@@ -15,14 +17,18 @@ description: Crawl một website để thu thập liên kết PDF, tải các fi
 
 | Định dạng nguồn | Engine | Lệnh | Ghi chú |
 |---|---|---|---|
-| **PDF** | `pdftotext -layout` | qua `scripts/pdf-to-md.ps1` (đọc PDF qua `/mnt/host`, ghi `.md` phía Windows) | Giữ bảng/cột tốt hơn — **ưu tiên cho PDF** |
-| **Office/HTML** (DOCX, PPTX, XLSX, HTML, CSV) | **markitdown** | `python -m markitdown "<file>" -o "<out.md>"` | pdftotext KHÔNG đọc được Office → dùng markitdown |
+| **PDF → .md giữ cấu trúc** (MẶC ĐỊNH) | **pymupdf4llm** (PyMuPDF) | `python scripts/pdf-to-md.py "<file.pdf hoặc thư mục>" "<out-dir>"` | Suy heading từ cỡ chữ (`#`/`##`), phát hiện **bảng → Markdown table**, giữ `**bold**`/`*italic*`, reading-order tốt. Pure Python, **không cần poppler**. Thêm `--images` để trích ảnh |
+| **PDF → text thô / tốc độ tối đa** (fallback) | `pdftotext -layout` | qua `scripts/pdf-to-md.ps1` (WSL, đọc qua `/mnt/host`) | Chỉ khi cần text phẳng nhanh (grep/đếm từ/feed ASR), hoặc khi pymupdf4llm lỗi. Cần poppler trong WSL |
+| **Office/HTML** (DOCX, PPTX, XLSX, HTML, CSV) | **markitdown** | `python -m markitdown "<file>" -o "<out.md>"` | pdftotext/pymupdf4llm KHÔNG đọc Office → dùng markitdown |
 
 **Cài đặt (một lần / khi mất):**
+- **pymupdf4llm** — pure Python (engine PDF mặc định): `python -m pip install --user pymupdf4llm`. Kiểm tra: `python -c "import pymupdf4llm; print('ok')"`. **Không cần binary ngoài** → hợp Windows/venv hơn pdftotext.
 - **markitdown** — pure Python: `python -m pip install --user "markitdown[all]"` (đã cài v0.1.6). Kiểm tra: `python -m markitdown --version`.
-- **pdftotext** — máy hiện tại chỉ có 1 WSL distro `docker-desktop` (Alpine), **mặc định CHƯA có** pdftotext. Cài: `wsl -d docker-desktop -- apk add --no-cache poppler-utils` → có `pdftotext`. **Lưu ý:** distro docker-desktop ephemeral → có thể **mất sau khi WSL/Docker restart**, chạy lại lệnh trên khi `pdftotext: not found`.
+- **pdftotext** (fallback) — WSL distro `docker-desktop` (Alpine) mặc định CHƯA có. Cài: `wsl -d docker-desktop -- apk add --no-cache poppler-utils`. Distro ephemeral → chạy lại khi `pdftotext: not found`.
 
-**Lưu ý chất lượng:** bản trích là **raw extract** (CLAUDE.md §0). XLSX qua markitdown để ô trống thành `NaN`/cột không tên thành `Unnamed: N` — dọn tay khi cần bản chính thức. PDF nhiều cột/bảng phức tạp ưu tiên pdftotext -layout.
+**Chọn engine PDF:** mục tiêu ra `.md` **giữ cấu trúc** (heading/bảng/list — để đọc, đưa vào RAG/LLM, hoặc deliverable) → **pymupdf4llm** (thắng rõ). Chỉ cần text thô + tốc độ tối đa → pdftotext. Cả hai **không OCR** (chỉ đọc text-layer; PDF scan ảnh → cần OCR riêng). Lưu ý license: poppler GPL, PyMuPDF **AGPL** (cân nhắc nếu phân phối thương mại).
+
+**Lưu ý chất lượng:** bản trích là **raw extract** (CLAUDE.md §0). XLSX qua markitdown để ô trống thành `NaN`/cột không tên thành `Unnamed: N` — dọn tay khi cần bản chính thức.
 
 ### 0.1 Kết nối Google Drive / Sheets (LIVE, qua Service Account)
 Pull tài liệu **đang ở Google Drive/Sheets** về `.md` (re-pull khi nguồn đổi). Chạy ở máy → 0 token.
@@ -92,7 +98,22 @@ Mỗi PDF → một `.md` (frontmatter + link nguồn + text `pdftotext -layout`
 - **FAA 14 CFR (public domain):** govinfo.gov — `https://www.govinfo.gov/content/pkg/CFR-<năm>-title14-vol<N>/pdf/CFR-<năm>-title14-vol<N>-part<NNN>.pdf` (Title 14: vol1=1–59, vol2=60–109, vol3=110–199).
 - **IATA:** `iata.org/contentassets/...` (phần lớn tài liệu chuẩn IATA là sản phẩm trả phí, không có công khai).
 
+## 4b. Phân rã tài liệu LỚN sau extract (token-economy)
+
+> Bản trích lớn (**> ~800 dòng**, vd tài liệu kỹ thuật PDF 10k+ dòng) → **phân rã theo section cấp 1** để tra đúng phần, không nạp cả file (CLAUDE.md §0.5/§8). CHỈ tách trung thực, không sửa nội dung (§0).
+
+```bash
+# 1 file → <ten>_parts/sec-NN-*.md + INDEX.md (nối nội dung). --delete-original nếu thay monolith.
+python .claude/skills/crawl-pdf/scripts/split-md-by-section.py "<file.md>" [--outdir <dir>] [--title "<tiêu đề INDEX>"] [--delete-original]
+# cả thư mục: phân rã mọi .md > min-lines
+python .claude/skills/crawl-pdf/scripts/split-md-by-section.py "<thư mục>" --all --min-lines 800
+```
+- Nhận diện ranh giới: heading **đánh số cấp `##`** (số ≤ 99, tránh bắt nhầm model/năm như "787") → fallback `# N` → fallback mọi `##` (khi ≥6 heading). Phần trước section đầu → `sec-00-front-matter.md`.
+- Sau khi phân rã: cập nhật INDEX cha (vd `01-nguon/INDEX.md`) trỏ tới `<ten>_parts/INDEX.md` thay vì monolith (rule INDEX completeness §8).
+- Áp dụng cho bản trích lớn ở `01-nguon/` (Customer_docs) **và** KB lớn (`domain-knowledge/` — bổ trợ `term-check/split-kb-by-content.ps1` vốn cắt theo MỌI `##`; script này cắt theo SECTION SỐ cấp 1, hợp tài liệu kỹ thuật nhiều mục con).
+
 ## 5. Tài sản skill
 - `scripts/crawl-pdf-links.ps1` — BFS crawl → danh sách URL PDF.
 - `scripts/download-pdfs.ps1` — tải + xác thực PDF (PowerShell thuần, không cần WSL).
 - `scripts/pdf-to-md.ps1` — phân rã PDF → MD qua WSL `pdftotext`, đọc PDF qua `/mnt/host/<ổ>/...` + xuất **stdout** (PowerShell ghi `.md`) → **chạy được kể cả khi đĩa WSL read-only**; tự dò mount `/mnt/host` hoặc `/mnt`.
+- `scripts/split-md-by-section.py` — **phân rã .md lớn theo section cấp 1** → `<ten>_parts/sec-NN-*.md` + INDEX nối nội dung (§4b). Pure Python, stdout UTF-8.

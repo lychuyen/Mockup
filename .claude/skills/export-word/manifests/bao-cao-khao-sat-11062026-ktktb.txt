@@ -1,0 +1,3 @@
+# Manifest: Báo cáo Khảo sát TOSS — Buổi 11/06/2026 (KTKTB)
+# Phòng Kỹ thuật khai thác bay — MEL authoring, W&B, Demo NOTOC
+ba/workspace/drafts/phan-tich/02-khao-sat/BAO-CAO-KHAO-SAT-11062026-ktktb-v0.1.md

@@ -1,6 +1,9 @@
-# sync-check.ps1 — PostToolUse hook for dual-scope sync reminder
+﻿# sync-check.ps1 — PostToolUse hook for dual-scope sync reminder
 # Triggered after Edit/Write tool calls. Reads tool input from stdin (JSON),
 # checks whether the edited path is in a tracked scope, and prints a reminder.
+# 2026-07-02 (BA Lead): mirror obligation retired for .claude/{agents,commands,
+# templates,glossary} and .claude/human (now human role portraits, not a mirror).
+# Only the CLAUDE.md <-> HUMAN.md pair still triggers a reminder.
 
 param()
 
@@ -25,14 +28,8 @@ try {
         $mirror = $normalized -replace '/HUMAN\.md$', '/CLAUDE.md'
         $scope = 'HUMAN'
     }
-    elseif ($normalized -match '\.claude/human/') {
-        $mirror = $normalized -replace '\.claude/human/', '.claude/'
-        $scope = 'HUMAN'
-    }
-    elseif ($normalized -match '\.claude/(agents|commands|templates|glossary)/') {
-        $mirror = $normalized -replace '\.claude/', '.claude/human/'
-        $scope = 'AGENTS'
-    }
+    # (retired 2026-07-02) .claude/human/ and .claude/{agents,commands,templates,glossary}
+    # no longer have mirror pairs — see SYNC-PROTOCOL.md v1.1.
 
     if ($null -ne $mirror) {
         $target = if ($scope -eq 'AGENTS') { 'HUMAN scope (Vietnamese)' } else { 'AGENTS scope (English)' }

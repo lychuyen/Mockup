@@ -58,7 +58,7 @@ Claude Code skills (`/brd`, `/interview`, `/userstory`, `/meeting-notes`, export
 | Mockup / prototype HTML | `.claude/skills/gen-mockup/SKILL.md` |
 | Tổng hợp biên bản họp từ transcript | `.claude/skills/meeting-synthesize/SKILL.md` (if present) or `.claude/commands/meeting-notes.md` |
 | Angular feature code-gen | `.claude/skills/gen-*/SKILL.md` + `.claude/rules/angular-guidelines.md` |
-| Phân rã PDF / tài liệu Office (DOCX/PPTX/XLSX/HTML) sang Markdown | `.claude/skills/crawl-pdf/SKILL.md` **§0** — định tuyến engine + cài đặt (markitdown cho Office, pdftotext -layout cho PDF). Lệnh python/wsl/apk chạy được cho MỌI loại agent |
+| Phân rã PDF / tài liệu Office (DOCX/PPTX/XLSX/HTML) sang Markdown | `.claude/skills/crawl-pdf/SKILL.md` **§0** — định tuyến engine + cài đặt (markitdown cho Office; **pymupdf4llm** cho PDF giữ cấu trúc, fallback pdftotext -layout). Lệnh python/wsl/apk chạy được cho MỌI loại agent |
 
 ### 3.2 Sync hook → manual discipline
 
@@ -75,7 +75,7 @@ Claude Code fires a `PostToolUse` hook reminding about dual-scope mirrors. Codex
 - Respect `.aiignore` (token-heavy paths: logs, exports, binaries).
 - **Phân rã tài liệu → Markdown** (đỡ token: convert chạy ở máy, 0 token mô hình; sau đó đọc/Grep chọn lọc bản `.md`). Định tuyến engine theo định dạng — **lệnh tool-neutral, mọi agent chạy được**:
   - **Office** (DOCX/PPTX/XLSX/HTML/CSV) → `python -m markitdown "<file>" -o "<out.md>"`. Cài: `python -m pip install --user "markitdown[all]"` (đã cài v0.1.6).
-  - **PDF** → `pdftotext -layout` (giữ bảng tốt hơn). Máy này chỉ có WSL distro `docker-desktop` (Alpine) — cài: `wsl -d docker-desktop -- apk add --no-cache poppler-utils`; **ephemeral**, chạy lại khi báo `pdftotext: not found`.
+  - **PDF (mặc định, giữ cấu trúc → .md)** → `python .claude/skills/crawl-pdf/scripts/pdf-to-md.py "<file|dir>" "<out-dir>"` (pymupdf4llm: heading/bảng/bold; pure Python). Cài: `python -m pip install --user pymupdf4llm`. **Fallback text thô/tốc độ** → `pdftotext -layout` (WSL `docker-desktop` Alpine: `wsl -d docker-desktop -- apk add --no-cache poppler-utils`; ephemeral, chạy lại khi `pdftotext: not found`).
   - Bản trích là **raw extract** (CLAUDE.md §0). Chi tiết + script: `.claude/skills/crawl-pdf/SKILL.md` §0.
 - **Pull Google Drive / Sheets (LIVE)** → Markdown: `python .claude/skills/crawl-pdf/scripts/gsheet-to-md.py <id|url> <out.md>` (Sheet native, sạch) hoặc `gdrive-to-md.py` (file Office trên Drive). Cài `pip install --user gspread google-auth`; bật Sheets API + Drive API. **Auth = việc HUMAN (§0.3):** Service Account key JSON ở `.secrets/` (gitignore, KHÔNG commit/chia sẻ), Share file cho `client_email` của SA. Chi tiết: skill crawl-pdf §0.1.
 

@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Tải danh sách PDF về một thư mục, kiểm tra header %PDF-, báo cáo OK/lỗi.
 .DESCRIPTION

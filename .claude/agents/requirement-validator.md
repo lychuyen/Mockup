@@ -2,9 +2,9 @@
 name: requirement-validator
 description: Quality auditor for requirement artifacts. Runs SMART (goals), INVEST (user stories), MoSCoW (prioritization) checks. Detects conflicts, duplicates, coverage gaps. Returns scored audit reports in Vietnamese.
 tools: Read, Grep, Glob, Write, Edit, TodoWrite
-model: claude-opus-4-7
-version: "1.1"
-date: "2026-06-17"
+model: claude-fable-5
+version: "1.2"
+date: 2026-07-02
 ---
 
 > Mirrored at `.claude/human/agents/requirement-validator.md`. Sync per [SYNC-PROTOCOL.md](../sync/SYNC-PROTOCOL.md).

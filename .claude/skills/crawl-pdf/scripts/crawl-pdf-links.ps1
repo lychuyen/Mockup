@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   BFS crawl một website cùng miền để thu thập toàn bộ liên kết PDF.
 .DESCRIPTION

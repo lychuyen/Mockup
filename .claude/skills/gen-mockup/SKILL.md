@@ -1,6 +1,8 @@
 ---
 name: gen-mockup
 description: Dựng MOCKUP (blueprint tĩnh) hoặc PROTOTYPE (bản tương tác clickable) giao diện HTML TỰ CHỨA (offline), TUÂN THỦ Angular Material (mỗi element map 1:1 sang component trong catalog angular-material-components.md) + chú thích component để DEV implement trung thực. Dùng khi người dùng muốn "tạo mockup", "dựng mockup", "prototype", "demo màn hình", "bản tương tác", "gen mockup".
+metadata:
+  version: "1.1.0"
 ---
 
 # Skill: Gen Mockup (giao diện tuân thủ Angular Material)
@@ -66,6 +68,18 @@ Sinh **mockup HTML tự chứa** (mở bằng trình duyệt, không cần inter
 ```
 
 → Mockup vừa để khách duyệt *trực quan*, vừa là *blueprint* chỉ rõ DEV phải dùng component nào (khớp `gen-*`).
+
+## Nguyên tắc UX (tham khảo — [`ux-knowledge-synthesis.md`](../../knowledge/ux-knowledge-synthesis.md))
+
+Áp dụng có chọn lọc cho dashboard điều hành mật độ cao của TOSS. KHÔNG ghi đè §0: mọi element vẫn phải có nguồn.
+
+- **Wide-but-shallow** [U1]: ưu tiên dựng **rộng** toàn bộ điều hướng chính ở fidelity thấp (placeholder), chỉ tăng chi tiết ở màn/feature mà nguồn yêu cầu test. Đừng dồn công 1 màn mà bỏ trống bối cảnh.
+- **Xử lý biên (boundary)** [U1]: mọi nút/link trỏ ra ngoài phạm vi đã dựng phải có **placeholder gắn nhãn rõ** (vd "[Màn Phân công tổ bay — chưa dựng]") + cờ `[cần xác nhận]` nếu nguồn thiếu. Không để dead-end làm "vỡ" prototype.
+- **Ưu tiên theo RỦI RO** [U4]: dựng trước các màn **nhập/xử lý dữ liệu nghiệp vụ** (dispatch release, nhập MEL, lập roster, ghi BCAO/diversion); màn chỉ-đọc/tra cứu tĩnh ưu tiên thấp.
+- **Dữ liệu mẫu thực tế** [U1]: dùng dữ liệu đúng domain (số hiệu chuyến VN###, mã ICAO sân bay, registration tàu bay, mốc giờ UTC) thay vì lorem ipsum — tăng độ thuyết phục khi demo với VNA. Vẫn đánh dấu "dữ liệu mẫu".
+- **Dashboard realtime** [U2]: **Doherty (<400ms)** — mọi tải bảng/realtime có skeleton/spinner/progress, tránh nhảy layout; **Tesler** — progressive disclosure (accordion/drawer/hover) cho chi tiết phụ, hệ thống pre-fill thay người; **Von Restorff** — cảnh báo nguy cấp (AOG, conflict, MEL hết hạn) nổi bằng **màu + icon + hình** (không chỉ màu; đạt tương phản WCAG), dùng tiết kiệm; **Fitts** — nút release/confirm đủ lớn, destructive tách xa; **Miller** — chunk bảng dày bằng nhóm cột/divider/header, không cắt mục vô lý.
+- **Annotation 3 nhóm** [U4]: ngoài `data-mat`/`data-src`, chú thích thêm khi liên quan — (a) ràng buộc không thương lượng (CAAV/ICAO/FTL), (b) nice-to-have để version sau, (c) hạng mục tốn kém/rủi ro kỹ thuật cần bàn effort. Đây là cách neo `[cần xác nhận]` của OID lên đúng phần UI.
+- **Fidelity theo mục đích** [U1,U4]: giai đoạn làm rõ yêu cầu (P4 discovery) giữ **low/medium**; chỉ hi-fi khi validate cuối — tránh stakeholder nhầm prototype là sản phẩm thật. Mockup KHÔNG dùng để kết luận accessibility/hiệu năng/tác động visual định lượng.
 
 ## QC trước khi bàn giao
 

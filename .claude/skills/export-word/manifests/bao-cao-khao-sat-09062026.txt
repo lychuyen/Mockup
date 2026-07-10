@@ -1,3 +1,3 @@
 # Manifest: Báo cáo Khảo sát TOSS — Buổi 09/06/2026
 # Cây menu, phân quyền, bảng triển khai YCKT
-ba/workspace/drafts/phan-tich/bao-cao-khao-sat/BAO-CAO-KHAO-SAT-09062026-v0.3.md
+ba/workspace/drafts/phan-tich/02-khao-sat/BAO-CAO-KHAO-SAT-09062026-v0.3.md

@@ -1,4 +1,4 @@
-<#
+﻿<#
   check-input-timeline.ps1 — Đồng bộ TIMELINE-INPUT-DOCS.md <-> thư mục ba/workspace/input/
 
   Chế độ:
@@ -8,14 +8,24 @@
 
   Phạm vi quét:
     - ba/workspace/input/Customer_docs/        (gốc + Form/, Procedure/, meeting-notes/, …)
-    - BỎ QUA: Customer_docs/ACARS/             (31 file zip bulk — chỉ track dòng tổng hợp)
+    - BỎ QUA: Customer_docs/Aircraft/ACARS/    (31 file zip bulk — chỉ track dòng tổng hợp; khớp mọi cấp)
     - BỎ QUA: Customer_docs/PEP5.16/           (564 file bulk — chỉ track dòng tổng hợp)
+    - BỎ QUA: Customer_docs/MEL/#MEL_R10_MMEL-CR-asterisk(DDG)_Complete-efb/ (gói MEL EFB ~700 file — chỉ track dòng tổng hợp)
     - BỎ QUA: ba/workspace/input/domain-knowledge/ (KB tự thu thập — track qua INDEX riêng)
 
   Quy ước:
     - meeting-notes/<YYYYMMDD>/                chỉ kiểm tra sự tồn tại của thư mục con (ngày họp),
                                                KHÔNG kiểm tra từng file transcript bên trong.
+                                               File nằm TRỰC TIẾP dưới meeting-notes/ được coi là file thường.
     - File tạm _combined_*.md (export-word)    bỏ qua.
+    - INDEX.md / README.md                     bỏ qua (meta-file, track qua chính nó).
+    - Mode Check bỏ qua theo thiết kế:
+        * tên đuôi .extracted.md               (bản trích nằm ở drafts/phan-tich/01-nguon/, không phải input/)
+        * token chứa wildcard '*'              (dòng tổng hợp, không phải file thật)
+        * file thuộc nhánh bulk bị bỏ qua khi quét (AptMgr/APD/in-26xxxx/B787_GBST_CMF…) — có kiểm tra
+          tồn tại thật trên toàn cây input/ (kể cả nhánh bulk) trước khi báo THIẾU
+        * danh sách ngoại lệ có ghi chú ($checkSkipExact): nguồn LIVE Google Sheet không lưu đĩa,
+          artifact nằm ngoài input/ (vd mockup trong ba/workspace/drafts/).
 
   LƯU Ý: Script CHỈ báo cáo, KHÔNG tự sửa TIMELINE hay file nào.
          Agent/human đọc báo cáo và quyết định thao tác tiếp theo.
@@ -48,7 +58,7 @@ if (-not (Test-Path $inputPath)) {
 $timelineRaw = Get-Content -Path $timelinePath -Raw -Encoding UTF8
 
 # Pattern: tên file có đuôi mở rộng phổ biến, trong backticks `...`
-$fileExtPattern = '\.(xlsx|xls|docx|doc|pdf|pptx|ppt|mdb|html|htm|zip|csv|tsv|md|srt|txt|xml|json)'
+$fileExtPattern = '\.(xlsx|xls|docx|doc|pdf|pptx|ppt|mdb|html|htm|zip|csv|tsv|md|srt|txt|xml|json|png|jpg)'
 $backtickMatches = [regex]::Matches(
     $timelineRaw,
     '`([^`\r\n]+?' + $fileExtPattern + ')`',
@@ -78,8 +88,8 @@ foreach ($m in $mtgDirMatches) {
 # 2) Quét hệ thống file thực trong ba/workspace/input/
 # --------------------------------------------------------------------------
 $customerDocs = Join-Path $inputPath 'Customer_docs'
-$skipDirNames = @('ACARS', 'PEP5.16')
-$skipFilePatterns = @('^_combined_.*\.md$')
+$skipDirNames = @('ACARS', 'PEP5.16', '#MEL_R10_MMEL-CR-asterisk(DDG)_Complete-efb')
+$skipFilePatterns = @('^_combined_.*\.md$', '^(INDEX|README)\.md$')
 
 $actualFiles = @()
 $actualMtgDirs = New-Object System.Collections.Generic.HashSet[string] ([System.StringComparer]::OrdinalIgnoreCase)
@@ -93,8 +103,13 @@ if (Test-Path $customerDocs) {
         $parts = $rel -split '/'
         $topDir = $parts[0]
 
-        # Bỏ qua nhánh ACARS, PEP5.16
-        if ($skipDirNames -contains $topDir) { continue }
+        # Bỏ qua nhánh ACARS, PEP5.16 — ở BẤT KỲ cấp thư mục nào
+        # (ACARS đã dời Customer_docs/ACARS/ -> Customer_docs/Aircraft/ACARS/ 2026-06)
+        $inSkipDir = $false
+        foreach ($sd in $skipDirNames) {
+            if ($parts -contains $sd) { $inSkipDir = $true; break }
+        }
+        if ($inSkipDir) { continue }
 
         # Bỏ qua file tạm
         $skip = $false
@@ -103,8 +118,9 @@ if (Test-Path $customerDocs) {
         }
         if ($skip) { continue }
 
-        # Trong meeting-notes: chỉ ghi nhận thư mục con cấp 1 (ngày họp), bỏ qua file lẻ
-        if ($topDir -ieq 'meeting-notes' -and $parts.Count -ge 2) {
+        # Trong meeting-notes: chỉ ghi nhận thư mục con cấp 1 (ngày họp), bỏ qua file bên trong.
+        # File nằm TRỰC TIẾP dưới meeting-notes/ (parts.Count -eq 2) là file thường -> track như file.
+        if ($topDir -ieq 'meeting-notes' -and $parts.Count -ge 3) {
             [void]$actualMtgDirs.Add($parts[1])
             continue
         }
@@ -158,12 +174,36 @@ if ($Mode -eq 'Check' -or $Mode -eq 'Both') {
     $actualNameSet = New-Object System.Collections.Generic.HashSet[string] ([System.StringComparer]::OrdinalIgnoreCase)
     foreach ($f in $actualFiles) { [void]$actualNameSet.Add($f.Name) }
 
-    foreach ($name in $timelineFiles) {
-        # Bỏ qua tên file thuộc nhóm ACARS/PEP5.16/domain-knowledge (chỉ ghi dòng tổng hợp)
-        if ($name -match '^(in-26\d{4}|B787_GBST_CMF|AptMgr|APD)') { continue }
-        if ($name -match '\.(md)$' -and $name -match '(combined_)') { continue }
+    # Tập tên TOÀN CÂY input/ (kể cả nhánh bulk bị bỏ qua khi quét: Aircraft/ACARS, PEP5.16,
+    # MEL EFB, domain-knowledge) — để entry TIMELINE trỏ vào nhánh bulk không bị báo THIẾU oan.
+    $allInputNames = New-Object System.Collections.Generic.HashSet[string] ([System.StringComparer]::OrdinalIgnoreCase)
+    foreach ($item in (Get-ChildItem -Path $inputPath -Recurse -File -ErrorAction SilentlyContinue)) {
+        [void]$allInputNames.Add($item.Name)
+    }
 
-        if (-not $actualNameSet.Contains($name)) {
+    # Ngoại lệ có chủ đích (KNOWN by design) — mỗi tên kèm lý do:
+    $checkSkipExact = @(
+        'VNA-TOSS-Function-list-v1.0.xlsx',   # nguồn LIVE Google Sheet — không lưu đĩa; chỉ có bản trích .extracted.md
+        'dsp_monitoring_poc_v0.1.html'        # artifact mockup — nằm ở ba/workspace/drafts/mockup/, ngoài input/
+    )
+
+    foreach ($name in $timelineFiles) {
+        # So khớp theo TÊN FILE (leaf) — token TIMELINE có thể kèm đường dẫn tương đối
+        $leaf = ($name -split '[\\/]')[-1].Trim()
+
+        # Bỏ qua token wildcard (dòng tổng hợp, không phải file thật)
+        if ($name -match '\*') { continue }
+        # Bỏ qua bản trích .extracted.md (nằm ở drafts/phan-tich/01-nguon/, không phải input/)
+        if ($leaf -match '\.extracted\.md$') { continue }
+        # Bỏ qua meta-file INDEX/README
+        if ($leaf -match '^(INDEX|README)\.md$') { continue }
+        # Bỏ qua tên file thuộc nhóm bulk ACARS/PEP5.16 (chỉ ghi dòng tổng hợp) — khớp cả khi có path đứng trước
+        if ($leaf -match '^(in-26\d{4}|B787_GBST_CMF|AptMgr|APD)') { continue }
+        if ($leaf -match '\.(md)$' -and $leaf -match '(combined_)') { continue }
+        # Bỏ qua ngoại lệ có ghi chú
+        if ($checkSkipExact -contains $leaf) { continue }
+
+        if (-not ($actualNameSet.Contains($leaf) -or $allInputNames.Contains($leaf))) {
             $missingFiles += $name
         }
     }

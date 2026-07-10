@@ -1,4 +1,4 @@
-# guard-safety.ps1 — PreToolUse hook (BLOCKING) — cluster G2 + G3.
+﻿# guard-safety.ps1 — PreToolUse hook (BLOCKING) — cluster G2 + G3.
 # Nguon: knowledge/agent-harness-engineering.md (N1 ratcheting/destructive-guard, N3 credential isolation).
 #
 # Chan 3 nhom hanh dong nguy hiem:
@@ -68,7 +68,7 @@ try {
                 '(?i)(^|[\s''"/\\])\.git([\s''"/\\]|$)',                # .git
                 '(?i)(^|[\s''"/\\])\.claude([\s''"/\\]|$)',             # .claude
                 '(?i)ba[\\/]sync',                                       # ba/sync (source of truth)
-                '(?i)Remove-Item\b.*-Recurse.*\b(C:|D:|\$HOME|~)\b'
+                '(?i)Remove-Item\b.*-Recurse.*[\s"''][A-Za-z]:[\\/]?(\s|"|''|$)'   # chi GOC o dia (D:\ ), khong chan D:\subfolder
             )
             foreach ($pat in $protected) {
                 if ($cmd -match $pat) {

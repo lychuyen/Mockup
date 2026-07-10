@@ -1,6 +1,8 @@
 ---
 name: survey-report
-description: Lập BÁO CÁO KHẢO SÁT (Discovery) cho TOSS từ transcript phỏng vấn/khảo sát stakeholder (file trong Customer_docs/meeting-notes/<ngày>/). Cấu trúc Yêu cầu / Thảo luận–Đề xuất / Kết luận; sửa lỗi ASR bằng domain-knowledge; hậu xử lý cập nhật sổ OID + đề xuất glossary. Dùng khi người dùng nói "tạo báo cáo khảo sát cho <ngày>", "lập báo cáo discovery", "tổng hợp buổi khảo sát".
+description: Lập BÁO CÁO KHẢO SÁT (Discovery) cho TOSS từ transcript phỏng vấn/khảo sát stakeholder (file trong Customer_docs/meeting-notes/[ngày]/). Cấu trúc Yêu cầu / Thảo luận–Đề xuất / Kết luận; sửa lỗi ASR bằng domain-knowledge; hậu xử lý cập nhật sổ OID + đề xuất glossary. Dùng khi người dùng nói "tạo báo cáo khảo sát cho [ngày]", "lập báo cáo discovery", "tổng hợp buổi khảo sát".
+metadata:
+  version: "1.1.0"
 ---
 
 # Skill: Lập Báo cáo Khảo sát (Discovery)
@@ -14,6 +16,9 @@ description: Lập BÁO CÁO KHẢO SÁT (Discovery) cho TOSS từ transcript ph
 - **domain-knowledge chỉ để làm rõ + sửa ASR**, không thêm nội dung ngoài transcript.
 - Output 100% tiếng Việt; thuật ngữ kỹ thuật giữ tiếng Anh trong ngoặc lần đầu.
 - Khách hàng trước, glossary sau; viết tắt nội bộ chưa rõ → gắn cờ.
+- **Tách "data point" rời rạc** (kỹ thuật UX Research [U3] — [`ux-knowledge-synthesis.md`](../../knowledge/ux-knowledge-synthesis.md)): khi rã transcript, mỗi **ý/khái niệm độc lập** là một đơn vị riêng trước khi gom theo chủ đề. Câu ghép phải tách ("upload OFP thủ công" + "muốn tự động đồng bộ" = 2 data point) để truy vết chính xác, không gộp nhầm.
+- **Mỗi kết luận trả lời "So what?"** [U3]: phần Kết luận của mỗi chủ đề nêu rõ *hệ quả cho thiết kế/quyết định* (ảnh hưởng FUNC/luồng/dữ liệu nào), không chỉ mô tả lại.
+- **Trích nguyên văn ẩn danh** [U3]: khi minh họa một yêu cầu, dùng trích nguyên văn từ transcript (kèm dẫn dòng nguồn) thay vì diễn giải — củng cố "trích dẫn nguồn" của §0.
 
 ## 0.1 Văn phong tiếng Việt (BẮT BUỘC khi soạn §II)
 

@@ -1,4 +1,4 @@
-# check-vietnamese.ps1 — PreToolUse hook for Write|Edit.
+﻿# check-vietnamese.ps1 — PreToolUse hook for Write|Edit.
 # Warns (non-blocking) when content being written to a .md file under
 # docs/, deliverables/, or reports/ is predominantly English.
 #
