@@ -25,6 +25,36 @@ feature_name: "Thêm mới/Sửa Email"
 
 ![Ảnh minh họa](../_images/TOSS.DM.EMAIL_ADD_EDIT.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph SG1["User"]
+        S0(("●"))
+        A1["(1) Truy cập web ODP =&gt; chọn Danh mục Email"]
+        A2["(2) Click button Thêm mới/sửa tại màn danh sách"]
+        A4["(4) Nhập thông tin và chọn lưu lại"]
+    end
+    subgraph SG2["ODP_Danh mục Email"]
+        A3["(3) Mở màn thêm mới/sửa Email"]
+        A5["(5) Kiểm tra dữ liệu"]
+        D1{"?"}
+        A6["(6) Hiển thị toast message lỗi"]
+        A7["(7) Update dữ liệu vào DB"]
+        A8["(8) Hiển thị toast message Thêm mới/sửa thành công"]
+        E0((("●")))
+    end
+    S0 --> A1
+    A1 --> A2
+    A2 --> A3
+    A3 --> A4
+    A4 --> A5
+    A5 --> D1
+    D1 -->|Không hợp lệ| A6
+    A6 -->|Nhập thông tin/sửa thông tin| A3
+    D1 -->|Hợp lệ| A7
+    A7 --> A8
+    A8 --> E0
+```
+
 Hình 27. Sơ đồ luồng hệ thống
 
 #### Mô tả luồng xử lý

@@ -27,6 +27,33 @@ feature_name: "Xem danh sách Email"
 
 ![Ảnh minh họa](../_images/TOSS.DM.EMAIL_LIST.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph SG1["User"]
+        S0(("●"))
+        A1["(1) Truy cập web ODP =&gt; chọn Danh mục Email"]
+        A3["(3) Nhấn button thêm mới"]
+        A5["(5) Nhấn icon sửa"]
+        A7["(7) Nhấn icon xem lịch sử"]
+    end
+    subgraph SG2["ODP_Danh mục Email"]
+        A2["(2) Hiển thị màn hình danh sách Email"]
+        A4["(4) Mở màn hình thêm mới Email"]
+        A6["(6) Mở màn hình sửa mới Email"]
+        A8["(8) Mở màn hình xem lịch sử"]
+        E0((("●")))
+    end
+    S0 --> A1
+    A1 --> A2
+    A2 --> A3
+    A2 --> A5
+    A2 --> A7
+    A3 --> A4
+    A5 --> A6
+    A7 --> A8
+    A8 --> E0
+```
+
 Hình 23. Sơ đồ luồng hệ thống
 
 #### Mô tả luồng xử lý

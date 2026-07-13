@@ -25,6 +25,25 @@ feature_name: "Xem lịch sử Đội bay"
 
 **![Ảnh minh họa](../_images/TOSS.DM.FLEET_HISTORY.img01.png)**
 
+```mermaid
+flowchart TD
+    subgraph LANE_USER["Use"]
+        START(("●"))
+        U1["(1) Truy cập web FIMS =&gt; mở đến Danh mục =&gt; Đội bay"]
+        U2["(2) Click icon Xem lịch sử tại danh sách hoặc button Xem lịch sử tại màn hình Xem chi tiết"]
+    end
+    subgraph LANE_SYS["Hệ thống"]
+        S3["(3) Hệ thống call API lấy dữ liệu"]
+        S4["(4) Mở màn hình Xem lịch sử"]
+        END_NODE((("●")))
+    end
+    START --> U1
+    U1 --> U2
+    U2 --> S3
+    S3 --> S4
+    S4 --> END_NODE
+```
+
 #### Mô tả luồng xử lý
 
 | **Bước** | **Chi tiết** |

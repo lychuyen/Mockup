@@ -29,6 +29,35 @@ Module quản lý danh mục AC Subtype cho phép thực hiện đầy đủ cá
 
 ![Ảnh minh họa](../_images/TOSS.DM.AC_SUBTYPE_LIST.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph LANE_USER["User"]
+        START(("●"))
+        U1["(1) Truy cập web FIMS =&gt; chọn Danh mục AC Subtype"]
+        U4["(4) Nhấn button thêm mới"]
+        U6["(6) Nhấn icon sửa"]
+        U8["(8) Nhấn icon xóa"]
+    end
+    subgraph LANE_SYS["FIMS_Danh mục AC Subtype"]
+        S2["(2) Gọi API để lấy dữ liệu AC Subtype"]
+        S3["(3) Hiển thị màn hình danh sách AC Subtype"]
+        S5["(5) Mở màn hình thêm mới AC Subtype"]
+        S7["(7) Mở màn hình sửa mới AC Subtype"]
+        S9["(9) Mở màn hình xóa AC Subtype"]
+        END_NODE((("●")))
+    end
+    START --> U1
+    U1 --> S2
+    S2 --> S3
+    S3 --> U4
+    S3 --> U6
+    S3 --> U8
+    U4 --> S5
+    U6 --> S7
+    U8 --> S9
+    S9 --> END_NODE
+```
+
 #### Mô tả luồng xử lý
 
 | **Bước** | **Mô tả** |

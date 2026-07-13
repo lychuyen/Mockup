@@ -25,6 +25,36 @@ feature_name: "[Thêm mới ULD](../TOSS.DM.ULD/TOSS.DM.ULD_CREATE.FD.v0.1.md) T
 
 ![Ảnh minh họa](../_images/TOSS.DM.ULD_TYPE_CREATE.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph SG1["User"]
+        S0(("●"))
+        A1["1. Người dùng truy cập ODP, chọn danh mục quản trị =&gt; Danh mục ULD"]
+        A2["2. Chọn chức năng &quot;Create New&quot;"]
+        A4["4. Nhập dữ liệu và &quot;Lưu lại&quot;"]
+    end
+    subgraph SG2["Hệ thống"]
+        A3["3. Hiển thị màn hình &quot;Thêm mới ULD&quot;"]
+        A5["5. Hệ thống kiểm tra dữ liệu"]
+        D1{"?"}
+        A6["6. Hiển thị toast báo lỗi cho người dùng"]
+        A7["7. Lưu và cập nhập danh sách loại ULD"]
+        A8["8. Hiển thị toast thành công cho người dùng"]
+        E0((("●")))
+    end
+    S0 --> A1
+    A1 --> A2
+    A2 --> A3
+    A3 --> A5
+    A4 --> A5
+    A5 --> D1
+    D1 -->|ERROR| A6
+    A6 --> A3
+    D1 -->|OK| A7
+    A7 --> A8
+    A7 --> E0
+```
+
 1. Sơ đồ luồng hệ thống [thêm mới ULD](../TOSS.DM.ULD/TOSS.DM.ULD_CREATE.FD.v0.1.md) Type
 
 #### Mô tả luồng xử lý

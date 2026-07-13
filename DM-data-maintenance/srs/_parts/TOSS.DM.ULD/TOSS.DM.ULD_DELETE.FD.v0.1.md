@@ -25,6 +25,36 @@ feature_name: "Xóa ULD"
 
 ![Ảnh minh họa](../_images/TOSS.DM.ULD_DELETE.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph SG1["User"]
+        S0(("●"))
+        A1["1. Người dùng truy cập ODP, chọn danh mục quản trị =&gt; Danh mục ULD"]
+        A2["2. Chọn chức năng &quot;Xóa&quot; trên một bản ghi"]
+        A4["4. Nhập lý do và nhấn &quot;Lưu lại&quot;"]
+    end
+    subgraph SG2["Hệ thống"]
+        A3["3. Hiển thị màn hình xác nhận xóa ULD"]
+        A5["5. Hệ thống kiểm tra dữ liệu"]
+        D1{"?"}
+        A6["6. Hiển thị toast báo lỗi cho người dùng"]
+        A7["7. Update dữ liệu vào DB"]
+        A8["8. Hiển thị toast xóa thành công cho người dùng"]
+        E0((("●")))
+    end
+    S0 --> A1
+    A1 --> A2
+    A2 --> A3
+    A3 --> A4
+    A4 --> A5
+    A5 --> D1
+    D1 -->|ERROR| A6
+    A6 --> A3
+    D1 -->|OK| A7
+    A7 --> A8
+    A7 --> E0
+```
+
 1. Sơ đồ luồng xóa ULD
 
 #### Mô tả luồng xử lý

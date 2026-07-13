@@ -25,6 +25,25 @@ feature_name: "Xem chi tiết Email"
 
 ![Ảnh minh họa](../_images/TOSS.DM.EMAIL_DETAIL.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph SG1["User"]
+        S0(("●"))
+        A1["(1) Truy cập web ODP =&gt; chọn Danh mục Email"]
+        A3["(3) Click vào 1 bản ghi trên danh sách"]
+    end
+    subgraph SG2["ODP_Danh mục Email"]
+        A2["(2) Hiển thị màn hình danh sách Email"]
+        A4["(4) Hiển thị popup view chi tiết Email"]
+        E0((("●")))
+    end
+    S0 --> A1
+    A1 --> A2
+    A2 --> A3
+    A3 --> A4
+    A4 --> E0
+```
+
 Hình 25. Sơ đồ luồng hệ thống
 
 #### Mô tả luồng xử lý

@@ -25,6 +25,35 @@ feature_name: "[Sửa ULD](../TOSS.DM.ULD/TOSS.DM.ULD_EDIT.FD.v0.1.md) Type"
 
 ![Ảnh minh họa](../_images/TOSS.DM.ULD_TYPE_EDIT.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph SG1["User"]
+        S0(("●"))
+        A1["(1) Truy cập web FIMS =&gt; mở đến Danh mục =&gt; ULD Type"]
+        A2["(2) Click Icon Sửa ULD Type"]
+        A4["(4) Nhập thông tin và Lưu lại"]
+    end
+    subgraph SG2["Hệ thống"]
+        A3["(3) Mở màn hình Sửa ULD Type"]
+        A5["(5) Kiểm tra dữ liệu"]
+        D1{"?"}
+        A6["(6) Hiển thị toast message lỗi"]
+        A7["(7) Update dữ liệu vào DB"]
+        A8["(8) Hiển thị toast message Thêm mới/Sửa thành công"]
+        E0((("●")))
+    end
+    S0 --> A1
+    A1 --> A2
+    A2 --> A3
+    A4 --> A5
+    A5 --> D1
+    D1 -->|không hợp lệ| A6
+    A6 --> A3
+    D1 -->|Hợp lệ| A7
+    A7 --> A8
+    A8 --> E0
+```
+
 #### Mô tả luồng xử lý
 
 | **STT** | **Bước** | **Chi tiết** |

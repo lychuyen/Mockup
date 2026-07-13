@@ -27,6 +27,39 @@ feature_name: "Xem danh sách Đội bay"
 
 **![Ảnh minh họa](../_images/TOSS.DM.FLEET_LIST.img01.png)**
 
+```mermaid
+flowchart TD
+    subgraph LANE_USER["Use"]
+        START(("●"))
+        U1["(1) Truy cập web FIMS =&gt; chọn Danh mục Đội bay"]
+        U4["(4) Nhấn button thêm mới"]
+        U6["(6) Nhấn icon sửa"]
+        U8["(8) Nhấn icon xem lịch sử"]
+        U10["(10) Nhấn icon xoá"]
+    end
+    subgraph LANE_SYS["Hệ thống"]
+        S2["(2) Gọi API để lấy dữ liệu danh sách Đội bay"]
+        S3["(3) Hiển thị màn hình danh sách Đội bay"]
+        S5["(5) Mở màn hình thêm mới Đội bay"]
+        S7["(7) Mở màn hình sửa Đội bay"]
+        S9["(9) Mở màn hình xem lịch sử"]
+        S11["(11) Mở màn hình xoá Đội bay"]
+        END_NODE((("●")))
+    end
+    START --> U1
+    U1 --> S2
+    S2 --> S3
+    S3 --> U4
+    S3 --> U6
+    S3 --> U8
+    S3 --> U10
+    U4 --> S5
+    U6 --> S7
+    U8 --> S9
+    U10 --> S11
+    S11 --> END_NODE
+```
+
 #### Mô tả luồng xử lý
 
 | **Bước** | **Chi tiết** |

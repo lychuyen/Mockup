@@ -25,6 +25,36 @@ feature_name: "Thêm mới/Sửa AC Subtype"
 
 ![Ảnh minh họa](../_images/TOSS.DM.AC_SUBTYPE_ADD_EDIT.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph LANE_USER["User"]
+        START(("●"))
+        U1["(1) Truy cập web FIMS =&gt; chọn Danh mục AC Subtype"]
+        U2["(2) Click button Thêm mới/sửa tại màn danh sách"]
+        U4["(4) Nhập thông tin và chọn lưu lại"]
+    end
+    subgraph LANE_SYS["FIMS_Danh mục AC Subtype"]
+        S3["(3) Mở màn thêm mới/sửa AC Subtype"]
+        S5["(5) Kiểm tra dữ liệu"]
+        D1{"?"}
+        S6["(6) Hiển thị toast message lỗi"]
+        S7["(7) Update dữ liệu vào DB"]
+        S8["(8) Hiển thị toast message Thêm mới/sửa thành công"]
+        END_NODE((("●")))
+    end
+    START --> U1
+    U1 --> U2
+    U2 --> S3
+    S3 -->|"Nhập thông tin/sửa thông tin"| U4
+    U4 --> S5
+    S5 --> D1
+    D1 -->|"Không hợp lệ"| S6
+    S6 --> S3
+    D1 -->|"Hợp lệ"| S7
+    S7 --> S8
+    S8 --> END_NODE
+```
+
 #### Mô tả luồng xử lý
 
 | **STT** | **Bước** | **Mô tả** |

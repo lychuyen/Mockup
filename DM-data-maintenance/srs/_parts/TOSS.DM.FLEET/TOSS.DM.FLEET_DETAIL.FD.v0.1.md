@@ -25,6 +25,25 @@ feature_name: "Xem chi tiết Đội bay"
 
 **![Ảnh minh họa](../_images/TOSS.DM.FLEET_DETAIL.img01.png)**
 
+```mermaid
+flowchart TD
+    subgraph LANE_USER["Use"]
+        START(("●"))
+        U1["(1) Truy cập web FIMS =&gt; mở đến Danh mục =&gt; Đội bay"]
+        U3["(3) Click vào 1 Đội bay trên danh sách"]
+    end
+    subgraph LANE_SYS["Hệ thống"]
+        S2["(2) Hiển thị danh sách Đội bay"]
+        S4["(4) Hiển thị view chi tiết Đội bay"]
+        END_NODE((("●")))
+    end
+    START --> U1
+    U1 --> S2
+    S2 --> U3
+    U3 --> S4
+    S4 --> END_NODE
+```
+
 #### Mô tả luồng xử lý
 
 | **Bước** | **Chi tiết** |

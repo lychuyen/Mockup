@@ -27,6 +27,23 @@ feature_name: "Xem danh sách ULD"
 
 ![Ảnh minh họa](../_images/TOSS.DM.ULD_LIST.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph SG1["User"]
+        S0(("●"))
+        A1["1. Người dùng truy cập ODP, chọn danh mục quản trị =&gt; Danh mục ULD"]
+    end
+    subgraph SG2["Hệ thống"]
+        A2["2. Gọi API để lấy dữ liệu ULD"]
+        A3["3. Hiển thị danh sách ULD"]
+        E0((("●")))
+    end
+    S0 --> A1
+    A1 --> A2
+    A2 --> A3
+    A3 --> E0
+```
+
 1. Sơ đồ luồng hệ thống danh mục ULD
 
 #### Mô tả luồng xử lý

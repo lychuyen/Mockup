@@ -25,6 +25,38 @@ feature_name: "Xoá Tàu bay (trong Đội bay)"
 
 **![Ảnh minh họa](../_images/TOSS.DM.AIRCRAFT_IN_FLEET_DELETE.img01.png)**
 
+```mermaid
+flowchart TD
+    subgraph LANE_USER["Use"]
+        START(("●"))
+        U1["(1) Truy cập web FIMS =&gt; mở đến Danh mục =&gt; Đội bay"]
+        U2["(2) Click vào 1 Đội bay trên danh sách"]
+        U3["(3) Click icon Xoá tại danh sách Tàu bay"]
+        U5["(5) Nhập lý do và Lưu lại"]
+    end
+    subgraph LANE_SYS["Hệ thống"]
+        S4["(4) Mở màn hình Xoá tàu bay"]
+        S6["(6) Kiểm tra dữ liệu"]
+        D1{"?"}
+        S7["(7) Hiển thị toast message lỗi"]
+        S8["(8) Update dữ liệu vào DB"]
+        S9["(9) Hiển thị toast message Thêm mới/Sửa thành công"]
+        END_NODE((("●")))
+    end
+    START --> U1
+    U1 --> U2
+    U2 --> U3
+    U3 --> S4
+    S4 --> U5
+    U5 --> S6
+    S6 --> D1
+    D1 -->|"Không hợp lệ"| S7
+    S7 --> S4
+    D1 -->|"Hợp lệ"| S8
+    S8 --> S9
+    S9 --> END_NODE
+```
+
 #### Mô tả luồng xử lý
 
 | **Bước** | **Chi tiết** |

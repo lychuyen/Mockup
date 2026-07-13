@@ -25,6 +25,36 @@ feature_name: "Xóa AC Subtype"
 
 ![Ảnh minh họa](../_images/TOSS.DM.AC_SUBTYPE_DELETE.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph LANE_USER["User"]
+        START(("●"))
+        U1["1. Người dùng truy cập FIMS, chọn Danh mục =&gt; AC Subtype"]
+        U2["2. Chọn chức năng &quot;Xóa&quot; trên một bản ghi"]
+        U4["4. Nhập lý do và nhấn &quot;Lưu lại&quot;"]
+    end
+    subgraph LANE_SYS["Hệ thống"]
+        S3["3. Hiển thị màn hình xác nhận Xóa AC Subtype"]
+        S5["5. Hệ thống kiểm tra dữ liệu"]
+        D1{"?"}
+        S6["6. Hiển thị toast báo lỗi cho người dùng"]
+        S7["7. Update dữ liệu vào DB"]
+        S8["8. Hiển thị toast xóa thành công cho người dùng"]
+        END_NODE((("●")))
+    end
+    START --> U1
+    U1 --> U2
+    U2 --> S3
+    S3 --> U4
+    U4 --> S5
+    S5 --> D1
+    D1 -->|"NOK"| S6
+    S6 --> S3
+    D1 -->|"OK"| S7
+    S7 --> S8
+    S8 --> END_NODE
+```
+
 #### Mô tả luồng xử lý
 
 | **STT** | **Bước** | **Mô tả** |

@@ -25,6 +25,29 @@ feature_name: "Change History (Tàu bay)"
 
 ![Ảnh minh họa](../_images/TOSS.DM.AIRCRAFT_HISTORY.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph SGU["User"]
+        ST((" "))
+        A1["(1) Đăng nhập =&gt; Chọn Data Maintenance =&gt; Chọn tab Quản lý tàu bay"]
+        A3["(3) Chọn xem chi tiết 1 tàu bay"]
+        A5["(5) Click vào tab Change History"]
+    end
+    subgraph SGS["Hệ thống"]
+        A2["(2) Hệ thống gọi API =&gt; Hiển thị danh sách Aircraft Type List"]
+        A4["(4) Hiển thị chi tiết 1 tàu bay"]
+        A6["(6) Hiển thị Change History"]
+        EN(((" ")))
+    end
+    ST --> A1
+    A1 --> A2
+    A2 --> A3
+    A3 --> A4
+    A4 --> A5
+    A5 --> A6
+    A6 --> EN
+```
+
 #### Mô tả luồng xử lý
 
 | Bước | Chi tiết |

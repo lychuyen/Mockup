@@ -25,6 +25,25 @@ feature_name: "Xem lịch sử Email"
 
 ![Ảnh minh họa](../_images/TOSS.DM.EMAIL_HISTORY.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph SG1["User"]
+        S0(("●"))
+        A1["(1) Truy cập web ODP =&gt; chọn Danh mục Email"]
+        A2["(2) Click icon xem lịch sử tại danh sách hoặc button xem lịch sử tại màn xem chi tiết/sửa"]
+    end
+    subgraph SG2["ODP_Danh mục Email"]
+        A3["(3) Hệ thống call APi lấy dữ liệu"]
+        A4["(4) Mở màn hình xem lịch sử"]
+        E0((("●")))
+    end
+    S0 --> A1
+    A1 --> A2
+    A2 --> A3
+    A3 --> A4
+    A4 --> E0
+```
+
 Hình 30. Sơ đồ hệ thống
 
 #### Mô tả luồng xử lý

@@ -25,6 +25,42 @@ feature_name: "Thêm mới ACARS Fuel Limit & Fuel Multiplier"
 
 ![Ảnh minh họa](../_images/TOSS.DM.ACARS_FUEL_LIMIT_CREATE.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph SGU["User"]
+        ST((" "))
+        A1["(1) Đăng nhập =&gt; Chọn Data Maintenance =&gt; Chọn tab Quản lý tàu bay =&gt; Chọn xem chi tiết 1 tàu bay"]
+        A3["(3) Click vào tab General Information"]
+        A5["(5) Click Button Edit ACARS Fuel Limit & Fuel Multiplier =&gt; Click Buton Add Time Period"]
+        A7["(7) Nhập thông tin và Lưu lại"]
+    end
+    subgraph SGS["Hệ thống"]
+        A2["(2) Hệ thống gọi API =&gt; Hiển thị chi tiết 1 tàu bay"]
+        A4["(4) Hệ thống gọi API =&gt; Hiển thị General Information"]
+        A6["(6) Mở màn hình Add Time Period ACARS Fuel Limit & Fuel Multiplier"]
+        A8["(8) Kiểm tra dữ liệu"]
+        D1{"?"}
+        A9["(9) Hiển thị toast message lỗi"]
+        A10["(10) Update dữ liệu vào DB"]
+        A11["(11) Hiển thị toast message Thêm mới thành công"]
+        EN(((" ")))
+    end
+    ST --> A1
+    A1 --> A2
+    A2 --> A3
+    A3 --> A4
+    A4 --> A5
+    A5 --> A6
+    A6 -->|Nhập thông tin| A7
+    A7 --> A8
+    A8 --> D1
+    D1 -->|Không hợp lệ| A9
+    D1 -->|Hợp lệ| A10
+    A9 --> A6
+    A10 --> A11
+    A11 --> EN
+```
+
 #### Mô tả luồng xử lý
 
 | Bước | Chi tiết |

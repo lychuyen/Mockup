@@ -15,7 +15,7 @@ subsystem: "Data Maintenance (Danh mục dùng chung)"
 > **Quy ước đếm (chỉ để tra cứu, không phải nội dung nguồn):**
 > - **Số trường** = số dòng thành phần trong bảng "Mô tả chi tiết màn hình" (không tính dòng nhóm/tiêu đề khối; dòng gộp nhiều trường tính 1 dòng; dòng bị gạch bỏ trong nguồn vẫn đếm và được gắn cờ).
 > - **Số bước** = số dòng trong bảng "Mô tả luồng xử lý" (một dòng có thể gộp nhiều bước, ví dụ "Bước 7,8").
-> - Các phần "Sơ đồ luồng hệ thống" và "Màn hình chức năng" trong nguồn là **ảnh** — [cần xác nhận — nội dung dạng ảnh, xem .docx].
+> - **Đã giải quyết (2026-07-13):** khôi phục file `.docx` gốc từ git history, trích 426/430 ảnh thật (2 ảnh không có trong nguồn — 1 icon ở ULD_TYPE_LIST, 1 icon ở AIRCRAFT_SEARCH) và gắn link trực tiếp vào cả 69 file feature (khớp 100% số placeholder = số ảnh). Riêng ảnh "Sơ đồ luồng hệ thống" (69/69, đúng 1 ảnh/feature) đã được xem trực tiếp và chuyển thành sơ đồ Mermaid (`flowchart TD`) chèn ngay dưới ảnh gốc trong từng file — vừa giữ ảnh gốc (người xem) vừa có bản Mermaid (agent/máy đọc). Ảnh "Màn hình chức năng" và icon trong bảng chỉ gắn link ảnh, không chuyển Mermaid (không phải sơ đồ luồng). Phát hiện thêm trong quá trình xem ảnh: xem §4.5 mục 11–15.
 
 ---
 
@@ -413,3 +413,8 @@ Ngoài ra: mọi "Sơ đồ luồng hệ thống" và "Màn hình chức năng" 
 8. **[TOSS.DM.THONG_TIN_CHUNG.FD.v0.1.md](TOSS.DM.THONG_TIN_CHUNG.FD.v0.1.md) §Khái niệm, thuật ngữ:** dòng OFP để trống định nghĩa.
 9. **Tìm kiếm tàu bay (sec-33):** Category 2–5 ghi kiểu "Dropdown (multi-select)" nhưng mô tả "chỉ cho phép chọn 1 giá trị".
 10. **Reason khi xóa:** chuẩn chung 1000 ký tự, riêng Xóa ACARS Fuel Limit & Fuel Multiplier là 300 ký tự; Xóa ACARS là **xóa cứng**, các danh mục khác xóa mềm `is_delete=true`.
+11. **ULD_CREATE — nghi sao chép từ sơ đồ Xóa:** sơ đồ luồng hệ thống bước 4 ghi "Nhập lý do và nhấn 'Lưu lại'" và bước 8 ghi "Hiển thị toast **xóa** thành công" trong khi đây là luồng **Thêm mới** ULD — giữ nguyên verbatim theo ảnh gốc.
+12. **ULD_EDIT — nhầm tên thực thể:** sơ đồ luồng hệ thống bước (2) ghi "Click Icon Sửa ULD **Type**" trong khi đây là luồng Sửa **ULD** (không phải ULD Type) — giữ nguyên verbatim.
+13. **FLEET_DELETE, AIRCRAFT_IN_FLEET_DELETE — sai nội dung toast:** bước cuối trong sơ đồ luồng hệ thống ghi "Hiển thị toast message **Thêm mới/Sửa** thành công" dù đang mô tả luồng **Xóa** — nghi lỗi copy giữa các sơ đồ, giữ nguyên verbatim.
+14. **Nhãn làn (swimlane) không nhất quán:** nhóm Đội bay (Fleet) dùng nhãn "**Use**" (thiếu chữ "r") thay vì "User" trong toàn bộ 7 sơ đồ luồng hệ thống — giữ nguyên verbatim.
+15. **Lỗi chính tả nhỏ trong sơ đồ luồng (giữ nguyên, không sửa):** EMAIL_HISTORY bước (3) ghi "call APi"; ULD_TYPE_CREATE bước 7 ghi "cập nhập" (thay vì "cập nhật"); ACARS_FUEL_LIMIT_CREATE bước 5 ghi "Click Buton Add Time Period" (thiếu chữ "t").

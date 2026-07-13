@@ -25,6 +25,27 @@ feature_name: "Xem chi tiết ULD"
 
 ![Ảnh minh họa](../_images/TOSS.DM.ULD_DETAIL.img01.png)
 
+```mermaid
+flowchart TD
+    subgraph SG1["User"]
+        S0(("●"))
+        A1["1. Người dùng truy cập ODP, chọn danh mục quản trị =&gt; Danh mục ULD"]
+        A4["4. Chọn 1 bản ghi trên danh sách"]
+    end
+    subgraph SG2["Hệ thống"]
+        A2["2. Gọi API để lấy dữ liệu ULD"]
+        A3["3. Hiển thị danh sách ULD"]
+        A5["5. Hiển thị màn hình view chi tiết ULD"]
+        E0((("●")))
+    end
+    S0 --> A1
+    A1 --> A2
+    A2 --> A3
+    A3 --> A4
+    A4 --> A5
+    A5 --> E0
+```
+
 1. Sơ đồ luồng xem chi tiết ULD
 
 #### Mô tả luồng xử lý
