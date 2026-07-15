@@ -76,6 +76,10 @@ Số Function Document (`.FD.v<x>.md`, SRS cấp chức năng) của module Ngu�
 
 **DM ↔ SA** là cặp duy nhất có phụ thuộc chức năng thực (đồng bộ AVES cập nhật Danh sách người dùng/vai trò SA; 1 chỗ SA→DM nghi gán nhầm link, xem file chi tiết). Cột **COMMON** là trích dẫn Google Doc "Thiết kế dùng chung" (kịch bản filter/export/phân trang dùng lại), không phải phụ thuộc module-tới-module. 7 module chưa phân rã SRS (LO, Station Manager, RPT, Data Source Monitoring, MCB, JDB, AUTH) chưa có Function Document nào nên không xuất hiện trong ma trận.
 
+## Quy trình review GitLab: `BA-Review` → `main`
+
+Nhánh **`BA-Review`** tiếp nhận nội dung `ba/sync/` mới/cập nhật để đánh giá trước khi công bố; nhánh **`main`** chỉ nhận nội dung đã được đánh giá và BA Lead xác nhận "ổn". Theo dõi từng đợt kéo + kết quả đánh giá tại [`quan-ly-yeu-cau/BA-REVIEW-TRACKING.md`](quan-ly-yeu-cau/BA-REVIEW-TRACKING.md).
+
 ## Không nằm ở đây
 
 - **Hồ sơ QC/audit-trail nội bộ** (review, validation, đề xuất chờ duyệt của BRD) → từng ở `ba/workspace/drafts/quy-trinh/qc-brd/`, đã xóa khỏi working tree (BA Lead quyết định 2026-07-15, khôi phục được từ lịch sử Git) — không lộ dấu vết QC nội bộ trong gói bàn giao module.
