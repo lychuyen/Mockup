@@ -138,7 +138,7 @@ Tổng các trỏ OID xuất hiện trong tài liệu này: **15 điểm mở** 
 ### Liên kết tài liệu tham chiếu
 
 - **BRD khung (cha):** `BRD-TOSS-001-khung-v0.12.md` — Phân hệ 2 thuộc §7.2.
-- **Phân rã chức năng (FUNC):** [PHAN-RA-BRD-PH2-quan-ly-tai-lieu-chuyen-bay-v0.5.md](../../../workspace/drafts/srs/03-dac-ta-chuc-nang/PHAN-RA-BRD-PH2-quan-ly-tai-lieu-chuyen-bay-v0.5.md) — **đã đóng băng** (BA Lead quyết định 2026-07-09, xem CLAUDE.md §5 "SRS do con người"); BR-262 chưa có FUNC tương ứng vì agent không còn phân rã FUNC.
+- **Phân rã chức năng (FUNC):** `PHAN-RA-BRD-PH2-quan-ly-tai-lieu-chuyen-bay-v0.5.md` — **đã đóng băng** (BA Lead quyết định 2026-07-09) và **xóa khỏi working tree** (BA Lead quyết định 2026-07-15, xem CLAUDE.md §5 "SRS do con người" + `.claude/sync/SYNC-LOG.md`; khôi phục được từ lịch sử Git nếu cần tham khảo); BR-262 chưa có FUNC tương ứng vì agent không còn phân rã FUNC.
 - **BRD PH1 (nguồn chuyển BR-257):** `../../FD-flight-dispatch/brd/TOSS.FD.ALL.BRD.v0.8.md` — BR-112 đã chuyển chính thức sang PH2.
 - **BRD PH4 (nguồn chuyển BR-258…261, owner MEL master):** `../../DM-data-maintenance/brd/TOSS.DM.ALL.BRD.v0.6.md` — Nhóm K (BR-470…473) chuyển chính thức sang PH2; BR-472 thay thế BR-247 PH2 cũ; BR-425/426 là MEL master data owner mà BR-242/243/244 tham chiếu.
 - **BRD PH5 (owner kênh tích hợp, IAM tài khoản ca, sandbox):** `../../SA-system-admin/brd/TOSS.SA.ALL.BRD.v0.6.md` — BR-513 (IAM tài khoản ca) tham chiếu bởi BR-220; BR-542 (sandbox PROD→TEST) tham chiếu bởi BR-235.

@@ -19,7 +19,7 @@ parent: "BRD-TOSS-001-khung-v0.12.md"
 >
 > **Quản lý điểm cần xác nhận:** mọi cờ `[cần xác nhận]` đã được chuyển về sổ cái duy nhất **OID-TOSS-001** (`ba/workspace/drafts/quy-trinh/SO-THEO-DOI-DIEM-CHOT-v0.1.md`). Trong tài liệu này chỉ giữ chú thích trỏ về OID dưới dạng `*(xem OID: <mã>)*` ở cuối mô tả BR liên quan.
 >
-> **Quy ước MoSCoW, ràng buộc, bên liên quan:** tham chiếu BRD khung §3, §6, §9. Phân rã FUNC: xem [PHAN-RA-BRD-PH5-quan-tri-he-thong-v0.4.md](../../../workspace/drafts/srs/03-dac-ta-chuc-nang/PHAN-RA-BRD-PH5-quan-tri-he-thong-v0.4.md) (cập nhật theo v0.4 BR mới — BR-528/BR-530 tách atomic).
+> **Quy ước MoSCoW, ràng buộc, bên liên quan:** tham chiếu BRD khung §3, §6, §9. Phân rã FUNC: `PHAN-RA-BRD-PH5-quan-tri-he-thong-v0.4.md` (cập nhật theo v0.4 BR mới — BR-528/BR-530 tách atomic) — đã đóng băng và xóa khỏi working tree (BA Lead quyết định 2026-07-15, xem `.claude/sync/SYNC-LOG.md`); khôi phục được từ lịch sử Git nếu cần tham khảo.
 
 ---
 

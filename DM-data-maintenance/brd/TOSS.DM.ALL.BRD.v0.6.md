@@ -15,7 +15,7 @@ parent: "BRD-TOSS-001-khung-v0.12.md"
 >
 > **Vai trò chủ sở hữu (Master Data Owner):** PH4 là nơi định nghĩa và lưu trữ duy nhất của các danh mục dùng chung; PH1–PH3 và PH5 chỉ **tiêu thụ** (đọc) từ PH4. Khi một BR ở phân hệ khác phụ thuộc một danh mục, BR đó phải dẫn chiếu mã BR-4xx tương ứng.
 >
-> **Phân rã chức năng:** xem [PHAN-RA-BRD-PH4-quan-ly-danh-muc-v0.5.md](../../../workspace/drafts/srs/03-dac-ta-chuc-nang/PHAN-RA-BRD-PH4-quan-ly-danh-muc-v0.5.md).
+> **Phân rã chức năng:** `PHAN-RA-BRD-PH4-quan-ly-danh-muc-v0.5.md` — bản phân rã BRD→FUNC do agent dựng, đã đóng băng và xóa khỏi working tree (BA Lead quyết định 2026-07-15, xem `.claude/sync/SYNC-LOG.md`); nội dung khôi phục được từ lịch sử Git nếu cần tham khảo.
 >
 > **Quản lý điểm cần xác nhận:** mọi cờ `[cần xác nhận]` được tập trung tại sổ cái duy nhất **OID-TOSS-001** (`ba/workspace/drafts/quy-trinh/SO-THEO-DOI-DIEM-CHOT-v0.1.md`). Trong tài liệu này chỉ giữ chú thích trỏ về OID dưới dạng `*(xem OID: <mã>)*` ở cuối mô tả BR liên quan.
 

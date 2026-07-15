@@ -13,7 +13,7 @@ parent: "BRD-TOSS-001-khung-v0.12.md"
 
 > **Tài liệu con của [BRD-TOSS-001-khung-v0.12.md](../../BRD-TOSS-001-khung-v0.12.md).** Phân rã chi tiết §7.1 — Phân hệ 1. Mọi quy ước MoSCoW, phạm vi, bên liên quan tham chiếu từ tài liệu cha.
 >
-> **Phân rã chức năng:** xem [PHAN-RA-BRD-PH1-thong-tin-dieu-hanh-chuyen-bay-v0.8.md](../../../workspace/drafts/srs/03-dac-ta-chuc-nang/PHAN-RA-BRD-PH1-thong-tin-dieu-hanh-chuyen-bay-v0.8.md).
+> **Phân rã chức năng:** `PHAN-RA-BRD-PH1-thong-tin-dieu-hanh-chuyen-bay-v0.8.md` — bản phân rã BRD→FUNC do agent dựng, đã đóng băng và xóa khỏi working tree (BA Lead quyết định 2026-07-15, xem `.claude/sync/SYNC-LOG.md`); nội dung khôi phục được từ lịch sử Git nếu cần tham khảo.
 >
 > **Quản lý điểm cần xác nhận:** mọi cờ `[cần xác nhận]` đã được chuyển về sổ cái duy nhất **OID-TOSS-001** (`ba/workspace/drafts/quy-trinh/SO-THEO-DOI-DIEM-CHOT-v0.1.md`). Trong tài liệu này chỉ giữ chú thích trỏ về OID dưới dạng `*(xem OID: <mã>)*` ở cuối mô tả BR liên quan.
 >
