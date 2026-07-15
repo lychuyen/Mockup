@@ -131,7 +131,7 @@ subsystem: "Data Maintenance (Danh mục dùng chung)"
 | 54 | Thêm/Sửa Tàu bay (trong Đội bay) | Tạo mới + Sửa | [TOSS.DM.AIRCRAFT_IN_FLEET_ADD_EDIT.FD.v0.1.md](TOSS.DM.FLEET/TOSS.DM.AIRCRAFT_IN_FLEET_ADD_EDIT.FD.v0.1.md) | Thêm/Sửa tàu bay của Đội bay | Chi tiết Đội bay → Thêm mới/Sửa tàu bay | 7 | 8 | IATA Designator TH Sửa hiển thị `[flightfleet_code]` [Cần làm rõ: nghi lỗi nguồn] |
 | 55 | Xoá Tàu bay (trong Đội bay) | Xóa | [TOSS.DM.AIRCRAFT_IN_FLEET_DELETE.FD.v0.1.md](TOSS.DM.FLEET/TOSS.DM.AIRCRAFT_IN_FLEET_DELETE.FD.v0.1.md) | Xóa tàu bay khỏi Đội bay | Chi tiết Đội bay → icon Xóa | 7 | 7 | Xóa mềm `is_delete=true`; error khi tàu bay đã liên kết chức năng khác |
 
-**Danh mục AC Subtype (sec-32)**
+**Danh mục AC Subtype (sec-32)** — xem [tổng quan nhóm + sơ đồ quan hệ giữa 3 chức năng](TOSS.DM.AC_SUBTYPE/TOSS.DM.AC_SUBTYPE.MD.v0.1.md) (không tính vào số đếm "chức năng" dưới đây — file tổng hợp, không phải feature riêng)
 
 | # | Chức năng | Loại | Section | Mục đích (rút gọn) | Trigger (rút gọn) | Số trường | Số bước | Cờ |
 |---|---|---|---|---|---|---|---|---|
@@ -155,7 +155,21 @@ subsystem: "Data Maintenance (Danh mục dùng chung)"
 | 68 | Change History (Tàu bay) | Lịch sử | [TOSS.DM.AIRCRAFT_HISTORY.FD.v0.1.md](TOSS.DM.AIRCRAFT/TOSS.DM.AIRCRAFT_HISTORY.FD.v0.1.md) | Xem lịch sử chỉnh sửa tàu bay | Chi tiết tàu bay → tab History | 21 | 6 | Log chuẩn Date/Time·Changed By·Section·Action·Field·Old/New value; export excel template Google Sheets |
 | 69 | Tìm kiếm tàu bay | Action (tìm kiếm) | [TOSS.DM.AIRCRAFT_SEARCH.FD.v0.1.md](TOSS.DM.AIRCRAFT/TOSS.DM.AIRCRAFT_SEARCH.FD.v0.1.md) | Lọc danh sách theo 8 tiêu chí | Bộ lọc màn danh sách tàu bay | 11 | 5 | Category 2–5 ghi "Dropdown (multi-select)" nhưng mô tả "chỉ cho phép chọn 1 giá trị" [Cần làm rõ] |
 
-**Tổng: 69 chức năng** (Sân bay 6 · Phi công 5 · Tiếp viên 5 · Carrier 5 · Quốc gia 5 · FIR 5 · Email 4 · Loại ULD 5 · ULD 5 · Chặng bay 3 · Đội bay 7 · AC Subtype 3 · Tàu bay 11).
+**Quản lý tàu bay — APU INOP (BR-420 — không có `sec-NN` gốc, khác nguồn trích xuất với 13 nhóm còn lại)**
+
+> **[Cập nhật 2026-07-15 — chỉ đạo trực tiếp BA Lead, KHÔNG phải trích từ BR-420 gốc]** Bổ sung state machine 4 trạng thái xử lý (Hỏng — chưa sửa chữa → Đang sửa chữa → Đã khôi phục — chờ xác nhận → Đã xác nhận khôi phục, thay cho tính toán Active/Closed trực tiếp từ `to_date`) + 2 mã định danh tự sinh (Mã khai báo toàn cục `APU-YYYY-NNNN`, Lần khai báo riêng theo tàu bay) trên các Function Document liên quan. Xem chi tiết §Nghiệp vụ chính trong `TOSS.DM.APU_INOP_LIST.FD.v0.1.md` và §2.12 dưới đây.
+>
+> **[Cập nhật 2026-07-15 (tiếp) — tách file Sửa/Xóa]** File gộp `EDIT` (Sửa+Xóa) ban đầu đã tách thành 2 file riêng — `TOSS.DM.APU_INOP_EDIT.FD.v0.1.md` (chỉ Sửa) + `TOSS.DM.APU_INOP_DELETE.FD.v0.1.md` (chỉ Xóa) — khớp quy ước tách file mà 14 nhóm khác của module đều dùng. File `FILTER` không tồn tại trên đĩa (nội dung trùng lặp với bộ lọc đã có sẵn trong LIST — xem §4.6 điểm 2), không đăng ký vào bảng dưới đây.
+
+| # | Chức năng | Loại | Section | Mục đích (rút gọn) | Trigger (rút gọn) | Số trường | Số bước | Cờ |
+|---|---|---|---|---|---|---|---|---|
+| 70 | Danh sách khai báo APU INOP | Danh sách | [TOSS.DM.APU_INOP_LIST.FD.v0.1.md](TOSS.DM.APU/TOSS.DM.APU_INOP_LIST.FD.v0.1.md) | Xem danh sách khai báo tàu bay hỏng APU (Active/Closed) | Danh mục Tàu bay → APU INOP | 8 | 4 | **[v0.2]** Trạng thái Active/Closed nay là nhãn tổng hợp gom từ trường lưu trữ "Trạng thái xử lý" (4 giá trị, không còn tính trực tiếp từ `to_date`); bảng "Mô tả chi tiết màn hình" KHÔNG liệt kê button Export dù #74 (EXPORT) mô tả trigger là nút trên chính màn này [Cần làm rõ]; nguồn dẫn **BR-420** (không phải `sec-NN` như 13 nhóm khác của module) |
+| 71 | Tạo khai báo APU INOP | Tạo mới | [TOSS.DM.APU_INOP_CREATE.FD.v0.1.md](TOSS.DM.APU/TOSS.DM.APU_INOP_CREATE.FD.v0.1.md) | Khai báo tàu bay hỏng APU theo khoảng thời gian, kèm ghi chú | Nút "Thêm mới" trên màn Danh sách | 6 | 6 | Mã tàu bay chọn từ "danh mục tàu bay đang khai thác" (phụ thuộc nhóm `TOSS.DM.AIRCRAFT`, không phải link markdown — trích dẫn văn bản); **[v0.2]** tự sinh Mã khai báo + Lần khai báo khi lưu, khởi tạo Trạng thái xử lý = "Hỏng — chưa sửa chữa" |
+| 72 | Sửa khai báo APU INOP | Sửa | [TOSS.DM.APU_INOP_EDIT.FD.v0.1.md](TOSS.DM.APU/TOSS.DM.APU_INOP_EDIT.FD.v0.1.md) | Cập nhật Trạng thái xử lý/Đến ngày/Ghi chú | Nút Sửa trên dòng bản ghi | 3 | 6 | **[v0.3 — tách khỏi Xóa]** File nay chỉ còn luồng Sửa, khớp quy ước tách file của 14 nhóm khác (xem #73 DELETE); Mã tàu bay + Từ ngày + Mã khai báo + Lần khai báo khóa không cho sửa sau khi tạo; [Cần làm rõ] quy tắc giới hạn chuyển Trạng thái xử lý (tuần tự hay tự do) chưa được BA Lead xác nhận chi tiết |
+| 73 | Xóa khai báo APU INOP | Xóa | [TOSS.DM.APU_INOP_DELETE.FD.v0.1.md](TOSS.DM.APU/TOSS.DM.APU_INOP_DELETE.FD.v0.1.md) | Xóa khai báo không còn cần thiết | Nút Xóa trên dòng bản ghi | 0 (chỉ xác nhận) | 5 | Tách 2026-07-15 từ file gộp EDIT (Sửa+Xóa) — không đổi nội dung nghiệp vụ, chỉ tổ chức lại theo đúng quy ước tách file Sửa/Xóa riêng của module |
+| 74 | Xuất Excel danh sách APU INOP | Action (export) | [TOSS.DM.APU_INOP_EXPORT.FD.v0.1.md](TOSS.DM.APU/TOSS.DM.APU_INOP_EXPORT.FD.v0.1.md) | Xuất danh sách (theo bộ lọc hiện tại) ra file `.xlsx` | Nút Export trên màn Danh sách | 7 | 5 | Trigger mô tả nút Export nằm trên màn LIST nhưng #70 không liệt kê button này trong bảng trường — cùng cờ [Cần làm rõ] với #70; tên file `FIMS_APU_INOP_ddmmyy_hhmmss.xlsx`; **[v0.2]** thêm 3 cột xuất Mã khai báo/Lần khai báo/Trạng thái xử lý |
+
+**Tổng: 74 chức năng** (Sân bay 6 · Phi công 5 · Tiếp viên 5 · Carrier 5 · Quốc gia 5 · FIR 5 · Email 4 · Loại ULD 5 · ULD 5 · Chặng bay 3 · Đội bay 7 · AC Subtype 3 · Tàu bay 11 · APU INOP 5).
 
 ---
 
@@ -296,6 +310,8 @@ subsystem: "Data Maintenance (Danh mục dùng chung)"
 | AC Subtype Code | ac_subtype_code | Textview (danh sách) · Textbox (thêm; không sửa khi Edit) | Bắt buộc | ACS: Danh sách, Thêm/Sửa |
 | AC Subtype Name | ac_subtype_name | Textview · Textbox [100] | Bắt buộc | ACS: Danh sách, Thêm/Sửa |
 | Aircraft Type | aircraft_type_names | Textview (nguồn: [Flight fleet code] Danh mục Đội bay) | Bắt buộc chọn (form Thêm/Sửa) | ACS: Danh sách, Thêm/Sửa |
+| Status | *(không có mapping trong nguồn)* | Tag (danh sách: Active=xanh lá, Inactive=xám) · DDL (thêm/sửa) | Bắt buộc chọn (form Thêm/Sửa) | ACS: Danh sách, Thêm/Sửa |
+| Note | *(không có mapping trong nguồn)* | Textbox [1000], freetext | Không bắt buộc | ACS: Thêm/Sửa |
 | Search AC Subtype Code *(tham số lọc)* | search_code | Textbox [0;10] | — | ACS: Danh sách |
 | Search AC Subtype Name *(tham số lọc)* | search_name | Textbox [0;100] | — | ACS: Danh sách |
 | Filter Aircraft Type *(tham số lọc)* | filter_aircraft_type_id | Dropdown | — | ACS: Danh sách |
@@ -327,7 +343,22 @@ subsystem: "Data Maintenance (Danh mục dùng chung)"
 | Aircraft Category 5 | aircraftCategory5 | Textview · DDL [320, 32B, 32D, 32N, 350, 787] | Bắt buộc (Sửa) | TB: Xem/Sửa Group Attributes, Tìm kiếm |
 | Aircraft Fleet | aircraftFleet | Textview · DDL [A320, A321, A350, B787, ATR] | Bắt buộc (Sửa) | TB: Xem/Sửa Group Attributes |
 
-**Tổng từ điển: 109 trường** (Sân bay 15 · Log dùng chung 11 · Phi công/Tiếp viên 18 · Hành trình bay 8 · Quốc gia 4 · FIR 9 · Email 3 · Chặng bay 4 · Đội bay 9 · AC Subtype 7 · Tàu bay 21).
+### 2.12 Thực thể Khai báo APU INOP (BR-420)
+
+> **[Cập nhật 2026-07-15 — chỉ đạo trực tiếp BA Lead, KHÔNG phải trích từ BR-420 gốc]** Bổ sung 3 trường: Mã khai báo, Lần khai báo (2 mã định danh tự sinh), Trạng thái xử lý (4 giá trị, thay cho tính toán Active/Closed trực tiếp từ `to_date`). Trạng thái Active/Closed **giữ lại** làm nhãn tổng hợp suy từ Trạng thái xử lý — không còn là trường tính từ `to_date`.
+
+| Trường (Tên) | Mapping DB/API | Kiểu dữ liệu | Bắt buộc? | Xuất hiện ở chức năng(s) |
+|---|---|---|---|---|
+| Mã khai báo | `declaration_code` | Textview, chỉ đọc | Tự sinh — không nhập tay | APU: Danh sách, Export (CREATE sinh ra sau khi Lưu) |
+| Mã tàu bay | `aircraft_code` | Textview (LIST) · Dropdown/Search (CREATE) | Bắt buộc; khóa sau khi tạo | APU: Danh sách, Tạo, Lọc, Export |
+| Lần khai báo | `declaration_seq` | Textview, chỉ đọc | Tự sinh — đếm riêng theo Mã tàu bay | APU: Danh sách, Export (CREATE sinh ra sau khi Lưu) |
+| Từ ngày | `from_date` | Textview (LIST) · Datepicker (CREATE) | Bắt buộc; khóa sau khi tạo | APU: Danh sách, Tạo, Lọc, Export |
+| Đến ngày | `to_date` | Textview (LIST) · Datepicker (CREATE/EDIT) | Không bắt buộc — trống = "Chưa xác định" (đang hiệu lực) | APU: Danh sách, Tạo, Sửa, Lọc, Export |
+| Trạng thái xử lý | `processing_status` | Tag (LIST) · Dropdown (EDIT) | Bắt buộc; khởi tạo = "Hỏng — chưa sửa chữa" khi Tạo, chỉ đổi được qua Sửa | APU: Danh sách, Sửa, Lọc, Export — 4 giá trị: Hỏng — chưa sửa chữa / Đang sửa chữa / Đã khôi phục — chờ xác nhận / Đã xác nhận khôi phục |
+| Ghi chú | `note` | Textview (LIST) · Textarea [500] (CREATE/EDIT) | Không bắt buộc | APU: Danh sách, Tạo, Sửa, Export |
+| Trạng thái *(nhãn tổng hợp — không lưu DB riêng)* | — | Tag (Active=xanh/Closed=xám) | — | APU: Danh sách — suy từ Trạng thái xử lý ∈{1,2,3}→Active; =4→Closed *(trước 2026-07-15: suy trực tiếp từ `to_date` so với hôm nay)* |
+
+**Tổng từ điển: 118 trường** (Sân bay 15 · Log dùng chung 11 · Phi công/Tiếp viên 18 · Hành trình bay 8 · Quốc gia 4 · FIR 9 · Email 3 · Chặng bay 4 · Đội bay 9 · AC Subtype 9 · Tàu bay 21 · APU INOP 7 lưu trữ + 1 tính toán). *(AC Subtype tăng từ 7→9 ngày 2026-07-15: bổ sung 2 trường Status + Note — có trong nguồn [LIST STT10, ADD_EDIT] nhưng từng bị bỏ sót khỏi từ điển. APU INOP thêm mới 2026-07-15 (nhóm chưa từng có trong từ điển trước đó) với 5 trường ban đầu, sau đó tăng lên 8 cùng ngày theo chỉ đạo BA Lead bổ sung state machine 4 trạng thái + 2 mã định danh tự sinh.)*
 
 > Lưu ý cho data-modeler: các cột dữ liệu của **Carrier (sec-24)**, **ULD Type (sec-28)**, **ULD (sec-29)** và phần lớn màn hình **Sân bay danh sách/chi tiết (sec-14, 15)**, **Tàu bay danh sách (sec-33)** **không có mapping DB/API trong nguồn** — chưa đưa vào từ điển này (xem §4).
 
@@ -352,8 +383,9 @@ subsystem: "Data Maintenance (Danh mục dùng chung)"
 | 13 | Danh mục đội bay (Flight Fleet) — kèm Thêm/Sửa/Xóa Tàu bay trong đội | [TOSS.DM.FLEET_LIST.FD.v0.1.md](TOSS.DM.FLEET/TOSS.DM.FLEET_LIST.FD.v0.1.md) | Có nội dung |
 | 14 | Danh mục AC Subtype | [TOSS.DM.AC_SUBTYPE_LIST.FD.v0.1.md](TOSS.DM.AC_SUBTYPE/TOSS.DM.AC_SUBTYPE_LIST.FD.v0.1.md) | Có nội dung |
 | 15 | Quản lý Tàu bay (Aircraft) — 11 chức năng | [TOSS.DM.AIRCRAFT_LIST.FD.v0.1.md](TOSS.DM.AIRCRAFT/TOSS.DM.AIRCRAFT_LIST.FD.v0.1.md) | Có nội dung |
+| 16 | Quản lý tàu bay — APU INOP — 5 chức năng | [TOSS.DM.APU_INOP_LIST.FD.v0.1.md](TOSS.DM.APU/TOSS.DM.APU_INOP_LIST.FD.v0.1.md) | Có nội dung — **nguồn khác biệt: dẫn BR-420, không có `sec-NN`** (14 danh mục còn lại đều trích từ `VNA.TOSS_SRS_Data Maintenance_v0.1.docx`); đăng ký vào CATALOG/INDEX 2026-07-15, trước đó bị bỏ sót (xem §4.6) |
 
-Tham chiếu phạm vi ([TOSS.DM.THONG_TIN_CHUNG.FD.v0.1.md](TOSS.DM.THONG_TIN_CHUNG.FD.v0.1.md) §Phạm vi tài liệu, mục 1.2.2): "Phân hệ Danh mục dùng chung: Tàu bay, Sân bay, Chặng bay, Phi công, Tiếp viên, Carrier, Quốc gia, FIR, ULD, Đội bay" — danh sách trong nguồn không nhắc Email, loại ULD, AC Subtype, Tankering dù có đặc tả/tiêu đề riêng [cần xác nhận phạm vi].
+Tham chiếu phạm vi ([TOSS.DM.THONG_TIN_CHUNG.FD.v0.1.md](TOSS.DM.THONG_TIN_CHUNG.FD.v0.1.md) §Phạm vi tài liệu, mục 1.2.2): "Phân hệ Danh mục dùng chung: Tàu bay, Sân bay, Chặng bay, Phi công, Tiếp viên, Carrier, Quốc gia, FIR, ULD, Đội bay" — danh sách trong nguồn không nhắc Email, loại ULD, AC Subtype, Tankering, APU INOP dù có đặc tả/tiêu đề riêng [cần xác nhận phạm vi].
 
 ---
 
@@ -418,3 +450,23 @@ Ngoài ra: mọi "Sơ đồ luồng hệ thống" và "Màn hình chức năng" 
 13. **FLEET_DELETE, AIRCRAFT_IN_FLEET_DELETE — sai nội dung toast:** bước cuối trong sơ đồ luồng hệ thống ghi "Hiển thị toast message **Thêm mới/Sửa** thành công" dù đang mô tả luồng **Xóa** — nghi lỗi copy giữa các sơ đồ, giữ nguyên verbatim.
 14. **Nhãn làn (swimlane) không nhất quán:** nhóm Đội bay (Fleet) dùng nhãn "**Use**" (thiếu chữ "r") thay vì "User" trong toàn bộ 7 sơ đồ luồng hệ thống — giữ nguyên verbatim.
 15. **Lỗi chính tả nhỏ trong sơ đồ luồng (giữ nguyên, không sửa):** EMAIL_HISTORY bước (3) ghi "call APi"; ULD_TYPE_CREATE bước 7 ghi "cập nhập" (thay vì "cập nhật"); ACARS_FUEL_LIMIT_CREATE bước 5 ghi "Click Buton Add Time Period" (thiếu chữ "t").
+
+### 4.6 Nhóm APU INOP (BR-420) — nguồn khác biệt, chưa đăng ký + trùng lặp nội bộ (phát hiện 2026-07-15)
+
+Nhóm `TOSS.DM.APU` (5 Function Document: LIST/CREATE/EDIT/DELETE/EXPORT) tồn tại sẵn trong `_parts/` nhưng **chưa từng được đăng ký vào CATALOG.md/INDEX.md** trước 2026-07-15 (không có dòng #, không nằm trong bảng §3, không có trong từ điển trường) — đã bổ sung đầy đủ cùng đợt với việc tạo file tổng quan nhóm `TOSS.DM.APU.MD.v0.1.md`. Các điểm cần xác nhận riêng của nhóm này:
+
+1. **Nguồn khác 14 danh mục còn lại:** mọi file dẫn nguồn `BR-420` (Business Requirement), không phải `sec-NN` của `VNA.TOSS_SRS_Data Maintenance_v0.1.docx` như 14 danh mục khác — khả năng đây là nội dung soạn trực tiếp từ BRD, chưa qua vòng SRS chính thức của VNA/VTIT như phần còn lại của module. [Cần làm rõ với BA Lead: nhóm này đã được VNA/VTIT xác nhận hay còn là bản nháp nội bộ?]
+2. **FILTER đã bỏ, không tồn tại trên đĩa:** một file `FILTER` từng được phác thảo với nội dung trùng gần như nguyên vẹn bảng "Bộ lọc" đã có sẵn trong `TOSS.DM.APU_INOP_LIST.FD.v0.1.md` (cùng 5 trường: Mã tàu bay/Từ ngày/Đến ngày/Button Tìm kiếm/Button Reset) — xác nhận là phân rã dư thừa (2 file tả cùng 1 UI) nên đã loại bỏ, giữ nguyên bộ lọc trong LIST làm nguồn duy nhất; không đăng ký vào bảng §3.
+3. **Export button thiếu trong bảng trường của LIST:** `EXPORT.FD` mô tả Trigger là "nhấn button Export/Xuất Excel trên màn hình Danh sách APU INOP", nhưng bảng "Mô tả chi tiết màn hình" của LIST không liệt kê button này (chỉ có Breadcrumb/Thêm mới/Bộ lọc/Danh sách/Phân trang) — nghi sót khi soạn LIST.
+4. **EDIT đã tách thành 2 file riêng (Sửa / Xóa)** — khớp quy ước tách file riêng cho mỗi thao tác CRUD như 14 danh mục còn lại của module (vd AC Subtype có `_ADD_EDIT` và `_DELETE` riêng biệt): `TOSS.DM.APU_INOP_EDIT.FD.v0.1.md` (chỉ Sửa) + `TOSS.DM.APU_INOP_DELETE.FD.v0.1.md` (chỉ Xóa, nội dung giữ nguyên từ file gộp ban đầu).
+5. **Chỉ 1/4 liên kết trong nhóm có link markdown thật:** LIST → CREATE (nút "Thêm mới", STT 2 bảng chi tiết màn hình) là liên kết duy nhất; LIST → EDIT/DELETE (nút Sửa/Xóa, STT 5) không có link, chỉ ghi "Button Group | Button Sửa / Xóa"; EXPORT không được LIST trỏ tới bằng link nào dù cùng thao tác trên 1 màn — khác hẳn nhóm AC Subtype (LIST trỏ link tới cả 3 file con).
+
+### 4.7 Nhóm APU INOP — bổ sung state machine 4 trạng thái + 2 mã định danh (chỉ đạo trực tiếp BA Lead, 2026-07-15)
+
+Khác với các mục 4.6 (phát hiện thuần từ nội dung nguồn có sẵn), mục này ghi nhận **nội dung nghiệp vụ mới do BA Lead trực tiếp cung cấp** ngày 2026-07-15 — không trích từ BR-420 gốc hay bất kỳ tài liệu nguồn nào đã có trong `ba/workspace/input/`:
+
+1. **Trạng thái Active/Closed cũ (tính từ `to_date`) được xác nhận là chưa phản ánh đúng bản chất nghiệp vụ.** BA Lead chỉ rõ quy trình khai báo APU hỏng thực tế cần theo dõi qua 4 trạng thái tuần tự: Hỏng — chưa sửa chữa → Đang sửa chữa → Đã khôi phục — chờ xác nhận → Đã xác nhận khôi phục. Active/Closed được giữ lại làm nhãn tổng hợp (Active = 3 trạng thái đầu, Closed = trạng thái cuối), không còn tính trực tiếp từ so sánh ngày.
+2. **Cơ chế chuyển trạng thái:** thực hiện qua chính 2 thao tác Thêm mới (khởi tạo trạng thái đầu) và Sửa (chuyển sang trạng thái khác) — actor nào được phân quyền 2 thao tác này thì thực hiện được, không có vai trò/luồng phê duyệt riêng biệt (BA Lead xác nhận qua trao đổi trực tiếp, không phải văn bản chính thức).
+3. **[Cần làm rõ — CHƯA xác nhận]** Quy tắc giới hạn khi Sửa: bắt buộc chuyển đúng thứ tự tuần tự (chỉ chọn được trạng thái kế tiếp trong 4 trạng thái) hay được phép chọn tự do bất kỳ giá trị nào — đã gắn cờ trong `TOSS.DM.APU_INOP_EDIT.FD.v0.1.md`, chờ BA Lead xác nhận thêm trước khi coi là hoàn chỉnh.
+4. **2 mã định danh tự sinh, không cho nhập tay:** (a) Mã khai báo toàn hệ thống, định dạng `APU-YYYY-NNNN`, tăng dần không phân biệt tàu bay; (b) Lần khai báo riêng theo từng tàu bay, đếm lại từ 1 cho mỗi mã tàu bay khác nhau. Cả 2 đều gán tự động khi Lưu ở màn Tạo mới, không hiển thị trên form nhập (chỉ hiển thị sau khi lưu thành công, ở màn Danh sách/Export).
+5. **Nguồn xác nhận:** trao đổi trực tiếp qua hội thoại với BA Lead 2026-07-15 (3 lượt làm rõ: tập trạng thái, cách sinh 2 mã, cơ chế phân quyền chuyển trạng thái) — chưa có văn bản BR/BRD chính thức ghi nhận các quyết định này; cần bổ sung vào BR-420 (hoặc BR mới) nếu muốn có căn cứ văn bản lâu dài.

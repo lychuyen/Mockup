@@ -1,6 +1,6 @@
 # SRS Data Maintenance v0.1 (human-authored, VNA.FIMS template) — bản trích text
 
-> **🔎 Điểm vào tra cứu: [CATALOG.md](CATALOG.md)** — catalog 69 chức năng + từ điển 109 trường (dedup theo Mapping DB/API) + trạng thái 15 danh mục con + điểm cần xác nhận. Tra CATALOG trước, chỉ mở `sec-NN-*.md` khi cần nguyên văn.
+> **🔎 Điểm vào tra cứu: [CATALOG.md](CATALOG.md)** — catalog 74 chức năng + từ điển 118 trường (dedup theo Mapping DB/API) + trạng thái 16 danh mục con + điểm cần xác nhận. Tra CATALOG trước, chỉ mở `sec-NN-*.md` khi cần nguyên văn. *(Nhóm APU INOP — 5 chức năng, nguồn BR-420 — đăng ký bổ sung 2026-07-15, trước đó bị bỏ sót khỏi CATALOG/INDEX; cùng ngày bổ sung state machine 4 trạng thái + 2 mã định danh theo chỉ đạo trực tiếp BA Lead, xem CATALOG.md §4.7.)*
 >
 > **🖼 Hình ảnh màn hình:** xem trực tiếp trong file `.docx` gốc (bản trích text bỏ ảnh).
 >
@@ -76,6 +76,7 @@
 | FLEET_HISTORY | Xem lịch sử Đội bay | [TOSS.DM.FLEET_HISTORY.FD.v0.1.md](TOSS.DM.FLEET/TOSS.DM.FLEET_HISTORY.FD.v0.1.md) | 65 |
 | AIRCRAFT_IN_FLEET_ADD_EDIT | Thêm/Sửa Tàu bay (trong Đội bay) | [TOSS.DM.AIRCRAFT_IN_FLEET_ADD_EDIT.FD.v0.1.md](TOSS.DM.FLEET/TOSS.DM.AIRCRAFT_IN_FLEET_ADD_EDIT.FD.v0.1.md) | 63 |
 | AIRCRAFT_IN_FLEET_DELETE | Xoá Tàu bay (trong Đội bay) | [TOSS.DM.AIRCRAFT_IN_FLEET_DELETE.FD.v0.1.md](TOSS.DM.FLEET/TOSS.DM.AIRCRAFT_IN_FLEET_DELETE.FD.v0.1.md) | 60 |
+| AC_SUBTYPE (tổng quan nhóm) | Cấu trúc chung + quan hệ + mô tả dữ liệu tương tác giữa 3 Function Document nhóm AC Subtype | [TOSS.DM.AC_SUBTYPE.MD.v0.1.md](TOSS.DM.AC_SUBTYPE/TOSS.DM.AC_SUBTYPE.MD.v0.1.md) | 105 |
 | AC_SUBTYPE_LIST | Xem danh sách AC Subtype | [TOSS.DM.AC_SUBTYPE_LIST.FD.v0.1.md](TOSS.DM.AC_SUBTYPE/TOSS.DM.AC_SUBTYPE_LIST.FD.v0.1.md) | 73 |
 | AC_SUBTYPE_ADD_EDIT | Thêm mới/Sửa AC Subtype | [TOSS.DM.AC_SUBTYPE_ADD_EDIT.FD.v0.1.md](TOSS.DM.AC_SUBTYPE/TOSS.DM.AC_SUBTYPE_ADD_EDIT.FD.v0.1.md) | 64 |
 | AC_SUBTYPE_DELETE | Xóa AC Subtype | [TOSS.DM.AC_SUBTYPE_DELETE.FD.v0.1.md](TOSS.DM.AC_SUBTYPE/TOSS.DM.AC_SUBTYPE_DELETE.FD.v0.1.md) | 57 |
@@ -90,3 +91,9 @@
 | AIRCRAFT_EDIT_ATTRIBUTES | Sửa tàu bay — tab Group Attributes | [TOSS.DM.AIRCRAFT_EDIT_ATTRIBUTES.FD.v0.1.md](TOSS.DM.AIRCRAFT/TOSS.DM.AIRCRAFT_EDIT_ATTRIBUTES.FD.v0.1.md) | 72 |
 | AIRCRAFT_HISTORY | Change History (Tàu bay) | [TOSS.DM.AIRCRAFT_HISTORY.FD.v0.1.md](TOSS.DM.AIRCRAFT/TOSS.DM.AIRCRAFT_HISTORY.FD.v0.1.md) | 79 |
 | AIRCRAFT_SEARCH | Tìm kiếm tàu bay | [TOSS.DM.AIRCRAFT_SEARCH.FD.v0.1.md](TOSS.DM.AIRCRAFT/TOSS.DM.AIRCRAFT_SEARCH.FD.v0.1.md) | 67 |
+| APU (tổng quan nhóm) | Cấu trúc chung + quan hệ + mô tả dữ liệu tương tác (state machine 4 trạng thái + 2 mã định danh) + prototype (Figma, để trống) giữa 5 Function Document nhóm APU INOP | [TOSS.DM.APU.MD.v0.1.md](TOSS.DM.APU/TOSS.DM.APU.MD.v0.1.md) | 156 |
+| APU_INOP_LIST | Danh sách khai báo APU INOP | [TOSS.DM.APU_INOP_LIST.FD.v0.1.md](TOSS.DM.APU/TOSS.DM.APU_INOP_LIST.FD.v0.1.md) | 115 |
+| APU_INOP_CREATE | Tạo khai báo APU INOP | [TOSS.DM.APU_INOP_CREATE.FD.v0.1.md](TOSS.DM.APU/TOSS.DM.APU_INOP_CREATE.FD.v0.1.md) | 100 |
+| APU_INOP_EDIT | Sửa khai báo APU INOP | [TOSS.DM.APU_INOP_EDIT.FD.v0.1.md](TOSS.DM.APU/TOSS.DM.APU_INOP_EDIT.FD.v0.1.md) | 101 |
+| APU_INOP_DELETE | Xóa khai báo APU INOP | [TOSS.DM.APU_INOP_DELETE.FD.v0.1.md](TOSS.DM.APU/TOSS.DM.APU_INOP_DELETE.FD.v0.1.md) | 76 |
+| APU_INOP_EXPORT | Xuất Excel danh sách APU INOP | [TOSS.DM.APU_INOP_EXPORT.FD.v0.1.md](TOSS.DM.APU/TOSS.DM.APU_INOP_EXPORT.FD.v0.1.md) | 97 |
