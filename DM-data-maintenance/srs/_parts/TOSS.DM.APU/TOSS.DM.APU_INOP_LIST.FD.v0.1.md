@@ -1,7 +1,7 @@
 ---
 project: "TOSS — Hệ thống Điều hành Khai thác Hãng Hàng không"
 author: "BA Lead"
-version: "0.3"
+version: "0.4"
 date: "2026-07-15"
 status: "Draft"
 document_type: "SRS Feature"
@@ -107,13 +107,13 @@ flowchart TD
 
 #### Nghiệp vụ chính
 
-1. **[Cập nhật 2026-07-15] Trạng thái xử lý — 4 giá trị tuần tự** (BA Lead xác nhận, thay thế tính toán trực tiếp từ `To_DT`):
+1. **[Cập nhật 2026-07-15] Trạng thái xử lý — 4 giá trị theo thứ tự nghiệp vụ tự nhiên** (BA Lead xác nhận, thay thế tính toán trực tiếp từ `To_DT`):
    1. **Hỏng — chưa sửa chữa** — trạng thái khởi tạo, hệ thống tự gán khi tạo khai báo mới (xem CREATE).
    2. **Đang sửa chữa**
    3. **Đã khôi phục — chờ xác nhận**
    4. **Đã xác nhận khôi phục** — trạng thái kết thúc.
 
-   Chuyển trạng thái thực hiện qua chính màn hình Thêm mới (khởi tạo) và Sửa (cập nhật) — actor nào được phân quyền 2 thao tác này thì được thực hiện chuyển trạng thái, không có vai trò/luồng phê duyệt riêng. **[Cần làm rõ]** Quy tắc validate khi Sửa: bắt buộc theo đúng thứ tự tuần tự (chỉ được chọn trạng thái kế tiếp) hay cho phép chọn tự do bất kỳ giá trị nào trong 4 giá trị — BA Lead chưa xác nhận chi tiết.
+   Chuyển trạng thái thực hiện qua chính màn hình Thêm mới (khởi tạo) và Sửa (cập nhật) — actor nào được phân quyền 2 thao tác này thì được thực hiện chuyển trạng thái, không có vai trò/luồng phê duyệt riêng. **[BA Lead xác nhận 2026-07-15]** Quy tắc validate khi Sửa là **tự do** — cho phép chọn bất kỳ giá trị nào trong 4 giá trị, không ràng buộc phải chuyển đúng thứ tự tuần tự.
 2. **Active/Closed là nhãn tổng hợp** (giữ lại cho hiển thị dạng thẻ màu, không phải trường lưu trữ riêng): Trạng thái xử lý ∈ {1, 2, 3} → hiển thị thẻ **Active** (xanh); Trạng thái xử lý = 4 (Đã xác nhận khôi phục) → hiển thị thẻ **Closed** (xám).
 3. **Cho phép Đến ngày (to_date) = NULL**: Khai báo hỏng APU có thể chưa xác định ngày kết thúc; trường này độc lập với Trạng thái xử lý — một khai báo có thể đang ở trạng thái "Đang sửa chữa" mà vẫn chưa có Đến ngày xác định.
 4. **2 mã định danh tự sinh** (BA Lead xác nhận 2026-07-15, không cho người dùng nhập tay): **Mã khai báo** toàn hệ thống (`APU-YYYY-NNNN`, tăng dần, không phân biệt tàu bay) và **Lần khai báo** riêng theo từng tàu bay (đếm lại từ 1 cho mỗi mã tàu bay khác nhau) — xem CREATE §Form tạo khai báo.

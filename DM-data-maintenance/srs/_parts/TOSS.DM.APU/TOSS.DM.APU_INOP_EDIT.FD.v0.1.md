@@ -1,7 +1,7 @@
 ---
 project: "TOSS — Hệ thống Điều hành Khai thác Hãng Hàng không"
 author: "BA Lead"
-version: "0.3"
+version: "0.4"
 date: "2026-07-15"
 status: "Draft"
 document_type: "SRS Feature"
@@ -12,7 +12,9 @@ feature_name: "Sửa khai báo APU INOP"
 
 > **Ngữ cảnh chương (giữ nguyên từ nguồn):** mục `Data Maintenance (Danh mục dùng chung)`.
 >
-> **[Cập nhật 2026-07-15 — theo chỉ đạo BA Lead]** Bổ sung trường **Trạng thái xử lý** vào form Sửa (4 giá trị: Hỏng — chưa sửa chữa / Đang sửa chữa / Đã khôi phục — chờ xác nhận / Đã xác nhận khôi phục) — xem [TOSS.DM.APU_INOP_LIST.FD.v0.1.md](TOSS.DM.APU_INOP_LIST.FD.v0.1.md) §Nghiệp vụ chính. Actor được phân quyền thao tác Sửa (cùng quyền với Thêm mới) là actor thực hiện chuyển trạng thái — không có vai trò/luồng phê duyệt riêng. **[Cần làm rõ]** Quy tắc validate: bắt buộc chuyển tuần tự (chỉ chọn được trạng thái kế tiếp) hay tự do chọn bất kỳ giá trị nào trong 4 giá trị — BA Lead chưa xác nhận, form dưới đây mô tả Dropdown không giới hạn lựa chọn, chờ xác nhận thêm.
+> **[Cập nhật 2026-07-15 — theo chỉ đạo BA Lead]** Bổ sung trường **Trạng thái xử lý** vào form Sửa (4 giá trị: Hỏng — chưa sửa chữa / Đang sửa chữa / Đã khôi phục — chờ xác nhận / Đã xác nhận khôi phục) — xem [TOSS.DM.APU_INOP_LIST.FD.v0.1.md](TOSS.DM.APU_INOP_LIST.FD.v0.1.md) §Nghiệp vụ chính. Actor được phân quyền thao tác Sửa (cùng quyền với Thêm mới) là actor thực hiện chuyển trạng thái — không có vai trò/luồng phê duyệt riêng.
+>
+> **[Cập nhật 2026-07-15 (tiếp) — BA Lead xác nhận]** Quy tắc validate Trạng thái xử lý là **tự do**: Dropdown cho phép chọn bất kỳ 1 trong 4 giá trị, không ràng buộc phải chuyển đúng thứ tự tuần tự (không bắt buộc chỉ chọn trạng thái kế tiếp).
 >
 > **[Cập nhật 2026-07-15 (tiếp) — tách file]** Tách riêng khỏi file gộp `TOSS.DM.APU_INOP_EDIT.FD.v0.1.md` (Sửa+Xóa) ban đầu — thao tác **Xóa** nay ở file riêng [TOSS.DM.APU_INOP_DELETE.FD.v0.1.md](TOSS.DM.APU_INOP_DELETE.FD.v0.1.md), khớp quy ước tách file Sửa/Xóa riêng biệt mà 14 nhóm khác của module Data Maintenance đều dùng (vd AC Subtype có `_ADD_EDIT` + `_DELETE`). Không mất nội dung — toàn bộ luồng Xóa được chuyển nguyên vẹn sang file mới.
 
@@ -72,7 +74,7 @@ flowchart TD
 
 | **Tên trường** | **Kiểu** | **Bắt buộc** | **Mapping** | **Mô tả** |
 | --- | --- | --- | --- | --- |
-| Trạng thái xử lý | Dropdown | Có | `processing_status` | **[Mới 2026-07-15]** Chọn 1 trong 4 giá trị: Hỏng — chưa sửa chữa / Đang sửa chữa / Đã khôi phục — chờ xác nhận / Đã xác nhận khôi phục. [Cần làm rõ] quy tắc giới hạn lựa chọn (tuần tự hay tự do) — xem ghi chú đầu file |
+| Trạng thái xử lý | Dropdown | Có | `processing_status` | **[Mới 2026-07-15]** Chọn 1 trong 4 giá trị: Hỏng — chưa sửa chữa / Đang sửa chữa / Đã khôi phục — chờ xác nhận / Đã xác nhận khôi phục. **Tự do** — không ràng buộc thứ tự tuần tự (BA Lead xác nhận) |
 | Đến ngày | Datepicker | Không | to_date | Ngày kết thúc hỏng APU. Trống = chưa xác định (đang hiệu lực) |
 | Ghi chú | Textarea | Không | note | Ghi chú bổ sung. Maxlength 500 ký tự |
 
@@ -98,4 +100,4 @@ flowchart TD
 
 ---
 
-*Nguồn: BR-420 — quản lý khai báo APU INOP. **Cập nhật 2026-07-15 (chỉ đạo trực tiếp BA Lead, không phải trích từ BR-420 gốc):** bổ sung trường Trạng thái xử lý (4 giá trị) vào form Sửa; tách riêng khỏi luồng Xóa (nay ở [TOSS.DM.APU_INOP_DELETE.FD.v0.1.md](TOSS.DM.APU_INOP_DELETE.FD.v0.1.md)) để khớp quy ước tách file của 14 nhóm khác trong module.*
+*Nguồn: BR-420 — quản lý khai báo APU INOP. **Cập nhật 2026-07-15 (chỉ đạo trực tiếp BA Lead, không phải trích từ BR-420 gốc):** bổ sung trường Trạng thái xử lý (4 giá trị) vào form Sửa, quy tắc chuyển tự do (không ràng buộc thứ tự); tách riêng khỏi luồng Xóa (nay ở [TOSS.DM.APU_INOP_DELETE.FD.v0.1.md](TOSS.DM.APU_INOP_DELETE.FD.v0.1.md)) để khớp quy ước tách file của 14 nhóm khác trong module.*

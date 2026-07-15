@@ -1,7 +1,7 @@
 ---
 project: "TOSS — Hệ thống Điều hành Khai thác Hãng Hàng không"
 author: "BA Lead"
-version: "0.4"
+version: "0.5"
 date: "2026-07-15"
 status: "Draft"
 document_type: "SRS Group Overview"
@@ -59,13 +59,13 @@ flowchart LR
     LIST -->|"nút Thêm mới (link markdown thật)"| CREATE
     LIST -->|"nút Sửa (link markdown thật)"| EDIT
     LIST -->|"nút Xóa (link markdown thật)"| DELETE
-    LIST -.->|"nút Export trên cùng màn (KHÔNG có link)"| EXPORT
+    LIST -->|"nút Export (link markdown thật)"| EXPORT
     CREATE -->|"Lưu thành công → refresh"| LIST
     EDIT -->|"Lưu thành công → refresh"| LIST
     DELETE -->|"Xóa thành công → refresh"| LIST
 ```
 
-Mô hình quan hệ: **LIST là màn hình trung tâm** giống nhóm AC Subtype, bao gồm cả bộ lọc (Bộ lọc trước đây tách riêng ở file `FILTER` — đã xóa, gộp vào LIST 2026-07-15). Sau khi tách EDIT/DELETE và bổ sung link markdown thật (2026-07-15), quan hệ LIST→CREATE/EDIT/DELETE đều có link xác nhận; chỉ còn LIST→EXPORT là suy luận từ Trigger, chưa có link trực tiếp — xem chi tiết §4.
+Mô hình quan hệ: **LIST là màn hình trung tâm** giống nhóm AC Subtype, bao gồm cả bộ lọc (Bộ lọc trước đây tách riêng ở file `FILTER` — đã xóa, gộp vào LIST 2026-07-15). Sau khi tách EDIT/DELETE và bổ sung link markdown thật (2026-07-15), cả 4 quan hệ LIST→CREATE/EDIT/DELETE/EXPORT đều có link xác nhận — khớp quy ước nhóm AC Subtype — xem chi tiết §4.
 
 ## 4. Chi tiết liên kết trong nhóm
 
@@ -73,19 +73,20 @@ Mô hình quan hệ: **LIST là màn hình trung tâm** giống nhóm AC Subtype
 |---|---|---|---|
 | LIST | CREATE | STT 2 bảng "Mô tả chi tiết màn hình": nút "Thêm mới" → mở popup, có link markdown thật | LIST §Mô tả chi tiết màn hình STT 2 |
 | CREATE | LIST | Sau khi Lưu hợp lệ (Bước 6): lưu bản ghi, refresh danh sách, đóng popup | CREATE §Mô tả luồng xử lý Bước 6 |
+| LIST | EXPORT | STT 3 bảng "Mô tả chi tiết màn hình": Button Export, có link markdown thật (bổ sung 2026-07-15, khớp Trigger đã mô tả ở EXPORT.FD) | LIST §Mô tả chi tiết màn hình STT 3 |
 | LIST | EDIT | STT 8 bảng "Mô tả chi tiết màn hình": Button Sửa, có link markdown thật (bổ sung 2026-07-15) | LIST §Mô tả chi tiết màn hình STT 8 |
 | EDIT | LIST | Sau khi Sửa thành công (Bước 6): cập nhật bản ghi, refresh danh sách | EDIT §Mô tả luồng xử lý Bước 6 |
 | LIST | DELETE | STT 8 bảng "Mô tả chi tiết màn hình": Button Xóa, có link markdown thật (bổ sung 2026-07-15) | LIST §Mô tả chi tiết màn hình STT 8 |
 | DELETE | LIST | Sau khi Xóa thành công (Bước 5): xóa bản ghi, refresh danh sách | DELETE §Mô tả luồng xử lý Bước 5 |
-| LIST | EXPORT | EXPORT nêu Trigger "nút Export trên màn hình Danh sách APU INOP" nhưng **LIST không liệt kê nút này** trong bảng trường — không có link, và cũng thiếu bằng chứng UI ở phía LIST | Xem §5 mục 1 — nghi sót khi soạn LIST |
 
-**[Cần làm rõ]** LIST→EXPORT vẫn chỉ là suy luận hợp lý từ ngữ cảnh (cùng thao tác trên 1 màn hình), chưa có bằng chứng trích dẫn trực tiếp trong LIST. Giữ nguyên trạng, không tự thêm link vào file nguồn.
+## 5. Bất thường nội bộ nhóm — đã xử lý (khác nhóm AC Subtype — không có ở đó)
 
-## 5. Bất thường nội bộ nhóm (khác nhóm AC Subtype — không có ở đó)
-
-| # | Bất thường | Mô tả | Nguồn |
+| # | Bất thường | Mô tả | Trạng thái |
 |---|---|---|---|
-| 1 | Export button thiếu trong bảng trường LIST | `APU_INOP_EXPORT.FD` mô tả Trigger là nút Export "trên màn hình Danh sách APU INOP", nhưng bảng "Mô tả chi tiết màn hình" của LIST chỉ liệt kê Breadcrumb/Thêm mới/Bộ lọc/Danh sách/Phân trang/Sửa/Xóa — không có dòng nào cho nút Export | LIST §Mô tả chi tiết màn hình; EXPORT §Trigger |
+| 1 | Export button thiếu trong bảng trường LIST | `APU_INOP_EXPORT.FD` mô tả Trigger là nút Export "trên màn hình Danh sách APU INOP", nhưng bảng "Mô tả chi tiết màn hình" của LIST trước đó không liệt kê nút này | **Đã xử lý 2026-07-15** — LIST bổ sung dòng Button Export (STT 3, link markdown thật tới EXPORT.FD) |
+| 2 | Quy tắc chuyển Trạng thái xử lý khi Sửa (tuần tự hay tự do) | Chưa xác nhận bắt buộc chuyển đúng thứ tự tuần tự hay được chọn tự do bất kỳ giá trị nào trong 4 trạng thái | **BA Lead xác nhận 2026-07-15 — Tự do**, không ràng buộc thứ tự. Đã cập nhật `TOSS.DM.APU_INOP_EDIT.FD.v0.1.md` §Form sửa |
+
+*(Điểm còn để ngỏ, chưa xử lý trong đợt này: nguồn BR-420 của cả nhóm chưa được xác nhận là đã qua vòng SRS chính thức của VNA/VTIT hay còn là bản nháp nội bộ — xem CATALOG.md §4.6 điểm 1.)*
 
 *(2 bất thường trước đó — "EDIT gộp Sửa+Xóa" và "FILTER trùng lặp với Bộ lọc LIST" — đã được xử lý 2026-07-15: EDIT tách thành EDIT/DELETE riêng; FILTER đã xóa, nội dung gộp vào LIST. Xem ghi chú đầu file.)*
 
@@ -120,7 +121,7 @@ Thực thể chính là **Khai báo APU INOP** (khai báo tàu bay hỏng APU tr
 | Lần khai báo | `declaration_seq` | Textview, chỉ đọc | Tự sinh, không nhập tay | CREATE (sinh khi Lưu), LIST/EXPORT (đọc) | **[Mới 2026-07-15]** Đếm riêng theo Mã tàu bay — lần 1, 2, 3... cho mỗi tàu bay khác nhau, không dùng chung bộ đếm với Mã khai báo |
 | Từ ngày | `from_date` | Textview (LIST) · Datepicker (CREATE) | Bắt buộc; mặc định = ngày hiện tại khi tạo | LIST (đọc), CREATE (ghi) | **Khóa sau khi tạo** — không cho sửa ở EDIT |
 | Đến ngày | `to_date` | Textview (LIST) · Datepicker (CREATE/EDIT) | Không bắt buộc — trống = "Chưa xác định" | LIST (đọc), CREATE (ghi), EDIT (sửa được) | Độc lập với Trạng thái xử lý — validate: nếu nhập phải ≥ Từ ngày |
-| Trạng thái xử lý | `processing_status` | Tag (LIST) · Dropdown (EDIT) | Bắt buộc; khởi tạo = "Hỏng — chưa sửa chữa" khi Tạo | CREATE (khởi tạo), EDIT (sửa được), LIST (đọc) | **[Mới 2026-07-15]** 4 giá trị tuần tự: Hỏng — chưa sửa chữa → Đang sửa chữa → Đã khôi phục — chờ xác nhận → Đã xác nhận khôi phục. Chuyển trạng thái qua Create/Edit, actor có quyền 2 thao tác này thì thực hiện được. [Cần làm rõ] quy tắc giới hạn tuần tự hay tự do — chưa xác nhận |
+| Trạng thái xử lý | `processing_status` | Tag (LIST) · Dropdown (EDIT) | Bắt buộc; khởi tạo = "Hỏng — chưa sửa chữa" khi Tạo | CREATE (khởi tạo), EDIT (sửa được), LIST (đọc) | **[Mới 2026-07-15]** 4 giá trị theo thứ tự nghiệp vụ tự nhiên: Hỏng — chưa sửa chữa → Đang sửa chữa → Đã khôi phục — chờ xác nhận → Đã xác nhận khôi phục. Chuyển trạng thái qua Create/Edit, actor có quyền 2 thao tác này thì thực hiện được. **Quy tắc chuyển khi Sửa: tự do** (BA Lead xác nhận 2026-07-15), không ràng buộc thứ tự |
 | Ghi chú | `note` | Textview (LIST) · Textarea [500] (CREATE/EDIT) | Không bắt buộc | LIST (đọc), CREATE (ghi), EDIT (sửa được) | |
 | Trạng thái *(nhãn tổng hợp — không lưu DB riêng)* | — | Tag (Active=xanh/Closed=xám) | — | LIST (đọc, suy diễn) | **[Cập nhật 2026-07-15]** Trạng thái xử lý ∈{Hỏng chưa sửa, Đang sửa, Đã khôi phục chờ xác nhận} → Active; = Đã xác nhận khôi phục → Closed. *(Trước 2026-07-15: suy trực tiếp từ `to_date IS NULL OR to_date >= hôm nay`, không qua Trạng thái xử lý.)* |
 
@@ -155,4 +156,4 @@ Nhóm `TOSS.DM.APU` **không xuất hiện** trong [ma trận liên kết chéo 
 
 ---
 
-*Nguồn: tổng hợp từ 5 file feature trong nhóm (`TOSS.DM.APU_INOP_LIST/CREATE/EDIT/DELETE/EXPORT.FD.v0.1.md`, nguồn BR-420) + [CATALOG.md](../CATALOG.md) dòng #70–74, §2.12, §3 dòng #16, §4.6, §4.7. Không chỉnh sửa nội dung nguồn, chỉ tổ chức lại quan hệ đã có sẵn (CLAUDE.md §0) — riêng §8 (v0.3) là ngoại lệ có chủ đích: nội dung state machine + 2 mã định danh do BA Lead trực tiếp cung cấp qua trao đổi 2026-07-15 (không trích từ BR-420), ghi lại theo đúng thẩm quyền quyết định nghiệp vụ của BA Lead (CLAUDE.md §0). Tạo theo yêu cầu BA Lead 2026-07-15 (v0.1), cùng cấu trúc đã áp dụng cho nhóm `TOSS.DM.AC_SUBTYPE`; bổ sung §2 "Prototype (Figma)" cùng ngày (v0.2) — bảng để trống chờ gắn link Figma theo từng màn hình; bổ sung state machine 4 trạng thái + 2 mã định danh tự sinh vào §1/§5/§8 (v0.3); cập nhật toàn bộ §1–§9 theo cấu trúc file thực tế sau khi xóa FILTER (gộp vào LIST) và tách EDIT thành EDIT/DELETE (v0.4).*
+*Nguồn: tổng hợp từ 5 file feature trong nhóm (`TOSS.DM.APU_INOP_LIST/CREATE/EDIT/DELETE/EXPORT.FD.v0.1.md`, nguồn BR-420) + [CATALOG.md](../CATALOG.md) dòng #70–74, §2.12, §3 dòng #16, §4.6, §4.7. Không chỉnh sửa nội dung nguồn, chỉ tổ chức lại quan hệ đã có sẵn (CLAUDE.md §0) — riêng §8 (v0.3) là ngoại lệ có chủ đích: nội dung state machine + 2 mã định danh do BA Lead trực tiếp cung cấp qua trao đổi 2026-07-15 (không trích từ BR-420), ghi lại theo đúng thẩm quyền quyết định nghiệp vụ của BA Lead (CLAUDE.md §0). Tạo theo yêu cầu BA Lead 2026-07-15 (v0.1), cùng cấu trúc đã áp dụng cho nhóm `TOSS.DM.AC_SUBTYPE`; bổ sung §2 "Prototype (Figma)" cùng ngày (v0.2) — bảng để trống chờ gắn link Figma theo từng màn hình; bổ sung state machine 4 trạng thái + 2 mã định danh tự sinh vào §1/§5/§8 (v0.3); cập nhật toàn bộ §1–§9 theo cấu trúc file thực tế sau khi xóa FILTER (gộp vào LIST) và tách EDIT thành EDIT/DELETE (v0.4); xử lý 2 bất thường theo yêu cầu BA Lead — xác nhận LIST→EXPORT đã có link markdown thật (không còn là suy luận), xác nhận quy tắc chuyển Trạng thái xử lý là tự do (v0.5).*
