@@ -52,7 +52,8 @@ source_range: "Google Docs index 10594–15546"
 | 2 | ![Hình ảnh image14 từ Google Docs](../_images/google-docs/image14.png) | icon |  | Click icon x \=\> Quay trở lại màn hình danh sách và tài liệu chuyến bay |
 | 3 | Document Type | Tab |  | Hiển thị các nhóm tài liệu: **Load Sheet**, **Gen. Declaration**, **Pax Manifest**.  Mặc định chọn **Load Sheet**  Khi user chọn tab khác, hệ thống hiển thị danh sách tài liệu của loại tương ứng. |
 | 4 | Upload Area | View |  | Vùng hiển thị chức năng tải lên tài liệu.  [Tham chiếu kịch bản upload tài liệu](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit#heading=h.g3cvtakkbgr2) |
-| **Bảng dữ liệu thông tin tài liệu chuyến bay *Fix cứng 20 bản ghi  và cho phép scroll lên xuống (không phân trang) Nếu chuyến bay chưa có tài liệu đó \=\> giữ nguyên các hàng tiêu đề, thân bảng hiển thị “No data”*** |  |  |  |  |
+| **Bảng dữ liệu thông tin tài liệu chuyến bay *Mặc định hiển thị 20 bản ghi trong khung  và cho phép scroll lên xuống (không phân trang)
+ Nếu chuyến bay chưa có tài liệu đó \=\> giữ nguyên các hàng tiêu đề, thân bảng hiển thị “No data”*** |  |  |  |  |
 | 5 | Document Name | Textview |  | Hiển thị tên file tài liệu được upload/ đồng bộ về Trường hợp API trả về rỗng/lỗi: để trống trường |
 | 6 | Upload Date | Datetime |  | Hiển thị thời gian tài liệu được upload/đồng bộ lên hệ thống.  ![Hình ảnh image15 từ Google Docs](../_images/google-docs/image15.png) Định dạng ddMM hh:mm Trường hợp API trả về rỗng/lỗi: để trống trường |
 | 7 | ACK Time | Datetime |  | Hiển thị thời điểm phi công confirm (ACK) tài liệu ![Hình ảnh image15 từ Google Docs](../_images/google-docs/image15.png) Định dạng ddMM hh:mm Trường hợp API trả về rỗng/lỗi: để trống trường *Đối với tài liệu đang ở trạng thái AWAIT ACK \=\> Mặc định để trống trường này và hiển thị “---”* |
