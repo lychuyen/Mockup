@@ -2,7 +2,7 @@
 project: "TOSS — Hệ thống Điều hành Khai thác Hãng Hàng không"
 author: "VNA/VTIT (nguồn Google Docs) — phân rã bởi agent BA"
 version: "0.1"
-date: "2026-07-15"
+date: "2026-07-16"
 status: "Draft"
 document_type: "SRS Feature"
 subsystem: "Flight Load Control"
@@ -10,11 +10,11 @@ feature_id: "TOSS.FLC.CUSTOMIZE_DOC_TABLE"
 feature_name: "Customize bảng biểu"
 group: "Document"
 source_url: "https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit"
-source_revision: "ALtnJHxtgop8tqU1H4gOvgIdTgE39wuW0tXeTq11SiDids1CLuKzRUNhr3GxQkpotgiqrqrdOBQNUeCsjS--F24FhdUDJiRoJFzN8MNoC2k"
-source_range: "Google Docs index 23941–27229"
+source_revision: "ALtnJHw752QgcvhVUuNEE-hu5IMGBpSkN00WjYskJ9yEU_jTAh4oi9SCaz9AkZwFdMFX2SE4iKFybLDiZBdqCPcZtK6ptnEqmoPzVAMPTkU"
+source_range: "Google Docs index 23950–27555"
 ---
 
-> **Phạm vi file:** Nội dung chức năng “Customize bảng biểu” được phân rã nguyên nghĩa từ Google Docs nguồn tại phạm vi chỉ mục 23941–27229. Không bổ sung hoặc suy diễn nghiệp vụ ngoài nguồn.
+> **Phạm vi file:** Nội dung chức năng “Customize bảng biểu” được phân rã nguyên nghĩa từ Google Docs nguồn tại phạm vi chỉ mục 23950–27555. Không bổ sung hoặc suy diễn nghiệp vụ ngoài nguồn.
 
 ## **Customize bảng biểu**
 
@@ -46,7 +46,7 @@ source_range: "Google Docs index 23941–27229"
 
 | STT | Tên | Kiểu dữ liệu\[Độ dài\] | Mapping DB/API | Mô tả nghiệp vụ |
 | ----- | :---: | :---: | :---: | ----- |
-| **QUY TẮC LƯU CẤU HÌNH BẢNG** Nếu User đang trong phiên đăng nhập hợp lệ (96h kể từ lúc login) và đã có cấu hình bảng được lưu (Customize view), hệ thống tự động hiển thị danh sách theo cấu hình đã lưu (Lưu ý: Thao tác Logout/Login lại trong 96h sẽ không làm mất cấu hình) Trường hợp quá 96h hoặc chưa từng cấu hình, hệ thống hiển thị danh sách theo giao diện mặc định  **QUY TẮC CÁC CỘT LUÔN HIỂN THỊ** Phạm vi áp dụng: 7 cột dữ liệu (EDD, FLT NO, ACREG, ACTYPE, ETD, DEP, ARR) Tại danh sách chuyến bay: Các cột này luôn được sắp xếp cố định ở đầu bảng (từ trái sang phải) và không bị ghim, cho phép cuộn ngang cùng bảng dữ liệu Tại giao diện cấu hình cột (Table setting Popup): Không hiển thị 7 cột cố định trong list “*Data column name”* |  |  |  |  |
+| **QUY TẮC LƯU CẤU HÌNH BẢNG** Cấu hình bảng (Customize View) được lưu theo **tài khoản User**. Khi User đăng nhập vào hệ thống (trên cùng hoặc thiết bị/trình duyệt khác), hệ thống tự động tải và áp dụng cấu hình bảng đã lưu gần nhất của User. Thao tác Logout/Login hoặc đăng nhập trên thiết bị/trình duyệt khác **không làm mất cấu hình bảng**. Nếu User chưa từng lưu cấu hình bảng, hệ thống hiển thị danh sách theo cấu hình mặc định. Khi User thực hiện lưu cấu hình mới, cấu hình cũ sẽ được ghi đè và áp dụng cho tất cả các phiên đăng nhập của User. **QUY TẮC CÁC CỘT LUÔN HIỂN THỊ       Phạm vi áp dụng:** 07 cột dữ liệu gồm: **EDD, FLT NO, ACREG, ACTYPE, ETD, DEP, ARR**. Tại danh sách chuyến bay: 07 cột trên luôn được hiển thị ở đầu bảng theo thứ tự từ trái sang phải. User không được phép ẩn, thay đổi vị trí hoặc cấu hình hiển thị đối với các cột này. Các cột không được ghim (pin) và cuộn ngang cùng với phần còn lại của bảng. Tại popup **Table Setting**: Không hiển thị 07 cột cố định trong danh sách **Data column name**. User chỉ được phép cấu hình các cột còn lại. |  |  |  |  |
 | 1 | Title | Textview |  | Fix cứng text “Document table setting” Không cho thao tác |
 | 2 | ![Hình ảnh image55 từ Google Docs](../_images/google-docs/image55.png) | Icon |  | Click Button \=\> Đóng Popup, trở lại màn hình danh sách chuyến bay và trạng thái tài liệu |
 | 3 | Data column name | Textview |  | Hiển thị tên danh sách tên các cột dữ liệu khả dụng của của bảng Fix cứng text, không cho thao tác |
@@ -60,4 +60,4 @@ source_range: "Google Docs index 23941–27229"
 
 ---
 
-**Nguồn trích:** [VNA.TOSS_SRS_Flight Load Control_v0.1](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit) · Revision `ALtnJHxtgop8tqU1H4gOvgIdTgE39wuW0tXeTq11SiDids1CLuKzRUNhr3GxQkpotgiqrqrdOBQNUeCsjS--F24FhdUDJiRoJFzN8MNoC2k` · Google Docs index 23941–27229.
+**Nguồn trích:** [VNA.TOSS_SRS_Flight Load Control_v0.1](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit) · Revision `ALtnJHw752QgcvhVUuNEE-hu5IMGBpSkN00WjYskJ9yEU_jTAh4oi9SCaz9AkZwFdMFX2SE4iKFybLDiZBdqCPcZtK6ptnEqmoPzVAMPTkU` · Google Docs index 23950–27555.

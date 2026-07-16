@@ -2,7 +2,7 @@
 project: "TOSS — Hệ thống Điều hành Khai thác Hãng Hàng không"
 author: "VNA/VTIT (nguồn Google Docs) — phân rã bởi agent BA"
 version: "0.1"
-date: "2026-07-15"
+date: "2026-07-16"
 status: "Draft"
 document_type: "SRS Feature"
 subsystem: "Flight Load Control"
@@ -10,11 +10,11 @@ feature_id: "TOSS.FLC.FLIGHT_SEARCH"
 feature_name: "Tìm kiếm chuyến bay"
 group: "Document"
 source_url: "https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit"
-source_revision: "ALtnJHxtgop8tqU1H4gOvgIdTgE39wuW0tXeTq11SiDids1CLuKzRUNhr3GxQkpotgiqrqrdOBQNUeCsjS--F24FhdUDJiRoJFzN8MNoC2k"
-source_range: "Google Docs index 19543–23940"
+source_revision: "ALtnJHw752QgcvhVUuNEE-hu5IMGBpSkN00WjYskJ9yEU_jTAh4oi9SCaz9AkZwFdMFX2SE4iKFybLDiZBdqCPcZtK6ptnEqmoPzVAMPTkU"
+source_range: "Google Docs index 19552–23949"
 ---
 
-> **Phạm vi file:** Nội dung chức năng “Tìm kiếm chuyến bay” được phân rã nguyên nghĩa từ Google Docs nguồn tại phạm vi chỉ mục 19543–23940. Không bổ sung hoặc suy diễn nghiệp vụ ngoài nguồn.
+> **Phạm vi file:** Nội dung chức năng “Tìm kiếm chuyến bay” được phân rã nguyên nghĩa từ Google Docs nguồn tại phạm vi chỉ mục 19552–23949. Không bổ sung hoặc suy diễn nghiệp vụ ngoài nguồn.
 
 ## **Tìm kiếm chuyến bay**
 
@@ -28,7 +28,6 @@ source_range: "Google Docs index 19543–23940"
 
 ![Hình ảnh image42 từ Google Docs](../_images/google-docs/image42.png)
 ### **Mô tả luồng xử lý**
-
 
 
 | Bước | Chi tiết |
@@ -61,4 +60,4 @@ source_range: "Google Docs index 19543–23940"
 
 ---
 
-**Nguồn trích:** [VNA.TOSS_SRS_Flight Load Control_v0.1](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit) · Revision `ALtnJHxtgop8tqU1H4gOvgIdTgE39wuW0tXeTq11SiDids1CLuKzRUNhr3GxQkpotgiqrqrdOBQNUeCsjS--F24FhdUDJiRoJFzN8MNoC2k` · Google Docs index 19543–23940.
+**Nguồn trích:** [VNA.TOSS_SRS_Flight Load Control_v0.1](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit) · Revision `ALtnJHw752QgcvhVUuNEE-hu5IMGBpSkN00WjYskJ9yEU_jTAh4oi9SCaz9AkZwFdMFX2SE4iKFybLDiZBdqCPcZtK6ptnEqmoPzVAMPTkU` · Google Docs index 19552–23949.

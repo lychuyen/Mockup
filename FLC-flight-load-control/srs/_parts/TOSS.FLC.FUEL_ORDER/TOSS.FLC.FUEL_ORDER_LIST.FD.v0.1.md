@@ -2,7 +2,7 @@
 project: "TOSS — Hệ thống Điều hành Khai thác Hãng Hàng không"
 author: "VNA/VTIT (nguồn Google Docs) — phân rã bởi agent BA"
 version: "0.1"
-date: "2026-07-15"
+date: "2026-07-16"
 status: "Draft"
 document_type: "SRS Feature"
 subsystem: "Flight Load Control"
@@ -10,11 +10,11 @@ feature_id: "TOSS.FLC.FUEL_ORDER_LIST"
 feature_name: "Xem danh sách chuyến bay và thông tin fuel order"
 group: "Fuel order"
 source_url: "https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit"
-source_revision: "ALtnJHxtgop8tqU1H4gOvgIdTgE39wuW0tXeTq11SiDids1CLuKzRUNhr3GxQkpotgiqrqrdOBQNUeCsjS--F24FhdUDJiRoJFzN8MNoC2k"
-source_range: "Google Docs index 27241–35660"
+source_revision: "ALtnJHw752QgcvhVUuNEE-hu5IMGBpSkN00WjYskJ9yEU_jTAh4oi9SCaz9AkZwFdMFX2SE4iKFybLDiZBdqCPcZtK6ptnEqmoPzVAMPTkU"
+source_range: "Google Docs index 27567–36130"
 ---
 
-> **Phạm vi file:** Nội dung chức năng “Xem danh sách chuyến bay và thông tin fuel order” được phân rã nguyên nghĩa từ Google Docs nguồn tại phạm vi chỉ mục 27241–35660. Không bổ sung hoặc suy diễn nghiệp vụ ngoài nguồn.
+> **Phạm vi file:** Nội dung chức năng “Xem danh sách chuyến bay và thông tin fuel order” được phân rã nguyên nghĩa từ Google Docs nguồn tại phạm vi chỉ mục 27567–36130. Không bổ sung hoặc suy diễn nghiệp vụ ngoài nguồn.
 
 ## **Xem danh sách chuyến bay và thông tin fuel order**
 
@@ -25,7 +25,6 @@ source_range: "Google Docs index 27241–35660"
 | **Tiền điều kiện** | Người dùng đăng nhập thành công và được phân quyền phân hệ Flight load control |
 | **Hậu điều kiện** | Mở màn hình danh sách chuyến bay và thông tin fuel order đối với từng chuyến bay |
 ### **Sơ đồ luồng hệ thống**
-
 
 
 ![Hình ảnh image62 từ Google Docs](../_images/google-docs/image62.png)
@@ -40,6 +39,8 @@ source_range: "Google Docs index 27241–35660"
 
 ####
 ### **Màn hình chức năng**
+
+   ![Hình ảnh image65 từ Google Docs](../_images/google-docs/image65.png)
 ### **Mô tả chi tiết màn hình**
 
 | STT | Tên | Kiểu dữ liệu\[Độ dài\] | Mapping DB/API | Mô tả nghiệp vụ |
@@ -56,8 +57,8 @@ source_range: "Google Docs index 27241–35660"
 | 9 | PIC release rev | Textview |  | PIC release rev: Hiển thị thông tin phiên bản PIC release  mới nhất từ MO Hiển thị \[PIC release rev \] theo dữ liệu API trả về Trường hợp API trả về rỗng/lỗi: để trống trường Nếu độ dài dữ liệu vượt quá 2 dòng, hiển thị ba chấm \[…\] ở cuối dòng thứ 2 và có tooltip hiển thị toàn bộ nội dung |
 | 10 | EST PAYLOAD  | Numer |  | EST PAYLOAD: Hiển thị Tải trọng dự kiến do KST nhập/ gửi. Đơn vị (**Kg**) Gía trị lấy từ trường TOTAL PAYLOAD trong màn chi tiết Hiển thị \[EST PAYLOAD\] theo dữ liệu API trả về Trường hợp API trả về rỗng/lỗi: để trống trường  Nếu độ dài dữ liệu vượt quá 2 dòng, hiển thị ba chấm \[…\] ở cuối dòng thứ 2 và có tooltip hiển thị toàn bộ nội dung |
 | 11 | OFP PAYLOAD | Number |  | OFP PAYLOAD: Hiển thị Tải trọng dự kiến trên OFP. Đơn vị (**Kg**) Bóc tách từ trường PLD trong OFP phiên bản mới nhất ![Hình ảnh image63 từ Google Docs](../_images/google-docs/image63.png) Hiển thị \[OFP PAYLOAD\] theo dữ liệu API trả về Trường hợp API trả về rỗng/lỗi: để trống trường  Dữ liệu trong cột hiển thị thông tin Tải trọng dự kiến trên OFP Nếu độ dài dữ liệu vượt quá 2 dòng, hiển thị ba chấm \[…\] ở cuối dòng thứ 2 và có tooltip hiển thị toàn bộ nội dung |
-| 12 | OFP DOW | Number |  | OFP DOW: Trọng lượng cơ sở của tàu bay đã sẵn sàng để thực hiện chuyến bay. Đơn vị (**Kg**) Bóc tách từ trường DOW trong OFP phiên bản mới nhất  ![Hình ảnh image65 từ Google Docs](../_images/google-docs/image65.png) Hiển thị \[OFP DOW\] theo dữ liệu API trả về Trường hợp API trả về rỗng/lỗi: để trống trường  Dữ liệu trong cột hiển thị thông tin Trọng lượng cơ sỏ của tàu bay  Nếu độ dài dữ liệu vượt quá 2 dòng, hiển thị ba chấm \[…\] ở cuối dòng thứ 2 và có tooltip hiển thị toàn bộ nội dung |
-| 13 | DIFFERENCE | Textview |  | Hiển thị Chênh lệch tải trọng. Đơn vị (Kg) Hệ thống tự động tính toán theo công thức DIFFERENCE \= EST PAYLOAD \- OFP PAYLOAD để hiển thị ra màn hình Giá trị có thể số dương **(≥ 0\)** hoặc số âm **(\< 0\)** Trường hợp API trả về rỗng/lỗi, HOẶC một trong hai trường dữ liệu gốc (EST PAYLOAD, OFP PAYLOAD) bị rỗng: Để trống trường Nếu độ dài dữ liệu vượt quá 2 dòng, hiển thị ba chấm \[...\] ở cuối dòng thứ 2 và có tooltip hiển thị toàn bộ nội dung |
+| 12 | OFP DOW | Number |  | OFP DOW: Trọng lượng cơ sở của tàu bay đã sẵn sàng để thực hiện chuyến bay. Đơn vị (**Kg**) Bóc tách từ trường DOW trong OFP phiên bản mới nhất  ![Hình ảnh image66 từ Google Docs](../_images/google-docs/image66.png) Hiển thị \[OFP DOW\] theo dữ liệu API trả về Trường hợp API trả về rỗng/lỗi: để trống trường  Dữ liệu trong cột hiển thị thông tin Trọng lượng cơ sỏ của tàu bay  Nếu độ dài dữ liệu vượt quá 2 dòng, hiển thị ba chấm \[…\] ở cuối dòng thứ 2 và có tooltip hiển thị toàn bộ nội dung |
+| 13 | DIFFERENCE | Textview |  | Hiển thị Chênh lệch tải trọng. Đơn vị (Kg) Hệ thống tự động tính toán theo công thức DIFFERENCE \= EST PAYLOAD \- OFP PAYLOAD để hiển thị ra màn hình Gía trị được lấy nguyên bản: nếu kết quả ra số âm thì hiển thị dấu “-” phía trước và màu đỏ ( ví dụ: \-23). Nếu kết quả ra số dương thì hiển thị dấu “+” phía trước và màu xanh (ví dụ: \+300) Trường hợp API trả về rỗng/lỗi, HOẶC một trong hai trường dữ liệu gốc (EST PAYLOAD, OFP PAYLOAD) bị rỗng: Để trống trường Nếu độ dài dữ liệu vượt quá 2 dòng, hiển thị ba chấm \[...\] ở cuối dòng thứ 2 và có tooltip hiển thị toàn bộ nội dung |
 | 14 | OFP FUEL | Textview |  | Hiển thị dầu dự kiến trên OFP. Đơn vị (Kg) Lấy giá trị OFP BLOCK FUEL từ bản Flight Release mà PIC release mới nhất Hiển thị \[OFP FUEL\]  theo dữ liệu API trả về Trường hợp API trả về rỗng/lỗi: để trống trường  Nếu độ dài dữ liệu vượt quá 2 dòng, hiển thị ba chấm \[…\] ở cuối dòng thứ 2 và có tooltip hiển thị toàn bộ nội dung |
 | 15 | FUEL ORDER  | Textview |  | Hiển thị số dầu mà PIC request. Đơn vị (Kg) Hiển thị \[FUEL ORDER \]  theo dữ liệu API trả về Lấy giá trị REQUEST FUEL từ bản Flight Release mà PIC release mới nhất Trường hợp API trả về rỗng/lỗi: để trống trường  Nếu độ dài dữ liệu vượt quá 2 dòng, hiển thị ba chấm \[…\] ở cuối dòng thứ 2 và có tooltip hiển thị toàn bộ nội dung |
 | 16 | TAXI (release)  | Textview |  | Hiển thị Taxi Fuel. Đơn vị (Kg) Hiển thị \[TAXI\]  theo dữ liệu API trả về Lấy giá trị COR.TAXI FUEL từ bản Flight Release mà PIC release mới nhất Trường hợp API trả về rỗng/lỗi: để trống trường  Dữ liệu trong cột hiển thị thông tin Taxi Fuel Nếu độ dài dữ liệu vượt quá 2 dòng, hiển thị ba chấm \[…\] ở cuối dòng thứ 2 và có tooltip hiển thị toàn bộ nội dung |
@@ -68,4 +69,4 @@ source_range: "Google Docs index 27241–35660"
 
 ---
 
-**Nguồn trích:** [VNA.TOSS_SRS_Flight Load Control_v0.1](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit) · Revision `ALtnJHxtgop8tqU1H4gOvgIdTgE39wuW0tXeTq11SiDids1CLuKzRUNhr3GxQkpotgiqrqrdOBQNUeCsjS--F24FhdUDJiRoJFzN8MNoC2k` · Google Docs index 27241–35660.
+**Nguồn trích:** [VNA.TOSS_SRS_Flight Load Control_v0.1](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit) · Revision `ALtnJHw752QgcvhVUuNEE-hu5IMGBpSkN00WjYskJ9yEU_jTAh4oi9SCaz9AkZwFdMFX2SE4iKFybLDiZBdqCPcZtK6ptnEqmoPzVAMPTkU` · Google Docs index 27567–36130.

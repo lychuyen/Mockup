@@ -2,7 +2,7 @@
 project: "TOSS — Hệ thống Điều hành Khai thác Hãng Hàng không"
 author: "VNA/VTIT (nguồn Google Docs) — phân rã bởi agent BA"
 version: "0.1"
-date: "2026-07-15"
+date: "2026-07-16"
 status: "Draft"
 document_type: "SRS Feature"
 subsystem: "Flight Load Control"
@@ -10,11 +10,11 @@ feature_id: "TOSS.FLC.FUEL_ORDER_SEARCH"
 feature_name: "Tìm kiếm chuyến bay và thông tin fuel order"
 group: "Fuel order"
 source_url: "https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit"
-source_revision: "ALtnJHxtgop8tqU1H4gOvgIdTgE39wuW0tXeTq11SiDids1CLuKzRUNhr3GxQkpotgiqrqrdOBQNUeCsjS--F24FhdUDJiRoJFzN8MNoC2k"
-source_range: "Google Docs index 58418–63588"
+source_revision: "ALtnJHw752QgcvhVUuNEE-hu5IMGBpSkN00WjYskJ9yEU_jTAh4oi9SCaz9AkZwFdMFX2SE4iKFybLDiZBdqCPcZtK6ptnEqmoPzVAMPTkU"
+source_range: "Google Docs index 59946–65114"
 ---
 
-> **Phạm vi file:** Nội dung chức năng “Tìm kiếm chuyến bay và thông tin fuel order” được phân rã nguyên nghĩa từ Google Docs nguồn tại phạm vi chỉ mục 58418–63588. Không bổ sung hoặc suy diễn nghiệp vụ ngoài nguồn.
+> **Phạm vi file:** Nội dung chức năng “Tìm kiếm chuyến bay và thông tin fuel order” được phân rã nguyên nghĩa từ Google Docs nguồn tại phạm vi chỉ mục 59946–65114. Không bổ sung hoặc suy diễn nghiệp vụ ngoài nguồn.
 
 ## **Tìm kiếm chuyến bay và thông tin fuel order**
 
@@ -26,7 +26,7 @@ source_range: "Google Docs index 58418–63588"
 | **Hậu điều kiện** | Mở màn hình danh sách chuyến bay và thông tin Fuel Order với từng chuyến bay |
 ### **Sơ đồ luồng hệ thống**
 
-![Hình ảnh image95 từ Google Docs](../_images/google-docs/image95.png)
+![Hình ảnh image97 từ Google Docs](../_images/google-docs/image97.png)
 ### **Mô tả luồng xử lý**
 
 | Bước | Chi tiết |
@@ -40,14 +40,14 @@ source_range: "Google Docs index 58418–63588"
    ###
 ### **Màn hình chức năng**
 
-![Hình ảnh image96 từ Google Docs](../_images/google-docs/image96.png)
+![Hình ảnh image98 từ Google Docs](../_images/google-docs/image98.png)
 ### **Mô tả chi tiết màn hình**
 
    ###
 
 | STT | Tên | Kiểu dữ liệu\[Độ dài\] | Mapping DB/API | Mô tả nghiệp vụ |
 | ----- | ----- | ----- | ----- | ----- |
-| Tìm kiếm: ![Hình ảnh image97 từ Google Docs](../_images/google-docs/image97.png) Cơ chế Thu gọn/Mở rộng bộ lọc (Collapsible Filter): ![Hình ảnh image45 từ Google Docs](../_images/google-docs/image45.png)[Tham chiếu kịch bản chức năng ẩn hiện filter](https://docs.google.com/document/d/1L5y0t4FCWe_vnNI65xNMRC-LM3lvLwYsQRAm_Nokv9A/edit?tab=t.0#heading=h.bzejlqwncqtz) Trường hợp Searchbox không có dữ liệu: Mặc định tìm kiếm all dữ liệu tại cột đó  Người dùng thao tác thay đổi giá trị trường dữ liệu \=\> click Enter/button **![Hình ảnh image46 từ Google Docs](../_images/google-docs/image46.png)** \=\> hệ thống thực hiện: Reload dữ liệu table phù hợp với bộ lọc Set current page=1 Hiển thị kết quả tìm kiếm:  Trường hợp API trả về data có KQ: hiển thị danh sách dữ liệu theo kết quả API trả về. Trường hợp API trả về data rỗng hoặc lỗi: Hiển thị bảng danh sách với **chân trang \= Tất cả danh sách : 0**.   |  |  |  |  |
+| Tìm kiếm: ![Hình ảnh image99 từ Google Docs](../_images/google-docs/image99.png) Cơ chế Thu gọn/Mở rộng bộ lọc (Collapsible Filter): ![Hình ảnh image45 từ Google Docs](../_images/google-docs/image45.png)[Tham chiếu kịch bản chức năng ẩn hiện filter](https://docs.google.com/document/d/1L5y0t4FCWe_vnNI65xNMRC-LM3lvLwYsQRAm_Nokv9A/edit?tab=t.0#heading=h.bzejlqwncqtz) Trường hợp Searchbox không có dữ liệu: Mặc định tìm kiếm all dữ liệu tại cột đó  Người dùng thao tác thay đổi giá trị trường dữ liệu \=\> click Enter/button **![Hình ảnh image46 từ Google Docs](../_images/google-docs/image46.png)** \=\> hệ thống thực hiện: Reload dữ liệu table phù hợp với bộ lọc Set current page=1 Hiển thị kết quả tìm kiếm:  Trường hợp API trả về data có KQ: hiển thị danh sách dữ liệu theo kết quả API trả về. Trường hợp API trả về data rỗng hoặc lỗi: Hiển thị bảng danh sách với **chân trang \= Tất cả danh sách : 0**.   |  |  |  |  |
 |  | EDD |  |  | EDD là ngày dep\_scheldt ( ngày cất cánh dự kiến) Placeholder: DDMMMYY Mặc định chọn ngày hiện tại  Trường để lọc: Tìm kiếm chính xác theo \[FLT NO\] |
 | 1 | FLT NO | Textbox |  | Mặc định: Để trống Placeholder: FLT NO Trường để lọc: Tìm kiếm gần đúng theo \[FLT NO\]  Maxlength 10 ký tự  Validate cho phép nhập chữ, số, và ký tự đặc biệt  Nếu dữ liệu nhập vượt quá độ dài ô \=\> thay thế phần vượt quá bằng ký tự “...” và có tooltip hiển thị toàn bộ nội dung nhập  Nếu paste đoạn văn thì ghi nhận 10 ký tự đầu  Không cho phép nhận space Tự động TRIM Spaces đầu cuối khi tìm kiếm |
 | 2 | ACREG | Textbox |  | Mặc định: Để trống Placeholder: ACREG Trường để lọc: Tìm kiếm gần đúng theo \[ACREG\]  Maxlength 10 ký tự  Validate cho phép nhập chữ, số, và ký tự đặc biệt  Nếu dữ liệu nhập vượt quá độ dài ô \=\> thay thế phần vượt quá bằng ký tự “...” và có tooltip hiển thị toàn bộ nội dung nhập  Nếu paste đoạn văn thì ghi nhận 10 ký tự đầu  Không cho phép nhận space  Tự động TRIM Spaces đầu cuối khi tìm kiếm |
@@ -58,8 +58,6 @@ source_range: "Google Docs index 58418–63588"
 | 7 | ![Hình ảnh image47 từ Google Docs](../_images/google-docs/image47.png) | Button |  |   Click vào ![Hình ảnh image48 từ Google Docs](../_images/google-docs/image48.png) Hệ thống thực hiện lọc dữ liệu dựa trên từ khoá Hệ thống trả về danh sách dữ liệ u phù hợp với từ khoá tìm kiếm  |
 | 8 | ![Hình ảnh image49 từ Google Docs](../_images/google-docs/image49.png) | Button |  | Click vào ![Hình ảnh image50 từ Google Docs](../_images/google-docs/image50.png) Hệ thống: Xoá nội dung search Reset toàn trường lọc đã chọn Reset phân trang về trang đầu Hiển thị lại danh sách ban đầu  |
 
-##
-
 ---
 
-**Nguồn trích:** [VNA.TOSS_SRS_Flight Load Control_v0.1](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit) · Revision `ALtnJHxtgop8tqU1H4gOvgIdTgE39wuW0tXeTq11SiDids1CLuKzRUNhr3GxQkpotgiqrqrdOBQNUeCsjS--F24FhdUDJiRoJFzN8MNoC2k` · Google Docs index 58418–63588.
+**Nguồn trích:** [VNA.TOSS_SRS_Flight Load Control_v0.1](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit) · Revision `ALtnJHw752QgcvhVUuNEE-hu5IMGBpSkN00WjYskJ9yEU_jTAh4oi9SCaz9AkZwFdMFX2SE4iKFybLDiZBdqCPcZtK6ptnEqmoPzVAMPTkU` · Google Docs index 59946–65114.
