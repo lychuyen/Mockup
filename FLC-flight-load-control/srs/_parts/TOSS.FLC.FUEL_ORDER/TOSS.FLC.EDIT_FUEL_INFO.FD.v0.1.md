@@ -41,7 +41,7 @@ source_range: "Google Docs index 51785–59945"
 | 8 | Nếu Validate thành công (Chọn YES):  Hệ thống thực hiện lưu dữ liệu mới vào cơ sở dữ liệu (DB). Hiển thị thông báo lưu thành công (Toast thành công) và kết thúc luồng xử lý. |
 ### **Màn hình chức năng**
 
-![Hình ảnh image89 từ Google Docs](../_images/google-docs/image89.png)
+[![Hình ảnh image89 từ Google Docs](../_images/google-docs/image89.png)](https://www.figma.com/design/HNvApgVP8uqBD4eQOnW6K7/VNA_TOSS_H%E1%BB%87-th%E1%BB%91ng-qu%E1%BA%A3n-l%C3%BD-t%C3%A0i-li%E1%BB%87u---th%C3%B4ng-tin-%C4%91i%E1%BB%81u-h%C3%A0nh-chuy%E1%BA%BFn-bay?node-id=13309-218521&t=hJfgyU8SyTvD318l-4)
 ### **Mô tả chi tiết màn hình**
 
 | STT | Tên | Kiểu dữ liệu\[Độ dài\] | Mapping DB/API | Mô tả nghiệp vụ |

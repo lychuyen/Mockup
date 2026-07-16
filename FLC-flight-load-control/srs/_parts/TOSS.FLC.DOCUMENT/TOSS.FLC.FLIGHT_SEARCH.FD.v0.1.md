@@ -41,7 +41,7 @@ source_range: "Google Docs index 19552–23949"
 ###
 ### **Màn hình chức năng**
 
-![Hình ảnh image43 từ Google Docs](../_images/google-docs/image43.png)
+[![Hình ảnh image43 từ Google Docs](../_images/google-docs/image43.png)](https://www.figma.com/design/HNvApgVP8uqBD4eQOnW6K7/VNA_TOSS_H%E1%BB%87-th%E1%BB%91ng-qu%E1%BA%A3n-l%C3%BD-t%C3%A0i-li%E1%BB%87u---th%C3%B4ng-tin-%C4%91i%E1%BB%81u-h%C3%A0nh-chuy%E1%BA%BFn-bay?node-id=12507-571531&t=hJfgyU8SyTvD318l-4)
 ### **Mô tả chi tiết màn hình**
 
 | STT | Tên | Kiểu dữ liệu\[Độ dài\] | Mapping DB/API | Mô tả nghiệp vụ |
