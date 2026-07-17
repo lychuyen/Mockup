@@ -2,7 +2,7 @@
 project: "TOSS — Hệ thống Điều hành Khai thác Hãng Hàng không"
 author: "VNA/VTIT (nguồn Google Docs) — phân rã bởi agent BA"
 version: "0.1"
-date: "2026-07-16"
+date: "2026-07-17"
 status: "Draft"
 document_type: "SRS Feature"
 subsystem: "Flight Load Control"
@@ -10,11 +10,11 @@ feature_id: "TOSS.FLC.CUSTOMIZE_DOC_TABLE"
 feature_name: "Customize bảng biểu"
 group: "Document"
 source_url: "https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit"
-source_revision: "ALtnJHw752QgcvhVUuNEE-hu5IMGBpSkN00WjYskJ9yEU_jTAh4oi9SCaz9AkZwFdMFX2SE4iKFybLDiZBdqCPcZtK6ptnEqmoPzVAMPTkU"
-source_range: "Google Docs index 23950–27555"
+source_revision: "ALtnJHxfBcoS3ZX_dUDG4faiU2vNTN6jqfa11S8P3TtQKMoeCpKHAMIYbETn1t2y-MsETWV71PazYhsKeEIM4sMbm5GhpQLIcM5NXNTrqjk"
+source_range: "Google Docs index 23923–27539"
 ---
 
-> **Phạm vi file:** Nội dung chức năng “Customize bảng biểu” được phân rã nguyên nghĩa từ Google Docs nguồn tại phạm vi chỉ mục 23950–27555. Không bổ sung hoặc suy diễn nghiệp vụ ngoài nguồn.
+> **Phạm vi file:** Nội dung chức năng “Customize bảng biểu” được phân rã nguyên nghĩa từ Google Docs nguồn tại phạm vi chỉ mục 23923–27539. Không bổ sung hoặc suy diễn nghiệp vụ ngoài nguồn.
 
 ## **Customize bảng biểu**
 
@@ -25,8 +25,7 @@ source_range: "Google Docs index 23950–27555"
 | **Tiền điều kiện** | Người dùng đăng nhập thành công và được phân quyền phân hệ Flight load control |
 | **Hậu điều kiện** | Hiển thị màn hình danh sách chuyến bay và tài liệu chuyến bay khi user Customize  |
 ### **Sơ đồ luồng hệ thống**
-
-      ### **![Hình ảnh image52 từ Google Docs](../_images/google-docs/image52.png)**
+### **![Hình ảnh image52 từ Google Docs](../_images/google-docs/image52.png)**
 ### **Mô tả luồng xử lý**
 
 | Bước | Chi tiết |
@@ -58,6 +57,8 @@ source_range: "Google Docs index 23950–27555"
 
 #
 
+2. # **Fuel order**
+
 ---
 
-**Nguồn trích:** [VNA.TOSS_SRS_Flight Load Control_v0.1](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit) · Revision `ALtnJHw752QgcvhVUuNEE-hu5IMGBpSkN00WjYskJ9yEU_jTAh4oi9SCaz9AkZwFdMFX2SE4iKFybLDiZBdqCPcZtK6ptnEqmoPzVAMPTkU` · Google Docs index 23950–27555.
+**Nguồn trích:** [VNA.TOSS_SRS_Flight Load Control_v0.1](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit) · Revision `ALtnJHxfBcoS3ZX_dUDG4faiU2vNTN6jqfa11S8P3TtQKMoeCpKHAMIYbETn1t2y-MsETWV71PazYhsKeEIM4sMbm5GhpQLIcM5NXNTrqjk` · Google Docs index 23923–27539.

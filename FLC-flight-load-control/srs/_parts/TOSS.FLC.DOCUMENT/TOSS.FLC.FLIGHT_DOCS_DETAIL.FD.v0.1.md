@@ -2,7 +2,7 @@
 project: "TOSS — Hệ thống Điều hành Khai thác Hãng Hàng không"
 author: "VNA/VTIT (nguồn Google Docs) — phân rã bởi agent BA"
 version: "0.1"
-date: "2026-07-16"
+date: "2026-07-17"
 status: "Draft"
 document_type: "SRS Feature"
 subsystem: "Flight Load Control"
@@ -10,11 +10,11 @@ feature_id: "TOSS.FLC.FLIGHT_DOCS_DETAIL"
 feature_name: "Xem chi tiết tài liệu chuyến bay"
 group: "Document"
 source_url: "https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit"
-source_revision: "ALtnJHw752QgcvhVUuNEE-hu5IMGBpSkN00WjYskJ9yEU_jTAh4oi9SCaz9AkZwFdMFX2SE4iKFybLDiZBdqCPcZtK6ptnEqmoPzVAMPTkU"
-source_range: "Google Docs index 10594–15546"
+source_revision: "ALtnJHxfBcoS3ZX_dUDG4faiU2vNTN6jqfa11S8P3TtQKMoeCpKHAMIYbETn1t2y-MsETWV71PazYhsKeEIM4sMbm5GhpQLIcM5NXNTrqjk"
+source_range: "Google Docs index 10738–15711"
 ---
 
-> **Phạm vi file:** Nội dung chức năng “Xem chi tiết tài liệu chuyến bay” được phân rã nguyên nghĩa từ Google Docs nguồn tại phạm vi chỉ mục 10594–15546. Không bổ sung hoặc suy diễn nghiệp vụ ngoài nguồn.
+> **Phạm vi file:** Nội dung chức năng “Xem chi tiết tài liệu chuyến bay” được phân rã nguyên nghĩa từ Google Docs nguồn tại phạm vi chỉ mục 10738–15711. Không bổ sung hoặc suy diễn nghiệp vụ ngoài nguồn.
 
 ## **Xem chi tiết tài liệu chuyến bay**
 
@@ -38,22 +38,20 @@ source_range: "Google Docs index 10594–15546"
 ### **Màn hình chức năng**
 
       [![Hình ảnh image7 từ Google Docs](../_images/google-docs/image7.png)](https://www.figma.com/design/HNvApgVP8uqBD4eQOnW6K7/VNA_TOSS_H%E1%BB%87-th%E1%BB%91ng-qu%E1%BA%A3n-l%C3%BD-t%C3%A0i-li%E1%BB%87u---th%C3%B4ng-tin-%C4%91i%E1%BB%81u-h%C3%A0nh-chuy%E1%BA%BFn-bay?node-id=12507-571531&t=hJfgyU8SyTvD318l-4)
-
       [![Hình ảnh image8 từ Google Docs](../_images/google-docs/image8.png)](https://www.figma.com/design/HNvApgVP8uqBD4eQOnW6K7/VNA_TOSS_H%E1%BB%87-th%E1%BB%91ng-qu%E1%BA%A3n-l%C3%BD-t%C3%A0i-li%E1%BB%87u---th%C3%B4ng-tin-%C4%91i%E1%BB%81u-h%C3%A0nh-chuy%E1%BA%BFn-bay?node-id=12507-571531&t=hJfgyU8SyTvD318l-4)
 ### **Mô tả chi tiết màn hình**
 
 | STT | Tên | Kiểu dữ liệu \[Độ dài dữ liệu\] | Mapping DB/API | Mô tả |
 | :---- | ----- | ----- | :---- | :---- |
-|  | ![Hình ảnh image9 từ Google Docs](../_images/google-docs/image9.png) |  |  |  |
+| ![Hình ảnh image9 từ Google Docs](../_images/google-docs/image9.png) |  |  |  |  |
 | 1  | ![Hình ảnh image10 từ Google Docs](../_images/google-docs/image10.png) | Label |  | Dữ liệu đồng bộ từ Netline ops++ Top: Hiển thị số hiệu chuyến bay  Bottom: Hiển thị ACREG \+ ACTYPE |
 |  | ![Hình ảnh image11 từ Google Docs](../_images/google-docs/image11.png) | Label |  | Dữ liệu đồng bộ từ Netline ops++ Hiển thị ngày cất cánh dự kiến   |
 |  | ![Hình ảnh image12 từ Google Docs](../_images/google-docs/image12.png) | Label |  | Dữ liệu đồng bộ từ Netline ops++ Top: Hiển thị giờ cất cánh dự kiến (ETD) Bottom: Hiển thị sân bay khởi hành theo định dạng IATA \- ICAO  |
 |  | ![Hình ảnh image13 từ Google Docs](../_images/google-docs/image13.png) | Label |  | Dữ liệu đồng bộ từ Netline ops++ Top: Hiển thị giờ hạ cánh dự kiến  Bottom: Hiển thị sân bay khởi hành theo định dạng IATA \- ICAO  |
 | 2 | ![Hình ảnh image14 từ Google Docs](../_images/google-docs/image14.png) | icon |  | Click icon x \=\> Quay trở lại màn hình danh sách và tài liệu chuyến bay |
 | 3 | Document Type | Tab |  | Hiển thị các nhóm tài liệu: **Load Sheet**, **Gen. Declaration**, **Pax Manifest**.  Mặc định chọn **Load Sheet**  Khi user chọn tab khác, hệ thống hiển thị danh sách tài liệu của loại tương ứng. |
-| 4 | Upload Area | View |  | Vùng hiển thị chức năng tải lên tài liệu.  [Tham chiếu kịch bản upload tài liệu](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit#heading=h.g3cvtakkbgr2) |
-| **Bảng dữ liệu thông tin tài liệu chuyến bay *Mặc định hiển thị 20 bản ghi trong khung  và cho phép scroll lên xuống (không phân trang)
- Nếu chuyến bay chưa có tài liệu đó \=\> giữ nguyên các hàng tiêu đề, thân bảng hiển thị “No data”*** |  |  |  |  |
+| 4 | Upload Area | View |  | Vùng hiển thị chức năng tải lên tài liệu.  [Tham chiếu kịch bản upload tài liệu](#heading=h.g3cvtakkbgr2) |
+| **Bảng dữ liệu thông tin tài liệu chuyến bay *Mặc định hiển thị 20 bản ghi trong khung  và cho phép scroll lên xuống (không phân trang) Nếu chuyến bay chưa có tài liệu đó \=\> giữ nguyên các hàng tiêu đề, thân bảng hiển thị “No data”*** |  |  |  |  |
 | 5 | Document Name | Textview |  | Hiển thị tên file tài liệu được upload/ đồng bộ về Trường hợp API trả về rỗng/lỗi: để trống trường |
 | 6 | Upload Date | Datetime |  | Hiển thị thời gian tài liệu được upload/đồng bộ lên hệ thống.  ![Hình ảnh image15 từ Google Docs](../_images/google-docs/image15.png) Định dạng ddMM hh:mm Trường hợp API trả về rỗng/lỗi: để trống trường |
 | 7 | ACK Time | Datetime |  | Hiển thị thời điểm phi công confirm (ACK) tài liệu ![Hình ảnh image15 từ Google Docs](../_images/google-docs/image15.png) Định dạng ddMM hh:mm Trường hợp API trả về rỗng/lỗi: để trống trường *Đối với tài liệu đang ở trạng thái AWAIT ACK \=\> Mặc định để trống trường này và hiển thị “---”* |
@@ -74,4 +72,4 @@ source_range: "Google Docs index 10594–15546"
 
 ---
 
-**Nguồn trích:** [VNA.TOSS_SRS_Flight Load Control_v0.1](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit) · Revision `ALtnJHw752QgcvhVUuNEE-hu5IMGBpSkN00WjYskJ9yEU_jTAh4oi9SCaz9AkZwFdMFX2SE4iKFybLDiZBdqCPcZtK6ptnEqmoPzVAMPTkU` · Google Docs index 10594–15546.
+**Nguồn trích:** [VNA.TOSS_SRS_Flight Load Control_v0.1](https://docs.google.com/document/d/1h5wsfTtU6sKJDIqZod2MKWhhjQTNB-BVEn5252n1ALs/edit) · Revision `ALtnJHxfBcoS3ZX_dUDG4faiU2vNTN6jqfa11S8P3TtQKMoeCpKHAMIYbETn1t2y-MsETWV71PazYhsKeEIM4sMbm5GhpQLIcM5NXNTrqjk` · Google Docs index 10738–15711.
