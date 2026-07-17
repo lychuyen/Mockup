@@ -92,7 +92,7 @@ Chức năng **Table Setting** cho phép người dùng tuỳ chỉnh các cột
 | 10 | Nút Cancel | Button | *(chưa map)* | Đóng popup và huỷ bỏ mọi thay đổi |
 | 11 | Nút Save | Button | *(chưa map)* | Lưu cấu hình hiển thị cột và cập nhật ngay lập tức giao diện bảng dữ liệu giám sát |
 
-## Mục 5. Nội dung cảnh báo (Business rule)
+## 5. Nội dung cảnh báo (Business rule)
 
 Các quy tắc cảnh báo được mô tả chi tiết trong *(Bổ sung link dẫn)*.
 
@@ -104,7 +104,7 @@ Các quy tắc cảnh báo được mô tả chi tiết trong *(Bổ sung link d
 | BR-04 | Quy tắc Customize bảng | • 2 cột FLTNO và REG được fix tại mỗi bảng, người dùng không được customize (Cột pin được hiển thị trong mục customize bảng) <br>• Mặc định khi vào màn hình customize > Tất cả các cột được tick chọn, người dùng tick bỏ chọn để không hiển thị cột. <br>• Người dùng được phép thay đổi thứ tự cột trong bảng <br>• Yêu cầu phải tick chọn tối thiểu <TBD> cột   |
 
 
-## Mục 6. Giao diện mẫu
+## 6. Giao diện mẫu
 
 *(Chưa có ảnh trong nội dung nguồn — cần bổ sung.)* Nội dung nguồn tham chiếu "Hình 2: Màn hình giao diện xem danh sách chuyến bay và giám sát cảnh báo" nhưng chưa đính kèm hình ảnh/giao diện mẫu.
 
