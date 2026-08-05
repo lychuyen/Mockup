@@ -104,6 +104,17 @@ button{color:inherit}
 .ct-field label{display:block;font-size:8px;font-weight:800;margin-bottom:4px}.ct-field label .req{color:#ff6f78}
 .ct-field .control{width:100%;height:25px}
 .ct-note{margin-top:7px}.ct-note textarea{width:100%;min-height:50px;resize:vertical;border:1px solid #3c5870;border-radius:2px;background:#12283d;color:#fff;padding:7px;font:inherit;outline:none}
+.mt-note-box{border:1px solid #1f405a;border-radius:4px;padding:10px;background:#061826;margin-top:7px}
+.mt-note-toolbar{display:flex;gap:6px;margin-bottom:8px}
+.mt-note-tab{height:26px;padding:0 12px;border:1px solid #21405a;border-radius:4px;background:#0f2d43;color:#cfe4f3;font-size:8px;font-weight:800;cursor:pointer}
+.mt-note-tab.active{background:#123a56;border-color:#2d79b0;color:#fff}
+.mt-note-filter{display:grid;gap:6px;margin-bottom:8px}
+.mt-note-filter-label{font-size:8px;font-weight:800;color:#aad4f4}
+.mt-note-filter-list{display:flex;flex-wrap:wrap;gap:8px}
+.mt-note-filter-list label{display:inline-flex;align-items:center;gap:4px;font-size:8px;color:#d0e6ff;line-height:1.3;cursor:pointer}
+.mt-note-filter-list input{width:12px;height:12px;margin:0}
+#mtNote{width:100%;min-height:90px;resize:vertical;border:1px solid #254262;border-radius:3px;background:#091a27;color:#eef5fb;padding:10px;font:inherit;outline:none}
+.mt-note-summary{font-size:7px;color:#86aad0;margin-top:6px}
 .ct-parties-title{margin-top:9px;display:flex;align-items:flex-end}.ct-parties-title h4{margin:0;font-size:8px}.ct-parties-title small{display:block;color:var(--muted);font-size:7px;margin-top:2px}.ct-selected{margin-left:auto;color:#9eb4c6;font-size:7px}
 .party-grid{margin-top:6px;border:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
 .party-item{min-height:34px;padding:6px 8px;border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);display:grid;grid-template-columns:110px minmax(0,1fr);gap:7px;align-items:center}
@@ -1780,7 +1791,15 @@ html,body{
 
       <section class="mt-section">
         <div class="mt-section-head"><div><h3>Note</h3></div></div>
-        <div class="mt-note-box"><textarea id="mtNote" placeholder="Enter any additional notes here..."></textarea></div>
+        <div class="mt-note-box">
+          <div class="mt-note-toolbar"><button class="mt-note-tab active" type="button">Notes</button></div>
+          <div class="mt-note-filter">
+            <div class="mt-note-filter-label">Show comments from</div>
+            <div class="mt-note-filter-list" id="mtNoteFilter"></div>
+          </div>
+          <textarea id="mtNote" placeholder="Enter any additional notes here..."></textarea>
+          <div class="mt-note-summary" id="mtNoteFilterSummary">Showing comments from all selected parties.</div>
+        </div>
       </section>
 
       <section class="mt-section">
@@ -2113,6 +2132,7 @@ html,body{
     title:document.getElementById('mtTitle'), id:document.getElementById('mtId'), priority:document.getElementById('mtPriority'), impact:document.getElementById('mtImpact'), note:document.getElementById('mtNote'),
     from:document.getElementById('mtFrom'), to:document.getElementById('mtTo'), dep:document.getElementById('mtDep'), arr:document.getElementById('mtArr'), flight:document.getElementById('mtFlight'), aircraft:document.getElementById('mtAircraft'),
     preview:document.getElementById('mtPreviewBtn'), wrap:document.getElementById('mtFlightWrap'), found:document.getElementById('mtFoundCount'), included:document.getElementById('mtIncludedCount'), range:document.getElementById('mtFlightRange'),
+    noteFilter:document.getElementById('mtNoteFilter'), noteFilterSummary:document.getElementById('mtNoteFilterSummary'),
     partyGrid:document.getElementById('mtPartyGrid'), selectedCount:document.getElementById('mtSelectedCount')
   };
   let taskSeed=[...document.querySelectorAll('#taskTableBody .task-code')].length + 50;
@@ -2140,10 +2160,25 @@ html,body{
     el.partyGrid.querySelectorAll('.party-item').forEach((item,i)=>{ const cb=item.querySelector('input[type="checkbox"]'); const reason=item.querySelector('.party-reason'); cb.checked=false; reason.disabled=true; reason.value=''; });
     const dm=el.partyGrid.querySelector('input[data-party="Duty Manager"]'); if(dm){ dm.checked=true; const rs=dm.closest('.party-item').querySelector('.party-reason'); rs.disabled=false; rs.value='Coordinate operational handling'; }
     updateSelectedCount();
+    buildNoteFilter();
     previewFlights();
   }
   function updateSelectedCount(){
     const count=[...el.partyGrid.querySelectorAll('input[type="checkbox"]')].filter(x=>x.checked).length; el.selectedCount.textContent=`${count} selected`;
+  }
+  function buildNoteFilter(){
+    const parties=[...el.partyGrid.querySelectorAll('.party-item')].map(item=>item.querySelector('[data-party]')?.dataset.party).filter(Boolean);
+    if(!el.noteFilter || !parties.length) return;
+    el.noteFilter.innerHTML = parties.map(name=>`<label><input type="checkbox" value="${name}" checked> ${name}</label>`).join('');
+    el.noteFilter.querySelectorAll('input[type="checkbox"]').forEach(cb=>cb.addEventListener('change',updateNoteFilterSummary));
+    updateNoteFilterSummary();
+  }
+  function updateNoteFilterSummary(){
+    if(!el.noteFilter || !el.noteFilterSummary) return;
+    const selected=[...el.noteFilter.querySelectorAll('input[type="checkbox"]:checked')].map(cb=>cb.value);
+    el.noteFilterSummary.textContent = selected.length
+      ? `Showing comments from ${selected.join(', ')}.`
+      : 'No party selected. No comments will be displayed.';
   }
   function flightRow(f){
     return `<tr data-key="${f.key}"><td><label class="toggle-switch"><input type="checkbox" class="mt-include" ${includedKeys.has(f.key)?'checked':''}><span class="toggle-slider"></span></label></td><td>${f.flight}</td><td class="route"><span>${f.route.replace(' → ',' → ')}</span></td><td>${f.etd}</td><td>${f.eta}</td><td>${f.acReg}</td></tr>`;
@@ -2197,7 +2232,7 @@ html,body{
   el.closeBtn.addEventListener('click',closeView); el.cancelBtn.addEventListener('click',closeView); el.preview.addEventListener('click',previewFlights); el.createBtn.addEventListener('click',addTaskToList);
   view.addEventListener('click',e=>{ if(e.target===view) closeView(); });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape' && view.classList.contains('show')) closeView(); });
-  el.partyGrid.querySelectorAll('.party-item input[type="checkbox"]').forEach(cb=>cb.addEventListener('change',()=>{ const reason=cb.closest('.party-item').querySelector('.party-reason'); reason.disabled=!cb.checked; if(cb.checked){ if(!reason.value) reason.value=''; reason.focus(); } else reason.value=''; updateSelectedCount(); }));
+  el.partyGrid.querySelectorAll('.party-item input[type="checkbox"]').forEach(cb=>cb.addEventListener('change',()=>{ const reason=cb.closest('.party-item').querySelector('.party-reason'); reason.disabled=!cb.checked; if(cb.checked){ if(!reason.value) reason.value=''; reason.focus(); } else reason.value=''; updateSelectedCount(); buildNoteFilter(); }));
 })();
 </script>
 
