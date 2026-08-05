@@ -1875,7 +1875,7 @@ html,body{
             <div class="td-section-head"><h3>Notes & Activity</h3><button class="btn primary" id="tdAddNoteBtn">＋ Add Note</button></div>
             <div class="td-notes-wrap">
               <div class="td-notes-top">
-                <div class="td-tabs"><button class="td-tab active" data-mode="group">By Responsible Party</button><button class="td-tab" data-mode="all">All Activity</button></div>
+                <div class="td-filter"><label for="tdNoteFilter">Show activity from</label><select class="control" id="tdNoteFilter" multiple size="3"></select></div>
                 <div class="muted" id="tdActivitySummary">0 parties · 0 updates</div>
               </div>
               <div class="td-note-composer" id="tdNoteComposer">
@@ -2210,7 +2210,7 @@ html,body{
   const showToast=(m)=>{ if(!toast) return; toast.textContent=m; toast.classList.add('show'); clearTimeout(showToast._t); showToast._t=setTimeout(()=>toast.classList.remove('show'),2200); };
   const tableBody=document.getElementById('taskTableBody');
   const menu=document.getElementById('tdPartyMenu');
-  const state={activeId:null, mode:'group', menuPartyId:null, pendingRemovalId:null, removedRow:null, undoTimer:null};
+  const state={activeId:null, menuPartyId:null, pendingRemovalId:null, removedRow:null, undoTimer:null};
   const partyLabels={assigned:'Assigned',inprogress:'In Progress',done:'Done'};
   const monthMap={JAN:'01',FEB:'02',MAR:'03',APR:'04',MAY:'05',JUN:'06',JUL:'07',AUG:'08',SEP:'09',OCT:'10',NOV:'11',DEC:'12'};
 
@@ -2220,7 +2220,7 @@ html,body{
     createdBy:document.getElementById('tdCreatedBy'), status:document.getElementById('tdStatus'), updatedAt:document.getElementById('tdUpdatedAt'), flights:document.getElementById('tdFlightsBody'),
     heroTaskId:document.getElementById('tdHeroTaskId'), sourceType:document.getElementById('tdSourceType'), affectedCount:document.getElementById('tdAffectedFlightsCount'), heroProgressCount:document.getElementById('tdHeroProgressCount'), heroProgressBar:document.getElementById('tdHeroProgressBar'), heroProgressText:document.getElementById('tdHeroProgressText'),
     progress:document.getElementById('tdRespProgress'), partyList:document.getElementById('tdPartyList'), notesContent:document.getElementById('tdNotesContent'), summary:document.getElementById('tdActivitySummary'),
-    addNote:document.getElementById('tdAddNoteBtn'), composer:document.getElementById('tdNoteComposer'), noteTarget:document.getElementById('tdNoteTarget'), noteText:document.getElementById('tdNoteText'),
+    noteFilter:document.getElementById('tdNoteFilter'), addNote:document.getElementById('tdAddNoteBtn'), composer:document.getElementById('tdNoteComposer'), noteTarget:document.getElementById('tdNoteTarget'), noteText:document.getElementById('tdNoteText'),
     completeBanner:document.getElementById('tdCompleteBanner'), heroTitle:document.getElementById('tdHeroTitle'), heroSource:document.getElementById('tdHeroSource'), heroImpact:document.getElementById('tdHeroImpact'), heroFlights:document.getElementById('tdHeroFlights'), heroProgress:document.getElementById('tdHeroProgress'), heroBar:document.getElementById('tdHeroBar'), heroCaption:document.getElementById('tdHeroCaption'),
     submitNote:document.getElementById('tdSubmitNoteBtn'), cancelNote:document.getElementById('tdCancelNoteBtn')
   };
@@ -2296,16 +2296,27 @@ html,body{
     const options=['Task General', ...task.parties.map(p=>p.group)];
     detailNodes.noteTarget.innerHTML=options.map(v=>`<option value="${v}" ${v===preselect?'selected':''}>${v}</option>`).join('');
   }
+  function renderNoteFilterOptions(task){
+    const options=['Task General', ...task.parties.map(p=>p.group)];
+    detailNodes.noteFilter.innerHTML=options.map(v=>`<option value="${v}" selected>${v}</option>`).join('');
+  }
+  function getSelectedNoteGroups(){
+    const selected=[...detailNodes.noteFilter.selectedOptions].map(option=>option.value);
+    return selected.length?selected:['Task General'];
+  }
   function renderNotes(task){
-    const notes=sortNotes(task.notes||[]); detailNodes.summary.textContent=`${task.parties.length} parties · ${notes.length} updates`;
-    if(state.mode==='all'){
-      detailNodes.notesContent.innerHTML=`<div class="td-group-card"><div class="td-group-head"><div><h4>All Activity</h4><small>Latest updates across the whole task</small></div><span class="td-group-count">${notes.length}</span></div><div class="td-group-body">${notes.length?`<div class="td-activity-list">${notes.map(n=>`<div class="td-activity-item"><div class="td-activity-meta">${n.time} · ${n.author}<span class="badge-mini">${n.kind==='status'?'Status':n.kind==='created'?'Created':'Note'}</span></div><div class="td-activity-text">${n.text}</div></div>`).join('')}</div>`:'<div class="td-empty">No activity yet.</div>'}</div></div>`;
+    const allNotes=sortNotes(task.notes||[]);
+    const selectedGroups=getSelectedNoteGroups();
+    const notes=allNotes.filter(n=>selectedGroups.includes(n.group));
+    detailNodes.summary.textContent=`${task.parties.length} parties · ${allNotes.length} updates`;
+    if(!notes.length){
+      detailNodes.notesContent.innerHTML=`<div class="td-empty">No activity matches the selected filters.</div>`;
       return;
     }
     const groups=[];
     const ordered=['Task General', ...task.parties.map(p=>p.group)];
     ordered.forEach(group=>{ const items=notes.filter(n=>n.group===group); if(items.length){ groups.push({name:group,label:items[0].groupLabel||group,items}); } });
-    detailNodes.notesContent.innerHTML = groups.length ? `<div class="td-group-list">${groups.map(g=>`<article class="td-group-card"><div class="td-group-head"><div><h4>${g.label}</h4><small>${g.name==='Task General'?'Information shared across the whole task':`Updates from ${g.name}`}</small></div><span class="td-group-count">${g.items.length}</span></div><div class="td-group-body"><div class="td-activity-list">${g.items.map(n=>`<div class="td-activity-item"><div class="td-activity-meta">${n.time} · ${n.author}<span class="badge-mini">${n.kind==='status'?'Status':n.kind==='created'?'Created':'Note'}</span></div><div class="td-activity-text">${n.text}</div></div>`).join('')}</div></div></article>`).join('')}</div>` : `<div class="td-empty">No notes added yet.</div>`;
+    detailNodes.notesContent.innerHTML = `<div class="td-group-list">${groups.map(g=>`<article class="td-group-card"><div class="td-group-head"><div><h4>${g.label}</h4><small>${g.name==='Task General'?'Information shared across the whole task':`Updates from ${g.name}`}</small></div><span class="td-group-count">${g.items.length}</span></div><div class="td-group-body"><div class="td-activity-list">${g.items.map(n=>`<div class="td-activity-item"><div class="td-activity-meta">${n.time} · ${n.author}<span class="badge-mini">${n.kind==='status'?'Status':n.kind==='created'?'Created':'Note'}</span></div><div class="td-activity-text">${n.text}</div></div>`).join('')}</div></div></article>`).join('')}</div>`;
   }
   function renderParties(task){
     const progress=computeProgress(task); detailNodes.progress.textContent=`${progress.done}/${progress.total} completed · Task auto-completes when all parties are Done`;
@@ -2333,6 +2344,7 @@ html,body{
     detailNodes.flights.innerHTML=task.flights.map(f=>`<tr><td>${f[0]}</td><td>${f[1]}</td><td>${f[2]}</td><td>${f[3]}</td><td>${f[4]}</td></tr>`).join('');
     renderParties(task);
     renderNoteTargetOptions(task,'Task General');
+    renderNoteFilterOptions(task);
     renderNotes(task);
     updateTaskRow(task);
     detailNodes.markDone.disabled=status==='Done';
@@ -2378,7 +2390,7 @@ html,body{
   document.getElementById('tdConfirmLayer').addEventListener('click',e=>{if(e.target.id==='tdConfirmLayer')e.currentTarget.classList.remove('show')});
   document.getElementById('tdUndoBtn').addEventListener('click',undoRemoval);
   detailNodes.addNote.addEventListener('click',()=>showComposer('Task General')); detailNodes.cancelNote.addEventListener('click',()=>detailNodes.composer.classList.remove('show')); detailNodes.submitNote.addEventListener('click',addNote);
-  taskView.querySelectorAll('.td-tab').forEach(btn=>btn.addEventListener('click',()=>{ taskView.querySelectorAll('.td-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); state.mode=btn.dataset.mode; const task=ensureTask(state.activeId); if(task) renderNotes(task); }));
+  detailNodes.noteFilter.addEventListener('change',()=>{ const task=ensureTask(state.activeId); if(task) renderNotes(task); });
   document.addEventListener('click',e=>{ const menuBtn=e.target.closest('.td-party-menu-btn'); if(menuBtn){ e.stopPropagation(); openMenu(menuBtn, menuBtn.dataset.partyId); return; } if(!e.target.closest('#tdPartyMenu')) closeMenu(); });
   menu.addEventListener('click',e=>{ const btn=e.target.closest('button[data-action]'); if(!btn || !state.menuPartyId) return; const action=btn.dataset.action; if(action==='start') markParty(state.activeId,state.menuPartyId,'inprogress'); else if(action==='done') markParty(state.activeId,state.menuPartyId,'done'); else if(action==='note'){ const task=ensureTask(state.activeId); const party=task?.parties.find(p=>p.id===state.menuPartyId); showComposer(party?.group||'Task General'); } closeMenu(); });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape' && taskView.classList.contains('show')) closeTaskDetail(); });
